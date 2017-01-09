@@ -1,0 +1,74 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html ng-app="elem">
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+	<link rel="shortcut icon" href="/img/icone.png" type="image/x-icon" />
+
+    <script type="text/javascript" src="./../js/jquery-1.10.2.min.js"></script>
+    
+	<script type="text/javascript" src="./../js/angular.min.js"></script>
+	<script type="text/javascript" src="./../js/angular-route.min.js"></script>
+	<script type="text/javascript" src="./../js/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="./../js/elem.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/build.css"/>
+    <link href="../css/styles.css" rel="stylesheet">
+
+</head>
+<header>
+    <cartel-nav></cartel-nav>
+</header>
+<body>
+
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3" style="margin-top:130px; margin-bottom:130px;">
+    
+    <h1>
+        <span class="fa fa-sign-in"></span> Mot de passe oublié
+    </h1>
+    
+    <!-- LOGIN FORM -->
+        <!-- show any messages that come back with authentication -->
+    <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %>
+    
+    <form action="/forgot" method="post">
+        <div class="form-group">
+            <label style="font-weight:100;">Email</label>
+            <input type="text" class="form-control" name="email" required>
+        </div>
+        <div class="form-group">
+            <input type="hidden" value="none" class="form-control" name="password">
+        </div>
+        <button type="submit" class="btn btn-lg" style="background-color:#29374C;border:0px solid #FEDCA9;color:white;width:100%;">Demander à réinitialiser votre mot de passe</button>
+    </form>
+    <hr>
+
+</div>
+
+</div>
+<div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+</body>
+<footer>
+    <cartel-footer></cartel-footer>
+</footer>
+</html>

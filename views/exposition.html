@@ -1,0 +1,186 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html ng-app="exposition">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title><%= title %></title>
+    <link rel="shortcut icon" href="./../../img/icone.png" type="image/x-icon" />
+    
+    <meta property="fb:app_id" content="1485534465076102" /> 
+    <meta property="fb:admins" content="642530282" />
+    <meta property="og:type"   content="article" /> 
+    <meta property="og:url"    content="<%= uri %>" /> 
+    <meta property="og:title"  content="<%= title %>" /> 
+    <meta property="og:image"  content="<%= url %>" /> 
+    <meta property="og:image:width" content="<%= exposition.width %>" />
+    <meta property="og:image:height" content="<%= exposition.height %>" />
+    <meta property="og:description" content="<%= description %>" />
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@carteldelart">
+    <meta name="twitter:creator" content="@carteldelart">
+    <meta name="twitter:title" content="<%= title%>"> 
+    <meta name="twitter:description" content="<%= description %>">
+    <meta name="twitter:image" content="<%= url %>">
+    
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'/>
+    <link href="./../../css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/font-awesome.css"/>
+    <link href="./../../css/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./../../css/build.css"/>
+    <link rel="stylesheet" href="./../../css/article.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="./../../js/jquery-1.10.2.min.js"></script>
+    
+	<script type="text/javascript" src="./../../js/angular.min.js"></script>
+	<script type="text/javascript" src="./../../js/angular-route.min.js"></script>
+	<script type="text/javascript" src="./../../js/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="./../../js/exposition.js"></script>
+    
+    <script>
+  	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  	ga('create', 'UA-61941499-1', 'auto');
+  	ga('send', 'pageview');
+	</script>
+
+</head>
+<style>
+  [ng-cloak] {
+    display:none !important;
+  }
+</style>
+<body ng-controller="expositionController as exposition">
+<nav class="navbar" id="secondNav" style="position:static;width:100%;z-index:10;background-color:#FAF1E3;height:55px;margin-bottom:0px;" >
+  <cartel-nav></cartel-nav>
+</nav> 
+
+<script>
+	    var exposition = <%- JSON.stringify(exposition) %>; 
+</script>
+
+<section ng-hide="showExposition" id="loadingOngoing" style="margin-top:100px;margin-bottom:100px;">
+    <script type="text/javascript">
+        console.log("script in html for set up height");
+        $("#loadingOngoing").css({"height":($(window).height() - 470)})
+    </script>
+    <div class="container">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="rotating" style="width:60px; margin:0 auto;">
+                <img src="/img/icone.png" style="width:60px;"></img>
+            </div>
+            <div style="margin-top:30px;text-align:center;">
+                <label>Chargement en cours!</label>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+  [ng-cloak] {
+    display:none !important;
+  }
+</style>
+<section class="container row" ng-cloak="">
+    <div class="col-xs-12 lightopen" style="text-align:center;margin:10px auto;padding:0;" ng-show="showExposition">
+        <div class="col-lg-12" id="expositionContainer">
+            <div style="background-color:#ffffff; opacity:0.95;width:100%;height:60px;text-align:center;font-family:'Helvetica';">
+                <div style="padding-top:5px;font-size:18px;">
+                    <label style="font-weight:400;">
+                        <%= exposition.e_name %>
+                    </label>
+                </div>
+                <div style="font-size:14px;color:#6D6E70;">
+                    <label style="font-weight:200;">
+                        <%= exposition.gallery_detail[0].gname %>
+                    </label>
+                </div>
+            </div>
+            <div set-exhibition-cover withsrc="<%=exposition.url %>"
+                                    withtpx="<%=exposition.t_p_x %>"
+                                    withtpy="<%=exposition.t_p_y %>"
+                                    withtdx="<%=exposition.t_d_x %>"
+                style="margin:0 -15px;position:relative;">
+                <img id="exhibitionImage" style="width:100%;width:100%;"></img>
+                <div>
+                    <div class="row" style="width:200px;margin-left:10px;position:absolute;bottom:10px;">
+                        <div class="col-xs-3"style="border:1px solid #A7A9AB;width:60px;color:#A7A9AB;background-color:#ffffff; opacity:0.95;">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">{{exposition.date_debut | date : 'd'}}</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>{{exposition.date_debut | date : 'MMM'}}</label></div>
+                        </div>
+                        <div class="col-xs-1" style="color:#A7A9AB;font-size:24px;font-weight:100;margin-left:-5px;padding-top:10px;"><label>></label></div>
+                        <div class="col-xs-3" style="margin-left:5px;border:1px solid #A7A9AB;width:60px;color:#A7A9AB;background-color:#ffffff; opacity:0.95;">
+                            <div style="font-size:24px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">{{exposition.date_fin | date : 'd'}}</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>{{exposition.date_fin | date : 'MMM'}}</label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="position:relative;margin:0;text-align:left;">
+                <label style="color:#939597;margin-top:10px;font-weight:200px;font-size:11px;">Exposition - Installation</label>
+                <div style="float:right;margin-top:5px;">
+                    <label style="padding-top:4px;font-weight:100;padding-right:5px;"> {{nb_view}}</label> <img src="/img/cartel_oeil.png" style="width:17px;height:11px;margin-top:-3px;"></img>
+                </div>
+                <div style="width:124px; border-bottom:2px solid #FEDCA9;"></div>
+                <label style="font-weight:300px;font-size:15px;margin-top:10px;font-family:'Helvetica';font-weight:normal;">{{exposition.e_description}}</label>
+                <div style="width:40px; border-bottom:2px solid #FEDCA9;"></div>
+                <label style="color:#939597;font-weight:200px;font-size:11px;margin-top:10px;">{{exposition.adresse}}</label>
+                <div style="border-bottom:2px solid #FEDCA9;"></div>
+                <div style="text-align:center;padding:10px 0 0;">
+                    <label style="font-weight:100;font-size:18px;">Quelques &oelig;uvres de l'exposition</label>
+                </div>
+                <div class="row" style="margin-bottom:10px;margin-top:15px;">
+                    <% for(var i=0; i<exposition.exposition_creations.length; i++) {%>
+                       <div set-creation  class="col-xs-6" withsrc="<%= exposition.exposition_creations[i].url %>"
+                                        withtpx="<%=exposition.exposition_creations[i].t_p_x %>"
+                                        withtpy="<%=exposition.exposition_creations[i].t_p_y %>"
+                                        withtdx="<%=exposition.exposition_creations[i].t_d_x %>"
+                                        id="<%=i %>"
+                            style="cursor:pointer;padding-bottom:5px;"            
+                            ng-mouseenter="<%= 'generateTrueShow('+i+')' %>" 
+                            ng-mouseleave="<%= 'generateFalseShow('+i+')' %>"
+                        >
+                            <img id="<%= 'creation_'+i %>" style="width:100%;width:100%;"></img>
+                            <div id="expositionCreationElem" ng-show=<%= "show["+i+"]" %> style="color:#29374C;">
+                                <%= exposition.exposition_creations[i].gallery_artists[0].fname+" "+exposition.exposition_creations[i].gallery_artists[0].lname %>
+                            </div>
+                       </div>
+                    <% } %>
+                </div>
+            </div>
+        <div class="row" style="background-color:#FEDCA9;margin:0 -15px;height:40px;">
+            <div class="col-xs-2">
+                <img src="/img/cartel_maps.png" style="width:30px;padding-top:5px;"></img>
+            </div>
+            <div class="col-xs-10">
+                <label style="padding-top:10px;font-weight:100;">Afficher l'itinéraire vers le lieu d'exposition</label>
+            </div>
+        </div>						
+    </div>
+    
+</section>
+
+<footer id="footer">
+    <cartel-footer>
+    </cartel-footer>
+     <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+</footer>
+</body>
+</html>

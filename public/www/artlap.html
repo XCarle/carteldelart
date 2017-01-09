@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html ng-app="parcours">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="Art, paris, Cartel,art+contemporain,promotion,culture,geoloc,carte" />
+<meta name="author" content="Cartel">
+<meta property="fb:admins" content="642530282" />
+
+<title>Oeuvres à proximité</title>
+
+<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/font-awesome.css">
+<link href="css/flexslider.css" rel="stylesheet" >
+<link href="css/styles.css" rel="stylesheet">
+<link href="css/queries.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/bootstrap-formhelpers.min.css" rel="stylesheet">
+<link rel="shortcut icon" href="img/icone.png" type="image/x-icon" />
+<link href="css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/build.css"/>
+<link rel="stylesheet" href="css/privatespace.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/article.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- BS JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/angular-route.min.js"></script>
+<script type="text/javascript" src="js/angular-cookies.min.js"></script>
+<script type="text/javascript" src="js/parcours.js"></script>
+<script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.0.js"></script>
+<script>
+  	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  	ga('create', 'UA-61941499-1', 'auto');
+  	ga('send', 'pageview');
+	</script>
+</head>
+<style>
+  [ng-cloak] {
+    display:none !important;
+  }
+</style>
+<body class="bodyClass" id="parcoursController" ng-controller="parcoursController as user" ng-cloak>
+
+<header id="home">
+<section id="divTop">
+    <div style="background-color:#29374C;width:100%;text-align:center;color:white;padding:10px;font-size:9px;font-weight:100;">
+        <div>Les parcours auto-générés de <label>CARTEL</label> sont en version beta.</div>
+        <div>Des changements majeurs pourraient affecter votre expérience. Merci pour votre patience et votre participation!</div>
+    </div>
+</section>
+<nav class="navbar" id="secondNav" style="position:static;width:100%;z-index:10;background-color:#FAF1E3;height:55px;margin-bottom:0px;" >
+  <cartel-public-nav></cartel-public-nav>
+</nav>
+</header>
+
+<section ng-show="showLoadingOngoing" id="loadingOngoing" style="margin-top:100px;margin-bottom:100px;">
+    <script type="text/javascript">
+        console.log("script in html for set up height");
+        $("#loadingOngoing").css({"height":($(window).height() - 470)})
+    </script>
+    <div class="container">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="rotating" style="width:60px; margin:0 auto;">
+                <img src="/img/icone.png" style="width:60px;"></img>
+            </div>
+            <div style="margin-top:30px;text-align:center;">
+                <label>Chargement en cours!</label>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container">
+    <div close-modal class="modal fade" data-backdrop="static" id="myAuthModal" role="dialog" aria-labelledby="myAuthLabel"
+        ng-show="true" >
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 style="font-size:22px;">Bienvenue dans les parcours interactifs d'art contemporain du cartel de l'art</h1>
+                </div>
+                <div class="modal-body" style="padding-bottom:0;">
+                    <div ng-show="showLocationConfig">
+                        <label style="font-weight:100;">Pour découvrir des oeuvres géolocalisées, cliquer pour sélectionner : 
+                        </label>
+                        <div ng-show="true" style="text-align:center;padding-top:5px;">
+                            <button click-geolocation id="buttonClickGeoloc" class="btn" 
+                                style="width:100%;border-radius:4px;background-color:#29374C;color:white;" ng-click="selectCurrentPosition()">
+                                votre position actuelle
+                                <span class="fa-stack">
+                                  <i class="fa fa-square-o fa-stack-2x"></i>
+                                  <i class="fa fa-map-marker fa-stack-1x"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div style="padding-top:20px;" ng-show="showGoogleAddressCollector">
+                            <label style="font-weight:100;">Ou renseignez une adresse de départ :</label>
+                        </div>
+                        <div style="margin-top:5px;" class="row" style="width:100%;" ng-show="showGoogleAddressCollector">
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" id="adresse" placeHolder="Adresse (format : 1 rue de Lutèce, 75001 Paris)" ng-model="adresse" ng-model-options="{ getterSetter: true }"
+                                 style="height:40px;" ng-pattern="addressPattern" required/>
+                            </div>
+                            <div class="col-xs-2" style="text-align:center;padding-left:0px;">
+                                <button class="btn" ng-click="clickGeolocation()" ng-hide="hideGeolocationSavingButton" 
+                                    style="padding:5px 10px;border-radius:4px;background-color:#FAF1E3;color:#29374C;width:100%;">
+                                    <span class="fa-stack">
+                                      <i class="fa fa-square-o fa-stack-2x"></i>
+                                      <i class="fa fa-location-arrow fa-stack-1x"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div style="padding:0 0 0 15px;color:#5EC2D6;" ng-show="showGeolocErrorMessage">
+                                <span>Problème de récupération de votre position. Exemple de format : 1 rue de Lutèce, 75001 Paris</span>
+                            </div>
+                        </div>
+                        <div style="text-align:right;color:#29374C;">
+                            <label style="padding:10px 20px;"><i class="fa fa-info-circle" style="font-size:20px;color:#A7A9AB;" ng-click="showInfoContent()"></i></label>
+                        </div>
+                        <div ng-show="showInfo" style="margin-bottom:20px;border-top:1px dashed #A7A9AB;padding-top:10px;">
+                            <h1 style="font-size:16px;color:#939597;">Pourquoi avez-vous besoin de ma position géographique?</h1>
+                            <label style="font-size:13px;letter-spacing:1px;font-weight:100;color:#A7A9AB;">Cartel vous propose de construire des parcours de découverte d'art contemporain en vous présentant les oeuvres les plus proches de vous. La géolocalisation est nécessaire pour vous apporter la meilleure expérience de découverte possible. Nous ne collectons ces données seulement lorsque nous vous le demandons.</label>
+                            
+                            <h1 style="font-size:16px;color:#939597;">Le bouton "votre position actuelle" ne fonctionne pas.</h1>
+                            <label style="font-size:13px;letter-spacing:1px;font-weight:100;color:#A7A9AB;">Il est nécessaire que vous autorisiez explicitement via votre navigateur Cartel à récupérer votre donnée de géolocalisation. Si vous aviez refusé lorsque votre navigateur internet vous l'avez proposé, l'autorisation nécessite que vous vous rendiez dans les options de réglages avancés de votre navigateur.</label>
+                            
+                            <h1 style="font-size:16px;color:#939597;">Je ne souhaite pas donner ma position mais j'aimerais découvrir les oeuvres des artistes présentées sur Cartel.</h1>
+                            <label style="font-size:13px;letter-spacing:1px;font-weight:100;color:#A7A9AB;">Cartel, c'est aussi un média d'art contemporain! Découvrez les oeuvres qui ont suscité le plus d'engouement <a href="/">ici</a>.</label>
+                            
+                            <h1 style="font-size:16px;color:#939597;">J'utilise Internet Explorer et le site ne fonctionne pas</h1>
+                            <label style="font-size:13px;letter-spacing:1px;font-weight:100;color:#A7A9AB;">Nous avons décidé de ne pas adapter carteldelart au navigateur de Microsoft. Ses limitations complexifient en effet beaucoup la création du site. L'équipe technique de Cartel vous conseille l'ensemble des autres navigateurs (firefox, chrome, etc...)</label>
+                        </div>
+                    </div>
+                    <div ng-show="showSpinner" style="width:100%;text-align:center;padding-top:80px;color:#29374C;margin-bottom:70px; ">
+                        <div><span>
+                            Merci. Le calcul de votre position est en cours 
+                        </span>
+                        </div>
+                        <div style="padding-top:10px;">
+                        <span>
+                            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+                        </span>
+                        </div>
+                    </div>
+                    
+                    <div ng-show="showAdresse">
+                        <span>
+                            Merci d'avoir renseigné votre position. Vous pouvez accéder aux parcours
+                        </span>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</section>
+
+<section class="container" style="font-family:Helvetica;margin:0 0;padding:0;" ng-show="showCreationSection">
+    <div class="row" style="position:static;margin-left:0px;margin-right:0px;">
+        <div class="col-lg-12 col-md-12 col-xs-12 custom-display-button" style="position:relative;margin-bottom:5px;padding:0;text-align:center;">
+            <button id="myCartel" type="button" data-toggle="modal" data-target="#myModal" style="padding:0;border:none;background-color:white;">            
+                <img load-image
+                    style="display:block;width:100%;max-width:654px;min-width:200px;margin-left:auto;margin-right:auto;margin-top:0px;"
+                    id="fullScreenImage">
+                </img>
+                <div id="stats" style="width:100%;margin:0;padding:10px 0;border:1px solid #FAF1E3;" class="row">
+                    <div class="col-xs-9" style="text-align:left;">
+                        <div class="authorSimple">
+                            {{author}}
+                        </div>
+                        <div class="titleSimple">
+                            {{title}}
+                        </div>
+                    </div>
+                    <div class="col-xs-3" style="text-align:right;">
+                        <div style="padding-bottom:5px;margin-right:-3px;">
+                           <label style="font-weight:100;"> {{nb_view}}</label> <img src="/img/cartel_oeil.png" style="width:17px;height:11px;margin-top:-4px;"></img>
+                        </div>
+                        <div>
+                            <label style="font-weight:100;margin-left:-3px;">{{distance | number : 1}} km</label> <img src="/img/cartel_lieu.png" style="width:10px;height:15px;margin-top:-4px"></img>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <script>
+                var idCreator = <%- JSON.stringify(user.id) %>; 
+            </script>
+        </div>
+        
+        <div id="divDetail2" style="width:100%;margin:0 auto;position:relative;padding:10px 10px;margin-bottom:100px;">
+            <div>
+            <label class="cartel" style="padding-top:10px;">
+                {{cartel}}
+            </label>
+            </div>
+            <div style="position:relative;width:50px;border-bottom:1px dotted #A7A9AB;margin-top:10px;"></div>
+            <div style="padding-top:10px;">
+                <label class="cartel">
+               {{bio}}
+                </label>
+            </div>
+            
+            <div class="col-xs-12" style="padding:0;margin:0;">
+                <div style="position:relative;width:50px;border-bottom:1px dotted #FEDCA9;margin-top:10px;margin-bottom:10px;">
+                </div>
+                <div style="font-size:15px;color:#939597;">
+                    <div> 
+                        Date : {{creationDate | limitTo:4}}
+                    </div>
+                    <div>
+                        Médium : {{medium}}
+                    </div>
+                    <div>
+                        Dimensions : {{h}} cm {{h > 0 && ("x " + h + " cm") || ("")}} {{l > 0 && ("x " + l + " cm") || ("")}} 
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xs-12 row" style="padding:0;margin:0;">
+                <div class="col-xs-12" style="margin:0;padding:0;">
+                    <div style="position:relative;width:50px;border-bottom:2px solid #FEDCA9;margin-top:10px;margin-bottom:10px;">
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-2" style="margin:0;padding:0;">
+                    <img id="logoGallery" style="width:110px; height:110px;"></img>
+                </div>
+                <div class="col-xs-9 col-sm-10">
+                    <div class="col-xs-12 authorSimple" style="font-weight:200;font-size:18px;">
+                        {{gName}}
+                    </div>
+                    <div class="col-xs-12 titleSimple" style="font-weight:100;font-size:14px;">
+                        {{gAdresse}}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xs-12 row" style="padding:0;margin:0;border-bottom:1px dotted #29374C;">
+                <div style="position:relative;width:200px;border-bottom:1px solid #FEDCA9;margin-top:10px;margin-bottom:10px;">
+                </div>
+                
+                
+                <div style="position:relative;min-height:40px;margin-bottom:15px;">
+                    <label class="cartel" style="font-size:14px;line-height:40px;"><i>Sélectionné par </i> :</label>
+                    <div style="position:absolute;right:0px;top:0px;">
+                        <div>
+                            <img src="/img/cartel-image-cartel.png" style="width:45px;" alt="selection"></img>
+                            <label style="padding-left:10px;"><strong>CARTEL</strong></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-6 col-sm-offset-3 col-xs-12" id="divDetail" style="text-align:center;width:100%;height:150px;background-color:transparent;margin-top:10px;">
+            <div ng-show="showconditionnalshow" ng-class="classconditionnalshow" style="margin-top:8px;">
+                <button scroll-top class="btn btn-circle btn-lg" style="background-color:#5EC2D6;" ng-click="addCreationToLap()">
+                   <i class="fa fa-map-marker" style="color:white;font-size:36px;"></i> 
+                </button>
+                <div>
+                    <label style="font-weight:100;font-size:13px;font-color:#A7A9AB;">
+                        Afficher l'itinéraire
+                    </label>
+                </div>
+            </div>
+           
+            <div ng-class="classshow" style="margin-top:8px;">
+                <button scroll-top class="btn btn-circle btn-lg" style="background-color:#5CB884;" ng-click="addCreationToCollection()">
+                   <i class="fa fa-heart" style="color:white;font-size:26px;" ></i> 
+                </button>
+                <div>
+                    <label style="font-weight:100;font-size:13px;font-color:#A7A9AB;">
+                        Ajouter à ma collection
+                    </label>
+                </div>
+            </div>
+            
+           
+            <div ng-class="classshow" style="margin-top:8px;">
+                <button scroll-top class="btn btn-circle btn-lg" style="background-color:#E84F66;" ng-click="skipAndShowNextCreation()">
+                   <i class="fa fa-times" style="color:white;font-size:28px;"></i> 
+                </button>
+                <div>
+                    <label style="font-weight:100;font-size:13px;font-color:#A7A9AB;">
+                        Découvrir une autre oeuvre
+                    </label>
+                </div>
+            </div>
+            <script>
+                $(function () {
+                    console.log("set up tooltips");
+                  $('[data-toggle="tooltip"]').tooltip()
+                })
+            </script>
+             <script>    
+                /*
+                $("#logoGallery").load(function() {
+                    console.log("fullscreen image loaded");
+                    var topDist = $("#fullScreenImage").position();
+                    var footerDist = $("#footer").position();
+                    var articleIsSupWindow = (footerDist.top > window.innerHeight);
+                    $(document).scroll(function () {
+                        var scroll = $(this).scrollTop();
+                        if (scroll > 100 || articleIsSupWindow) {
+                            if ($('#divDetail').css('display') == "none"){
+                                $('#divDetail').css({"display":"block"}); 
+                            }
+                            //console.log("------------------value : ------------------", (footerDist.top - 180 - window.innerHeight));
+                            if (scroll > (footerDist.top  - window.innerHeight)){
+                                $('#divDetail').css({"position":"relative", "left":"0","margin-top":"20px","bottom":"none","margin-bottom":"20px"});
+                                $('#divDetail2').css({"margin-bottom":"10px"});
+                            } else {
+                                console.log("+++++++++++++++++++++++fixed position+++++++++++++++++++++++");
+                                $('#divDetail').css({"position":"fixed", "bottom":"20px", "top":topDist.left});
+                                $('#divDetail2').css({"margin-bottom":"120px"});
+                            }
+                        } else {
+                            $('#divDetail').css({"display":"none"}); 
+                        }
+                    });
+                });
+                */
+            </script>
+        </div>
+    </div>
+ </section>
+ 
+<section class="container" ng-show="showNoCreationFound" style="margin:0px 0 30px;">
+    <div class="row">
+        <div style="text-align:center;font-size:14px;margin:100px;">
+            <h1 style="font-size:18px;font-weight:100;">Ah! Vous êtes arrivé au bout du catalogue!</h1>
+            <h1 style="font-size:18px;font-weight:100;">On donne le maximum pour sélectionner les plus belles oeuvres</h1>
+            <h2 style="font-weight:100;">En attendant les prochains chef-d'oeuvres du cartel de l'art vous pouvez : </h2>
+        </div>
+        
+        <div class="row col-sm-10 col-sm-offset-1" onclick="location.href = '/'" 
+            style="position:relative;margin-top:10px;background-color:#FEDCA9;padding:10px;padding-right:10px;border-radius:0px;">
+            <div class="col-xs-12 col-sm-2 promoImg" style="position:relative;color:#ee6779;">
+                <span class="fa-stack fa-3x">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-street-view fa-stack-1x"></i>
+                </span>
+            </div>
+            <div class="col-xs-12 col-sm-10" id="promoElem" style="text-align:left;margin-top:10px;margin-left:0px;position:relative;">
+                <ul style="list-style-type:none;padding-left:5px;">
+                    <li><label style="font-size:16px;color:#29374C;text-transform:uppercase;">Aller prendre l'air</label></li>
+                    <li><label style="font-size:16px;color:#29374C;font-weight:100;">Pour ne pas vous perdre, générez vos parcours d'art contemporain personnalisés</label></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="row col-sm-10 col-sm-offset-1" onclick="location.href = '/'" 
+            style="position:relative;margin-top:10px;background-color:#FAF1E3;padding:10px; padding-right:10px;border-radius:10px;">
+            
+            <div class="col-xs-12 col-sm-11" id="promoElem" style="text-align:left;margin-top:10px;margin-left:0px;position:relative;">
+                <ul style="list-style-type:none;padding-left:5px;color:##FEDCA9;">
+                    <li><label style="font-size:16px;color:#29374C;text-transform:uppercase;">Faire des statistiques</label></li>
+                    <li><label style="font-size:16px;color:#29374C;font-weight:100;">Pour vous amuser, suivez les réussites de vos oeuvres préférées</label></li>
+                </ul>
+            </div>
+            
+            <div class="col-xs-12 col-sm-1 promoImg" style="position:relative;color:#FEDCA9;">
+                <span class="fa-stack fa-3x">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-line-chart fa-stack-1x"></i>
+                </span>
+            </div>
+        </div>
+        
+         <div class="row col-sm-10 col-sm-offset-1" onclick="location.href = '/'"
+            style="position:relative;margin-top:10px;background-color:#A7A9AB;padding:10px; padding-right:10px;border-radius:0px;">
+            <div class="col-xs-12 col-sm-2 promoImg" style="position:relative;color:#FAF1E3;">
+                <span class="fa-stack fa-3x">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-cogs fa-stack-1x"></i>
+                </span>
+            </div>
+            <div class="col-xs-12 col-sm-10" id="promoElem" style="text-align:left;margin-top:10px;margin-left:0px;position:relative;">
+                <ul style="list-style-type:none;padding-left:5px;">
+                    <li><label style="font-size:16px;color:white;text-transform:uppercase;">Adaptez vos paramètres de découverte</label></li>
+                    <li><label style="font-size:16px;color:white;font-weight:100;">Pour dénicher des talents cachés, essayez Cartel dans un autre lieu</label></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="row col-sm-10 col-sm-offset-1" onclick="location.href = '/'" 
+            style="position:relative;margin-top:10px;background-color:#29374C;padding:10px; padding-right:10px;border-radius:10px;">
+             
+            <div class="col-xs-12 col-sm-10 col-md-11" id="promoElem" style="text-align:left;margin-top:10px;margin-left:0px;position:relative;">
+                <ul style="list-style-type:none;padding-left:5px;color:white;">
+                    <li><label style="font-size:16px;color:white;text-transform:uppercase;">Découvrir les analyses de nos chroniqueurs</label></li>
+                    <li><label style="font-size:16px;color:white;font-weight:100;">Lisez les chroniques du cartel de l'art</label></li>
+                    <li><label style="font-size:16px;color:white;font-weight:100;">Découvrez les meilleures &oelig;uvres du moment</label></li>
+                </ul>
+            </div>
+            
+            <div class="col-xs-12 col-sm-2 col-md-1 promoImg" style="position:relative;color:#A7A9AB;">
+                <span class="fa-stack fa-3x">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-comments-o fa-stack-1x"></i>
+                </span>
+            </div>
+        </div>
+        
+       
+        <div class="row col-sm-10 col-sm-offset-1" onclick="location.href = '/'" 
+            style="position:relative;margin-top:10px;background-color:#ee6779;padding:10px; padding-right:10px;border-radius:0px;">
+            <div class="col-xs-12 col-sm-2 promoImg" style="position:relative;color:">
+                <span class="fa-stack fa-3x">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-medkit fa-stack-1x"></i>
+                </span>
+            </div>
+            <div class="col-xs-12 col-sm-10" id="promoElem" style="text-align:left;margin-top:10px;margin-left:0px;position:relative;">
+                <ul style="list-style-type:none;padding-left:5px;color:white;">
+                    <li><label style="font-size:16px;color:white;text-transform:uppercase;">Soutenir Cartel ! </label></li>
+                    <li><label style="font-size:16px;color:white;font-weight:100;"> Partagez cartel de l'art auprès de vos amis, de vos artistes et lieux d'arts préférés</label></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+ </section>
+
+ <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<footer style="margin-top:-3px;z-index:10;" id="footer">
+    <cartel-footer>
+    </cartel-footer>
+</footer>
+
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- BS JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+</body>
+</html>

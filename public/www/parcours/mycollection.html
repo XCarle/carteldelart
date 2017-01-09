@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html ng-app="collection">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta name="keywords" content="Art, paris, Cartel,art+contemporain,promotion,culture,geoloc,carte" />
+    <meta name="author" content="Cartel">
+    <meta property="fb:admins" content="642530282" />
+
+    <title>Ma collection</title>
+
+        <link rel="shortcut icon" href="../img/icone.png" type="image/x-icon" />
+
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'/>
+    <link href="../css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/font-awesome.css"/>
+    <link href="../css/styles.css" rel="stylesheet"/>
+    <link href="../css/bootstrap-formhelpers.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/build.css"/>
+    <link rel="stylesheet" href="../css/privatespace.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    
+    
+    <link rel="stylesheet" href="../css/leaflet.css"/>
+    <link rel="stylesheet" href="../css/leaflet.label.css"/>
+    <link rel="stylesheet" href="../css/directions.css"/>
+    <link rel="stylesheet" href="../css/article.css"/>
+    
+    <link rel="stylesheet" href="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.css" />
+    
+    <!-- jQuery -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- BS JavaScript -->
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/angular-route.min.js"></script>
+<script type="text/javascript" src="../js/angular-cookies.min.js"></script>
+<script type="text/javascript" src="../js/collection.js"></script>
+<script type="text/javascript" src="../js/ui-bootstrap-tpls-0.13.0.js"></script>
+
+<script>
+  	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  	ga('create', 'UA-61941499-1', 'auto');
+  	ga('send', 'pageview');
+</script>
+</head>
+<style>
+    [ng-cloak] {
+        display:none !important;
+      }
+</style>
+<body class="bodyClass" ng-controller="collectionController as collection"  ng-cloak>
+<header id="home">
+<section id="divTop">
+    <div style="background-color:#29374C;width:100%;text-align:center;color:white;padding:10px;font-size:9px;font-weight:100;">
+        <div>Les parcours auto-générés de <label>CARTEL</label> sont en version beta.</div>
+        <div>Des changements majeurs pourraient affecter votre expérience. Merci pour votre patience et votre participation!</div>
+    </div>
+</section>
+<nav class="navbar" id="secondNav" style="position:static;width:100%;z-index:10;background-color:#FAF1E3;height:55px;margin-bottom:0px;" >
+  <cartel-public-nav></cartel-public-nav>
+</nav>
+</header>
+    
+<section id="collectionSection"> 
+<script>
+	var idCreator = <%- JSON.stringify(user.id) %>; 
+	var cType = <%- JSON.stringify(user.type) %>; 
+</script>
+    <div class="container">
+        <div style="text-align:center;margin-top:30px;">
+            <div style="border-bottom:2px solid #FEDCA9;cursor:pointer;" ng-click="showCollectionButton()">
+                <h1 style="padding-bottom:10px;margin-bottom:5px;">
+                    En cours d'exposition ({{collection.length}})
+                    <i ng-hide="showCollection" style="float:right;padding-right:15px;font-size:18px;line-height:30px;"class="fa fa-chevron-up"></i>
+                    <i ng-show="showCollection" style="float:right;padding-right:15px;font-size:18px;line-height:30px;"class="fa fa-chevron-down"></i>
+                </h1>
+            </div>
+        </div>
+        <div style="position:relative;margin-top:15px;" class="row" ng-show="showCollection">
+            <div class="col-sm-4" ng-repeat="creation in collection track by $index">
+                <div set-collection-creations 
+                        withsrc="{{creation.url}}" 
+                        withtpx="{{creation.t_p_x}}" 
+                        withtpy="{{creation.t_p_y}}" 
+                        withtdx="{{creation.t_d_x}}"  
+                    ng-show="{{creation.collected}}"
+                    style="position:relative;margin-bottom:20px;"
+                >
+                    <img id="listThumb_{{$index}}" style="width:100%;height:100%;"></img>
+                    <div style="width:100%;border:1px solid #FEDCA9;padding:10px 10px 5px 10px;">
+                        <div style="padding-bottom:5px;">
+                            <div>
+                                <label class="author" style="word-wrap:break-word;font-family:Helvetica;font-weight:400;font-size:16px;">
+                                    {{creation.author[0].fname +" "+ creation.author[0].lname +" - "}}
+                                </label>
+                                <label class="title" style="word-wrap:break-word;font-family:Helvetica;font-weight:100;font-size:16px;">
+                                    {{creation.details[0].title + ","}}
+                                </label>
+                                <label class="title" style="word-wrap:break-word;font-family:Helvetica;font-weight:100;font-size:16px;">
+                                    {{creation.details[0].creation_date| date:'yyyy'}}.
+                                </label>
+                            </div>
+                            <div>
+                                <label class="author" style="word-wrap:break-word;font-family:Helvetica;font-weight:100;font-size:16px;">
+                                    {{creation.expositions[0].gallery[0].gname}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row" style="border-top:1px solid #eee;text-align:center;padding:10px 0 0;margin:0;">
+                            <div class="col-xs-4" style="border-right: 1px solid #eee;">
+                                <button class="btn" ng-click="dislike(creation)"
+                                    style="padding:0;background-color:transparent;width:100%;color:#ee6779;font-size:30px;">
+                                    <i class="fa fa-heart"></i>
+                                </button>
+                            </div>
+                            <div class="col-xs-4" style="border-right: 1px solid #eee;">
+                                <button click-geolocation class="btn" ng-click="toDirectionPage(creation)"
+                                    style="padding:0;background-color:transparent;width:100%;color:#29374C;font-size:30px;">
+                                    <i class="fa fa-map-signs"></i>
+                                </button>
+                            </div>
+                            <div class="col-xs-4">
+                                <button class="btn" ng-click="toCreationPage(creation)"
+                                    style="padding:0;background-color:transparent;width:100%;font-size:30px;">
+                                    <img src="/img/icone.png" style="width:40px;width:40px;"></img>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align:center;border-bottom:2px solid #FEDCA9;margin-bottom:15px;"  ng-click="showCollectionNoExhibitionButton()">
+            <h1 style="padding-bottom:10px;cursor:pointer;margin-bottom:5px;">
+                Hors exposition ({{collectionNoExhibition.length}})
+                <i ng-hide="showCollectionNoExhibition" style="float:right;padding-right:15px;font-size:18px;line-height:30px;"class="fa fa-chevron-up"></i>
+                <i ng-show="showCollectionNoExhibition" style="float:right;padding-right:15px;font-size:18px;line-height:30px;"class="fa fa-chevron-down"></i>
+            </h1>
+            
+        </div>
+        <div style="position:relative;" class="row" ng-show="showCollectionNoExhibition">
+            <div class="col-sm-4" ng-repeat="creation in collectionNoExhibition track by $index">
+                <div set-collection-creations-no-exhibition
+                        withsrc="{{creation.url}}" 
+                        withtpx="{{creation.t_p_x}}" 
+                        withtpy="{{creation.t_p_y}}" 
+                        withtdx="{{creation.t_d_x}}"  
+                    ng-show="{{creation.collected}}"
+                    style="position:relative;margin-bottom:20px;"
+                >
+                    <img id="listThumbNoExhbition_{{$index}}" style="width:100%;height:100%;"></img>
+                    <div style="width:100%;border:1px solid #FEDCA9;padding:10px 10px 5px 10px;">
+                        <div style="padding-bottom:5px;">
+                            <div>
+                                <label class="author" style="word-wrap:break-word;font-family:Helvetica;font-weight:400;font-size:16px;">
+                                    {{creation.author[0].fname +" "+ creation.author[0].lname +" - "}}
+                                </label>
+                                <label class="title" style="word-wrap:break-word;font-family:Helvetica;font-weight:100;font-size:16px;">
+                                    {{creation.details[0].title + ","}}
+                                </label>
+                                <label class="title" style="word-wrap:break-word;font-family:Helvetica;font-weight:100;font-size:16px;">
+                                    {{creation.details[0].creation_date| date:'yyyy'}}.
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row" style="border-top:1px solid #eee;text-align:center;padding:10px 0 0;margin:0;">
+                            <div class="col-xs-6" style="border-right: 1px solid #eee;">
+                                <button class="btn" ng-click="dislike(creation)"
+                                    style="padding:0;background-color:transparent;width:100%;color:#ee6779;font-size:30px;">
+                                    <i class="fa fa-heart"></i>
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button class="btn" ng-click="toCreationPage(creation)"
+                                    style="padding:0;background-color:transparent;width:100%;font-size:30px;">
+                                    <img src="/img/icone.png" style="width:40px;width:40px;"></img>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+</body>
+<footer>
+    <cartel-footer>
+    </cartel-footer>
+</footer>
+</body>
+</html>

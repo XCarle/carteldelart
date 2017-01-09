@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Cartel - Profil</title>
+
+	<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/profile/global.css"/>
+	<link rel="stylesheet" href="css/profile/profile.css"/>		
+		
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/profile/creations.css"/>
+	
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/uuid.js"></script>
+	<script type="text/javascript" src="js/profile.js"></script>
+	<script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.0.js"></script>
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+
+</head>
+<body>
+<section>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="/img/icone.png" style="width:40px;height:40px;margin-top:-10px;"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a>Profil</a></li>
+            <li><a href="/profile/creations">Oeuvres</a></li>
+            <li><a href="/profile/places">Lieux</a></li>
+            <li><a href="/profile/events">Expositions</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</section>
+<section>
+<div>
+	<p>ok</p>
+	<p>ok</p>
+</div>
+<section>
+	<div>
+		<p>
+        	<strong>id</strong>: <%= user._id %><br>
+            <strong>email</strong>: <%= user.localemail %><br>
+            <strong>password</strong>: <%= user.localpassword %>
+        </p>
+		<input type="file" id="file_input"/>
+		<p id="status">Please select a file</p>
+		<img id="preview" class="preview" src="/img/portfolio-01.jpg" />
+	
+		<form method="POST">
+	    	<input type="hidden" id="avatar_url" name="avatar_url" value="/public/default.png" />
+	    	<input type="text" name="username" placeholder="Username" /><br />
+	    	<input type="text" name="full_name" placeholder="Full name" /><br /><br />
+			<input id="form_input" type="submit" value="Update profile" />
+		</form>
+	</div>
+</section>
+
+	<script type="text/javascript">
+/*
+    Function to carry out the actual PUT request to S3 using the signed request from the app.
+*/
+function upload_file(file, signed_request, url){
+    var xhr = new XMLHttpRequest();
+    xhr.open("PUT", signed_request);
+    xhr.setRequestHeader('x-amz-acl', 'public-read');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            document.getElementById("preview").src = url;            
+            document.getElementById("avatar_url").value = url;
+        }
+    };
+    xhr.onerror = function() {
+        alert("Could not upload file."); 
+    };
+    xhr.send(file);
+}
+
+/*
+    Function to get the temporary signed request from the app.
+    If request successful, continue to upload the file using this signed
+    request.
+*/
+function get_signed_request(file){
+    var xhr = new XMLHttpRequest();
+    // define file name 
+    var file_name = "creator-image-101.png";
+    xhr.open("GET", "/sign_s3?file_name="+file_name+"&file_type="+file.type);
+    
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+        	console.log("xhr : ", xhr);
+            if(xhr.status === 200){
+                var response = JSON.parse(xhr.responseText);
+                upload_file(file, response.signed_request, response.url);
+            }
+            else{
+                alert("Could not get signed URL.");
+            }
+        }
+    };
+    xhr.send();
+}
+/*
+   Function called when file input updated. If there is a file selected, then
+   start upload procedure by asking for a signed request from the app.
+*/
+function init_upload(){
+
+    var file = dataURItoBlob(document.getElementById('preview').src);
+
+    //var files = document.getElementById("file_input").files;
+    //var file = files[0];
+    console.log("file : ", file);
+    if(file == null){
+        alert("No file selected.");
+        return;
+    }
+    get_signed_request(file);
+    console.log("is initialized");
+    return;
+}
+
+function dataURItoBlob(dataURI) {
+	console.log("IN dataURItoBlob : ", dataURI);
+    // convert base64 to raw binary data held in a string
+    var byteString = atob(dataURI.split(',')[1]);
+ 
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+ 
+    // write the bytes of the string to an ArrayBuffer
+    var arrayBuffer = new ArrayBuffer(byteString.length);
+    var _ia = new Uint8Array(arrayBuffer);
+    for (var i = 0; i < byteString.length; i++) {
+        _ia[i] = byteString.charCodeAt(i);
+    }
+ 
+    var dataView = new DataView(arrayBuffer);
+    var blob = new Blob([dataView], { type: 'image/png' });
+	console.log("OUT dataURItoBlob");
+    return blob;
+}
+
+function format_image(){
+	console.log("format_image");
+	// on récupère le fichier
+	var files = document.getElementById("file_input").files;
+    var file = files[0];
+	
+	var reader = new FileReader();
+	var image = new Image();
+	
+	// on créé le canvas de réception
+	var resize_canvas = document.createElement('canvas');
+	
+	// on lit le fichier source
+	if (file){
+		reader.readAsDataURL(file);
+	}
+	
+	// à la fin de la lecture du fichier
+	reader.onloadend = function(_file){
+		console.log("reader.onloadend");
+		// on écrit dans l'image tampon.
+		image.src = reader.result;
+		
+		// calculate new image size
+		var size = image.width + image.height;
+		var newW = image.width * 1600 / size;
+		var newH = image.height * 1600 / size;
+		
+		// on modifie le canvas 
+		resize_canvas.width = newW;
+		resize_canvas.height = newH;
+		
+		// création de l'image à la nouvelle taille
+		resize_canvas.getContext('2d').drawImage(image, 0, 0, newW, newH);
+		
+		// positionnement de l'image au bon endroit
+			//$('.preview').attr('src', resize_canvas.toDataURL("image/png"));  
+		
+		document.getElementById('preview').src = resize_canvas.toDataURL();
+		
+		// manage error
+		image.onerror = function(){
+			alert('Invalid File Type : ', file.type);
+		};
+	}	
+}
+
+/*
+   Bind listeners when the page loads.
+*/
+(function() {
+    document.getElementById("file_input").onchange = format_image;
+})();
+
+(function(){
+	document.getElementById("form_input").onsubmit = init_upload;
+})();
+</script>
+	
+
+</body>

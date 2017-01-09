@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="parcours">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<meta name="keywords" content="Art, paris, Cartel,art+contemporain,promotion,culture,geoloc,carte" />
+<meta name="author" content="Cartel">
+<meta property="fb:admins" content="642530282" />
+<meta property="fb:app_id" content="1485534465076102" /> 
+<meta property="og:type"   content="website" /> 
+<meta property="og:url"    content="http://www.carteldelart.com" /> 
+<meta property="og:title"  content="Cartel - Le cartel de l'art" /> 
+<meta property="og:image"  content="http://www.carteldelart.com/img/cover_cartel_4.png" /> 
+<meta property="og:image:width" content="960" />
+<meta property="og:image:height" content="598" />
+<meta property="og:description" content="Cartel de l'art - Oeuvres, Chroniques, Agenda d'Art Contemporain
+" />
+
+<title>Cartel - Le cartel de l'art</title>
+
+<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/privatespace.css"/>
+
+<link href="css/flexslider.css" rel="stylesheet" >
+<link href="css/styles.css" rel="stylesheet">
+<link href="css/queries.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/global.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap-formhelpers.min.css" rel="stylesheet">
+<link rel="shortcut icon" href="img/icone.png" type="image/x-icon" />
+
+
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/build.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/article.css"/>
+
+    <link rel="stylesheet" href="css/leaflet.css"/>
+    <link rel="stylesheet" href="css/leaflet.label.css"/>
+    <link rel="stylesheet" href="css/galeries.css"/>
+    <link rel="stylesheet" href="css/leaflet.markercluster.css"/>
+
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	    
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/angular-cookies.min.js"></script>
+
+    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
+    
+    <script type="text/javascript" src="js/leaflet.label.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+
+    <script type="text/javascript" src="js/angular-leaflet-directive.js"></script>
+
+	<script type="text/javascript" src="js/uuid.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
+	<script type="text/javascript" src="js/elem.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
+    
+	<script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.0.js"></script>
+
+	<script>
+  	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  	ga('create', 'UA-61941499-1', 'auto');
+  	ga('send', 'pageview');
+	</script>
+
+</head>
+<body id="top" ng-controller="parcoursController as user">
+<header id="home"> 
+<script>
+    $('#arrow').hide();
+    $(document).ready(function() {
+        var w = $(window).innerWidth();
+        if (w > 768){
+            console.log("innerwidth");
+            $('.arrow').show();
+        } else {
+            $('.arrow').hide();
+        }
+    });
+</script>
+</header>
+
+<section style="margin:100px 0 15px;">
+    <div class="watchandgo" id="topLabel">
+        <div style="margin:12px 0 0;">
+            <h1 id="searchTitle" style="color:#29374C;margin:0;"><img src="/img/cartel_maps.png" style="width:100px;padding-right:15px;margin-top:10px;margin-bottom:35px;"></img>Cartel de l'art </h1>
+        </div>
+    </div>
+</section>
+
+
+<section class="container">
+    <div class="col-sm-10 col-sm-offset-1" style="margin-bottom:30px;">
+        <div style="margin-top:5px;" class="row" style="width:100%;">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="text-align:center;color:#ee6779;margin-bottom:20px;">
+                <label id="searchLabel" style="font-weight:100;">L'actualité de l'art contemporain à proximité</label>
+            </div>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" id="adresse" placeHolder="Adresse de départ" ng-model="adresse" ng-model-options="{ getterSetter: true }"
+                 style="height:40px;border-radius:0;" ng-pattern="addressPattern" required/>
+            </div>
+            <div class="col-xs-2" style="text-align:center;padding-left:0px;">
+                <button class="btn" ng-click="clickGeolocation()"
+                    style="padding:5px 10px;border-radius:4px;background-color:#FAF1E3;color:#29374C;width:100%;">
+                    <span class="fa-stack">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-location-arrow fa-stack-1x"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container" id="searchBottom">
+    <a href="/chroniques">
+    <div class="col-xs-6 col-sm-3" style="background-color:white;color:#5CB884;height:80px;line-height:80px;">
+        <span class="fa-stack fa-lg" style="font-size:20px;font-weight:100;">
+                <i class="fa fa-pencil fa-stack-1x"></i>
+                <i class="fa fa-square-o fa-stack-2x"></i>
+             </span>
+            Chroniques
+    </div>
+    </a>
+    <a href="/agenda">
+    <div class="col-xs-6 col-sm-3" style="background-color:white;color:#ee6779;height:80px;line-height:80px;">
+        <span class="fa-stack fa-lg" style="font-size:20px;font-weight:100;">
+                <i class="fa fa-calendar fa-stack-1x"></i>
+                <i class="fa fa-square-o fa-stack-2x"></i>
+             </span>
+        Agenda
+    </div>
+    </a>
+    <a href="/oeuvres">
+    <div class="col-xs-6 col-sm-3" style="background-color:white;color:#5EC2D6;height:80px;line-height:80px;">
+        <span class="fa-stack fa-lg" style="font-size:20px;font-weight:100;">
+                <i class="fa fa-search fa-stack-1x"></i>
+                <i class="fa fa-square-o fa-stack-2x"></i>
+             </span>
+            Focus
+    </div>
+    </a>
+    <a href="/parcours">
+    <div class="col-xs-6 col-sm-3" style="background-color:white;height:80px;line-height:80px;">
+        <span class="fa-stack fa-lg" style="font-size:20px;font-weight:100;">
+                <i class="fa fa-user fa-stack-1x"></i>
+                <i class="fa fa-square-o fa-stack-2x"></i>
+             </span>
+            Mon espace
+    </div>
+    </a>
+</section>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/waypoints.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/scripts.js"></script> 
+<script src="js/jquery.flexslider.js"></script> 
+<script src="js/modernizr.js"></script>
+</body>
+</html>

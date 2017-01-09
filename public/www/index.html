@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="home">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="Art, paris, Cartel,art+contemporain,promotion,culture,geoloc,carte" />
+<meta name="author" content="Cartel">
+<meta property="fb:admins" content="642530282" />
+<meta property="fb:app_id" content="1485534465076102" /> 
+<meta property="og:type"   content="website" /> 
+<meta property="og:url"    content="http://www.carteldelart.com" /> 
+<meta property="og:title"  content="Cartel - Le cartel de l'art" /> 
+<meta property="og:image"  content="http://www.carteldelart.com/img/cover_cartel_4.png" /> 
+<meta property="og:image:width" content="960" />
+<meta property="og:image:height" content="598" />
+<meta property="og:description" content="Cartel de l'art - Oeuvres, Chroniques, Agenda d'Art Contemporain
+" />
+
+<title>Cartel - Le cartel de l'art</title>
+
+<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/font-awesome.css">
+<link href="css/flexslider.css" rel="stylesheet" >
+<link href="css/styles.css" rel="stylesheet">
+<link href="css/queries.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/bootstrap-formhelpers.min.css" rel="stylesheet">
+<link rel="shortcut icon" href="img/icone.png" type="image/x-icon" />
+
+<link href="css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/build.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/article.css"/>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
+	<script type="text/javascript" src="js/elem.js"></script>
+	<script type="text/javascript" src="js/uuid.js"></script>
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.0.js"></script>
+	<script type="text/javascript" src="js/picturefill.min.js" async></script>
+	<script>
+  	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  	ga('create', 'UA-61941499-1', 'auto');
+  	ga('send', 'pageview');
+	</script>
+
+</head>
+<body id="top" ng-controller="UserController as user" style="min-width:1200px;">
+<header id="home">
+<section id="divTop">
+</section>
+<nav class="navbar" id="secondNav" style="position:static;width:100%;z-index:10;background-color:#FAF1E3;height:55px;margin-bottom:0px;" >
+      <cartel-nav></cartel-nav>
+    </nav>  
+<script>
+    $('#arrow').hide();
+    $(document).ready(function() {
+        var w = $(window).innerWidth();
+        if (w > 768){
+            console.log("innerwidth");
+            $('.arrow').show();
+        } else {
+            $('.arrow').hide();
+        }
+    });
+</script>
+</header>
+
+<section style="min-width:1200px;margin-bottom:72px;margin-top:20px;">
+     <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+        <div class="item active" style="min-height:500px;">
+            <a href="/exposition/prosopopee-le-centquatre-destabilise-notre-vision-des-choses">
+                <img set-size1 id="first-image" class="first-slide"   style="width:100%;height:100%;position:relative;" alt="Chronique - Exposition - La réalité des frontières au Palais de la Porte Dorée"></img>
+            </a>
+          <div class="container">
+            <div class="carousel-caption" style="left:5%;right:50%;top:30px;">
+              <h2 style="text-align:left;text-shadow:none;font-size:22px;color:#29374C;">CHRONIQUES DE L'ART CONTEMPORAIN</h2>
+              <h3 style="text-align:left;text-shadow:none;color:#939597;font-size:19px;">AVEC « PROSOPOPEES », LE CENTQUATRE DESTABILISE NOTRE VISION DES CHOSES</h3>
+              <p style="text-align:justify;font-size:15px;text-shadow:none;">PARIS [02.01.2016] - Présentée dans le cadre de la biennale internationale des arts numériques Némo, l’exposition « Prosopopées: quand les objets prennent vie » au CENTQUATRE transforme l’objet technique en objet esthétique. </p>
+              <p><a class="btn btn-lg btn-primary" href="/exposition/prosopopee-le-centquatre-destabilise-notre-vision-des-choses" role="button" style="background-color:#ee6779;">Lire la chronique</a></p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="item" style="min-height:500px;">
+          <img class="second-slide" set-size2  id="second-image"  style="width:100%;height:100%;position:relative" alt='Cartel - Felix Gonzalez Torres - "Untitled" (Revenge), détail , 1991'></img>
+          <div class="container">
+            <div class="carousel-caption" style="left:5%;right:50%;top:70px;">
+              <h2 style="text-shadow:none;text-align:left;font-size:22px;color:#29374C;line-height:35px;">L'&OElig;UVRE DE LA SEMAINE</h2>
+              <h3 style="text-shadow:none;color:#939597;font-size:18px;text-align:left;">Felix Gonzalez Torres - "Untitled" (Revenge), détail , 1991</h3>
+              <p style="text-align:justify;font-size:16px;text-shadow:none;">
+                    En publiant aujourd’hui l’oeuvre « Untitled » (Revenge), 1991, de Felix Gonzalez-Torres (1957-1996), Cartel souhaite rendre hommage à l’artiste décédé il y a tout juste 20 ans.
+              </p>
+              <p><a class="btn btn-lg btn-primary" style="background-color:#FEDCA9;color:#29374C;" href="/cartel/felix-gonzalez-torres" role="button">Lire le cartel</a></p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="item" style="min-height:500px;">
+          <img class="third-slide" set-size3  id="third-image" src="https://s3.eu-central-1.amazonaws.com/cartelarticles/agenda-cartel.png" style="width:100%;height:100%;border:1px dotted #A7A9AB;position:relative;" alt="Agenda Cartel"></img>
+          <div class="container">
+            <div class="carousel-caption"  style="left:5%;right:50%;top:70px;">
+              <h2 style="text-shadow:none;text-align:left;font-size:22px;color:#29374C;line-height:35px;">AGENDA D'&Eacute;V&Egrave;NEMENTS</h2>
+              <h3 style="text-shadow:none;color:#939597;font-size:18px;text-align:left;">L'agenda des évènements d'art contemporain sélectionnés pour vous par le cartel de l'art</h3>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button" style="background-color:#29374C;margin-top:80px;">Découvrir l'agenda</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" style="background-image:none;background-color:none;">
+        <i class="fa fa-chevron-left" style="position:absolute;top:50%;left:15%;color:#29374C;"></i>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" style="background-image:none;background-color:none;">
+        <i class="fa fa-chevron-right" style="position:absolute;top:50%;right:15%;color:#29374C;"></i>
+        <span class="sr-only">Next</span>
+      </a>
+      <!-- Indicators -->
+      <ol class="carousel-indicators" style="bottom:-50px;">
+        <li data-target="#myCarousel" data-slide-to="0" class="active" style="border:1px solid #29374C;margin-right: 5px;"></li>
+        <li data-target="#myCarousel" data-slide-to="1" style="border:1px solid #29374C;margin-right: 5px;"></li>
+        <li data-target="#myCarousel" data-slide-to="2" style="border:1px solid #29374C;margin-right: 5px;"></li>
+      </ol>
+    </div><!-- /.carousel -->
+</section>
+
+<section style="background-color:#29374C;min-width:1200px;" ng-controller="AgendaController as agenda" id="divAgenda">
+    <div class="container">
+    <div class="row" style="margin-bottom:60px;">
+        <h1 style="color:white;text-align:center;margin-top:60px;"><img src="/img/cartel_select-date.png" style="width:60px;padding-right:10px;"></img><a  href="/agenda" style="color:white;">Agenda</a></h1>
+        <div class="col-md-8 col-md-offset-2 row" style="padding:0;margin-top:10px;">            
+            <div class="col-md-12">
+                {{agendaMsg}}
+            </div>
+            
+            <div class="col-xs-12" ng-repeat="evenement in agenda.evenements" ng-show="$index < 6"
+                style="z-index:0;border-bottom:1px solid #FEDCA9;background-color:white;" 
+                id="evenements_{{date.day | date:'dd'}}_{{date.day | date:'MM'}}_{{date.day | date:'yyyy'}}" >
+                <div class="col-xs-3 cartelImgAgendaPreviewHome">
+                    <img src="{{'https://s3.eu-central-1.amazonaws.com/cartelagenda/'+evenement.evenement.url}}" style="width:125px;"></img>
+                </div>
+                <div class="col-xs-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;">
+                        <li><label style="font-size:24px;color:#29374C;">{{evenement.evenement.nom}}</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">{{evenement.evenement.type}}</label></li>
+                        <li style="padding-top:5px;padding-bottom:5px;">
+                            <div class="row" style="margin-left:0px;">
+                                <div class="col-xs-1 cartelDateAgenda" style="padding:0;margin-left:0;">
+                                    <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">{{evenement.evenement.date_debut | date : 'dd'}}</label></div>
+                                    <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>{{evenement.evenement.date_debut | date : 'MMM'}}</label></div>
+                                </div>
+                                <div class="col-xs-1 chevronAgendaHome" style="">
+                                    <label>></label>
+                                </div>
+                                <div class="col-xs-1 cartelDateAgendaHome" style="padding:0;margin-left:0;">
+                                    <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">{{evenement.evenement.date_fin | date : 'dd'}}</label></div>
+                                    <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>{{evenement.evenement.date_fin | date : 'MMM'}}</label></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">{{evenement.evenement.adresse}}</label></li>
+                        <li><a href="http://{{evenement.evenement.description}}" target="_blank"><label style="FONT-WEIGHT:LIGHTER;cursor:help;">En savoir plus...</label></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2" style="text-align:center;background-color:#FEDCA9;height:40px;line-height:40px;cursor:pointer;" onclick="location.href = '/agenda'">
+            <label style="font-weight:lighter;">Tous les évènements <i class="fa fa-chevron-right" style="padding-right:5px;font-weight:lighter;"></i></label>
+        </div>
+    </div>
+    </div>
+</section>
+
+  <section class="subscribe text-center" style="background-color:#FAF1E3;padding:35px 0 70px;min-width:1200px;" id="newsletter">
+  <div class="container" ng-hide="user.isUserRegistered()">
+    <h1 style="margin-bottom:20px;"><span id="newsletterColor" style="color:#29374C;font-weight:200;padding-bottom:30px;">Newsletter mensuelle</span></h1>
+    <form ng-submit="user.updateUser()" class="form-inline" validate>
+        <i id="newsletterColor" style="color:#29374C;font-size:25px;padding-right:10px;" class="fa fa-paper-plane"></i>
+        <input type="email" id="userEmailInput" placeholder="Votre Mail" ng-model="user.usermail" required />
+        <input type="submit" id="submit" value="S'inscrire"></input>
+    </form>
+  </div>
+  <div ng-show="user.isUserRegistered()">
+  	<h2>Merci de vous être inscrit</h2>
+  </div>
+</section>
+
+<section style="min-width:1200px;" class="dark-bg text-center section-padding contact-wrap" id="contact"> <a href="#top" class="up-btn"><i class="fa fa-chevron-up"></i></a>
+  <div class="container">
+    <div class="col-md-12 row" onclick="location.href = '/questionnaire'" style="height:170px;margin-left:0;"
+            ng-mouseenter="showRedirect=true" ng-mouseleave="showRedirect=false" ng-init="showRedirect = false" >
+            <div class="col-sm-3 col-xs-12 cartelImgPreview" style="margin-top:15px;">
+                <img src="/img/cartel_question.png" style="width:150px"></img>
+            </div>
+            <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:40px;margin-left:30px;">
+                <label id="form-label" class="arrow" style="font-size:24px;">Votre avis nous intéresse</label>
+                <label id="form-label-h3" style="margin-bottom:0px;font-size:20px;font-weight:lighter;">Partagez votre expérience artistique en répondant à notre questionnaire.</label>
+            </div>
+            <div class="col-xs-2 arrow" ng-show="showRedirect" >
+                <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+            </div>
+       </div>
+  </div>
+</section>
+<footer>
+    <cartel-footer>
+    </cartel-footer>
+     <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+</footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/waypoints.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/scripts.js"></script> 
+<script src="js/jquery.flexslider.js"></script> 
+<script src="js/modernizr.js"></script>
+</body>
+</html>

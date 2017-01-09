@@ -1,0 +1,109 @@
+<!-- views/signup.ejs -->
+<!doctype html>
+<html ng-app="signup">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Cartel de l'art - Inscription</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="./../img/icone.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./../css/connect.css"/>
+    
+    <script type="text/javascript" src="./../js/jquery-1.10.2.min.js"></script>
+    
+	<script type="text/javascript" src="./../js/angular.min.js"></script>
+	<script type="text/javascript" src="./../js/angular-route.min.js"></script>
+	<script type="text/javascript" src="./../js/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="./../js/signup.js"></script>
+	<script>
+  	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  	ga('create', 'UA-61941499-1', 'auto');
+  	ga('send', 'pageview');
+	</script>
+</head>
+<body set-up-signup style="width:100%;" ng-cloak class="{{ bodyClass }}">
+<style>
+  [ng-cloak] {
+    display:none;
+  }
+</style>
+<div class="container" style="background-color:white;width:100%;">
+
+    <div id="inscription" class="col-sm-8" style="padding-top:80px;padding-left:15px;">
+        <div style="text-align:center;">
+            <a href="/"><img src="./../img/icone.png" style="width:100px;"></img></a>
+        </div>
+        <h1 style="font-size:28px;font-weight:200;font-family:'Helvetica';padding-bottom:20px;"><span class="fa fa-sign-in" style="padding-right:10px;"></span>Inscription à la version <strong>Bêta</strong></h1>
+    
+        <!-- show any messages that come back with authentication -->
+        <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-5" id="facebookConnect">
+                <form action="/connect/facebook" method="get">
+                     <div style="text-align:center;">
+                        <input type="checkbox" required></input>
+                        <label style="font-size:13px;">J'accepte les <a href="/conditions/cgu">conditions générales d'utilisation</a></label>
+                    </div>
+                    <div style="text-align:center;margin-top:20px;">
+                        <button type="btn submit"  class="btn btn-primary" style="border-radius:4px;background-color:#3b5998;font-size:20px;"><span class="fa fa-facebook"></span>acebook</a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-12 col-sm-7" id="localConnect" >
+
+                <!-- LOGIN FORM -->
+                <form action="/parcours-signup" method="post">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password">
+                    </div>
+                    <div>
+                        <input type="checkbox" required></input>
+                        <label style="font-size:13px;">J'accepte les <a href="/conditions/cgu">conditions générales d'utilisation</a></label>
+                    </div>
+                    <div style="text-align:center;padding-top:15px;">
+                        <button type="btn submit" class="btn btn-warning btn-lg" style="background-color:#29374C;color:white;border:none;">Inscription</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <hr></hr>
+
+        <p>Si vous avez déjà un compte, <a href="/parcours/login">connectez-vous</a></p>
+        <div style="text-align:center;padding-top:10px;">
+            <h1 style="letter-spacing:3px;font-family:Helvetica;font-weight:100;">CARTEL</h1>
+            <h2 style="font-size:22px;margin:0;font-weight:'Varela Round';">Personnalisez vos itinéraires d'art contemporain</h2>
+
+            <div style="padding-top:25px;">
+                <label>&copy; Cartel 2016, tout droits réservés</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4" id="signupRightImage" style="padding:0;margin:0;">
+
+    </div>
+    
+</div>
+
+    <div class="col-sm-12" id="footer" style="position:relative;background-color:#29374C;padding:0;margin:0;">
+    </div>
+
+
+</body>
+</html>

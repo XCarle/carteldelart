@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="guidearchitecture">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="Art, paris, Cartel,art+contemporain,promotion,culture,geoloc,carte" />
+<meta name="author" content="Cartel">
+<meta property="fb:admins" content="642530282" />
+
+<title>Parcours - Architecture - février 2016</title>
+    
+     <link rel="shortcut icon" href="../img/icone.png" type="image/x-icon" />
+
+    <meta property="fb:app_id" content="1485534465076102" /> 
+    <meta property="fb:admins" content="642530282" />
+    <meta property="og:type"   content="article" /> 
+    <meta property="og:url"    content="http://www.carteldelart.com/guide/parcours-architecture-fevrier-2016" /> 
+    <meta property="og:title"  content="Cartel - Parcours - Architecture - février 2016" /> 
+    <meta property="og:image"  content="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/presentation-parcours-architecture.png" /> 
+    
+    <meta property="og:image:width" content="484" />
+    <meta property="og:image:height" content="381" />
+    <meta property="og:description" content="A travers ce parcours thématique, Cartel souhaite montrer les liens qu’entretiennent les oeuvres entre elles et avec l’espace où elles sont exposées. Nous avons réuni une sélection d’expositions qui appréhendent l’espace entendu comme vide, plein, matière, échelle,… cause et conséquence de l’architecture. Au sein de ces espaces - hors temps, hors lieu, mais bien réels- le spectateur fait appel à ses sens, ses mouvements, son rapport à l’oeuvre pour vivre une expérience artistique unique.
+    " />
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@carteldelart">
+    <meta name="twitter:creator" content="@carteldelart">
+    <meta name="twitter:title" content="Cartel - Parcours - Architecture - février 2016">
+    <meta name="twitter:description" content="A travers ce parcours thématique, Cartel souhaite montrer les liens qu’entretiennent les oeuvres entre elles et avec l’espace où elles sont exposées. Nous avons réuni une sélection d’expositions qui appréhendent l’espace entendu comme vide, plein, matière, échelle,… cause et conséquence de l’architecture. Au sein de ces espaces - hors temps, hors lieu, mais bien réels- le spectateur fait appel à ses sens, ses mouvements, son rapport à l’oeuvre pour vivre une expérience artistique unique.">
+    <meta name="twitter:image" content="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/presentation-parcours-architecture.png">
+
+
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'/>
+    <link href="../css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/font-awesome.css"/>
+    <link href="../css/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/build.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    
+    
+    <link rel="stylesheet" href="../css/leaflet.css"/>
+    <link rel="stylesheet" href="../css/leaflet.label.css"/>
+    <link rel="stylesheet" href="../css/galeries.css"/>
+    <link rel="stylesheet" href="../css/privatespace.css"/>
+    <link rel="stylesheet" href="../css/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.css" />
+    
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!-- BS JavaScript -->
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../js/angular.min.js"></script>
+    <script type="text/javascript" src="../js/angular-route.min.js"></script>
+    <script type="text/javascript" src="../js/angular-cookies.min.js"></script>
+
+    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
+    <script type="text/javascript" src="../js/leaflet.label.js"></script>
+    <script type="text/javascript" src="../js/leaflet.awesome-markers.js"></script>
+    <script type="text/javascript" src="../js/angular-leaflet-directive.js"></script>
+    
+    <script type="text/javascript" src="../js/parcours-architecture.js"></script>
+    <script type="text/javascript" src="../js/ui-bootstrap-tpls-0.13.0.js"></script>
+    <script src="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.js" ></script>
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-61941499-1', 'auto');
+        ga('send', 'pageview');
+	</script>
+</head>
+<body class="container" id="top" ng-controller="GuideArchitectureMapController" style="padding:0;margin:0;">
+<header id="home">
+<section id="divTop">
+</section>
+<nav class="navbar" id="secondNav" style="position:static;width:100%;z-index:10;background-color:#FAF1E3;height:57px;margin-bottom:0px;" >
+  <cartel-nav></cartel-nav>
+</nav>  
+
+</header>
+    <section class="row" style="margin-top:20px;position:relative;">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10" style="text-align:center;padding:20px 0;border-bottom:2px solid #ee6779;color:#29374C;">
+            <div><label style="font-weight:200;font-size:23px;text-transform:uppercase;">Parcours thématique d'art contemporain</label></div>
+            <div><label style="font-weight:500;font-size:20px;"><strong>[ART][ARCHITECTURE][ESPACE][URBANISME]</strong></label></label></div>
+            <div><label style="font-weight:200;font-size:18px;">février 2016 - Paris</label></label></div>
+        </div>
+        
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10" style="text-align:center;padding:20px 0;border-bottom:2px solid #ee6779;">
+            <label style="font-weight:200;font-size:13px;color:#29374C;">
+                A travers ce parcours thématique, Cartel souhaite montrer les liens qu’entretiennent les oeuvres entre elles et avec l’espace où elles sont exposées. Nous avons réuni une sélection d’expositions qui appréhendent l’espace entendu comme vide, plein, matière, échelle,… cause et conséquence de l’architecture. Au sein de ces espaces - hors temps, hors lieu, mais bien réels- le spectateur fait appel à ses sens, ses mouvements, son rapport à l’oeuvre pour vivre une expérience artistique unique.
+            </label>
+        </div>
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1" >
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>1</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/1_etquelquesespacements.png" class="parcoursImg1" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">galerie melanie Rio</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">56, rue de la Fontaine au Roi - 75011 Paris</label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">23</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">jan.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">27</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">Et Quelque(s) Espacement(s)</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(1)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show1=!show1">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show1">
+                        +33 9 84 02 12 78. Ouverture : Jeu./Vend. 13h - 19h, Sam.15h - 19h et sur rendez-vous
+                    </li>
+                    <li ng-show="show1">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            Le cadre architectural de la galerie a constitué le point de départ de l’exposition pour les artistes. Ils ont perçu dans la galerie-appartement un lieu d’exposition atypique à la limite du domaine public et privé et ont choisi de s’inspirer de cet espace pour construire le discours de leur exposition. Leurs questionnements se sont portés sur la notion même de l’acte d’exposer et plus concrètement ils se sont interrogés sur la manière de montrer une œuvre et un ensemble d’œuvres. Leur présentation sonde le système de l’exposition, l’accrochage et la singularité d’une œuvre parmi un ensemble. 
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>2</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/3_Alexander-Apostol_Think-Blue_mor-charpentier.png" class="parcoursImg3" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">mor charpentier</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">8, Rue Saint-Claude - 75003 Paris</label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">09</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">jan.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">12</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">mar.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">CONCRETE CITIES</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(3)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show2=!show2">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show2">
+                        +33 (0) 1 44 54 01 58. Ouverture : Mar./Sam. 11 h - 19 h
+                    </li>
+                    <li ng-show="show2">
+                        <label style="font-weight:100;color:#29374C;">
+                            <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                                <li style="padding-left:20px;"><a href="http://www.mor-charpentier.com/fr/exhibition/concrete-cities/" target="_blank">http://www.mor-charpentier.com/fr/exhibition/concrete-cities/</a></li>
+                            </ul>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>3</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/10_jousse_entreprise_rometti_costales_worn.jpg" class="parcoursImg10" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">Jousse Entreprise</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">6 rue Saint-Claude - 75003 Paris</label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">09</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">jan.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">27</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">TERRITOIRE</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(10)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show3=!show3">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show3">
+                        Ouverture : Mar./Sam. 11 h - 19 h
+                    </li>
+                    <li ng-show="show3">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            "Ce sont là des traces, des marques, des éléments. Des indices peut-être. On a probablement des impressions de reconnaître quelque chose. Seulement des impressions car rien ne paraît relever du réel, tout est image. Une étendue plate et opaque qui emmène le regard ailleurs, dans des souvenirs et dans des lieux imagés.
+                            Un signe semble figurer un ailleurs, des circonstances autres ; il semble s’être arrêté en passant, imprimé : il suggère une identité à laquelle il s’apparente, un lieu d’où il vient, un temps auquel il échappe. C’est un territoire qui est évoqué, un « quelque part » représenté, dont la temporalité est étirée et la localité affranchie des limites physiques.
+                            Des images ont surgi, chargées de sens. Le champ des possibles s’est étendu par la recherche d’une poésie fictionnelle. Alors les limites du réel s’effacent, les choses s’en émancipent et deviennent visibles autrement, de même que d’autres sont rendues perceptibles.
+                            Les oeuvres ne cherchent pas à définir un territoire et son identité ; elles semblent s’efforcer de brouiller les pistes, d’estomper les frontières établies dans le temps et dans l’espace, pour regarder ces derniers autrement et ouvrir des passages inusités.
+                            Tout se passe comme une confrontation à la réalité : pour prendre la mesure de celle-ci, pour en avoir le plus conscience possible, pour en expérimenter les possibilités ainsi que les ressources, non seulement physiques mais aussi métaphysiques.
+                            Un pays est un territoire, la ville est un territoire, l’habitat en est un, de même qu’une chambre ; alors nous pourrions bien dire que la pensée est territoire. Ce serait comme se dire qu’au regard des éléments physiques et factuels qui composent le paysage de l’actualité, et par là même qui constituent le continuum urbain, un espace est démuré par le biais des oeuvres, une étendue s’ouvre dans la tête de celui qui regarde, un pas de côté dans l’imaginaire et la représentation, un méta-territoire qui donne à repenser le monde, à le réinventer.
+                            Le réinventer, c’est- à- dire faire de fantasmes une réalité probable, faire d’une anomalie une possibilité d’envisager l’espace, faire d’une association incongrue d’images une ressource pour produire du sens, ou encore faire de l’occupation d’un lieu l’occasion d’une expérience autre." Jousse Entreprise
+                            
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>4</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/4_solo-galerie-bijoy_jain_01.jpg" class="parcoursImg4" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">Solo galerie</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">11 rue des Arquebusiers - 75003 Paris</label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">05</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">27</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">OnArchitecture</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(4)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show4=!show4">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show4">
+                        T + 33 (0)1 42 77 05 44
+                    </li>
+                    <li ng-show="show4">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            « OnArchitecture est une plateforme en ligne d’archives vidéo dédiées à l’architecture créée par les architectes chiliens Felipe de Ferrari et Diego Grass en 2007. OnArchitecture montre un panorama mondial, complet et détaillé de problématiques liées à l’architecture contemporaine, offrant une tribune aux architectes du monde entier. […] Pour Solo Galerie, Felipe de Ferrari et Diego Grass proposent une sélection de leurs archives vidéo présentées pour la première fois en France. À travers cinq thèmes (Programmes, Culture, Travail, Loisir et Habitat), ces vidéos donnent accès à une compréhension profonde de productions architecturales emblématiques selon leurs contextes, en France, au Chili, au Brésil ou en Indonésie ». Solo galerie
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>5</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/searching_for_Identity-zinsmeister.jpg" class="parcoursImg4" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">Galerie NMariño</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">8 rue des Coutures Saint Gervais - 75003 Paris</label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">10</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">20</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">Virtual Interior - Annett Zinsmeister</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(13)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show14=!show14">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show4">
+                        01 48 87 49 75. Ouverture : du mardi au samedi de 13h à 18h.
+                    </li>
+                    <li ng-show="show14">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            « Dans son travail Annett Zinsmeister se concentre entre l’intersection entre l’art, l’architecture. Elle crée des installations à grande échelle, des espaces conceptuels et construits grâce à un travail en amont de photographies, dessins, films, et textes. Elle fusionne la recherche théorique à la pratique de l’art conceptuel. Son travail a un impact considérable sur le spectateur, par son coté immersif . En effet, ses créations sont réalisées pour contester la perception humaine et démystifier les habitudes quotidiennes. L’artiste sonde la communication, l’interaction sociale et le sens de la transformation de l’espace urbain. »
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        
+       <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>6</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/12_richard_serra_ramble_drawing.jpg" class="parcoursImg12" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">Gagosian Gallery</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">4 rue de Ponthieu - 75008 Paris </label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">28</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">jan.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">02</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">avr.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">Ramble drawings - Richard Serra</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(12)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show5=!show5">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show5">
+                        T. 33.1.75.00.05.92. Ouverture : Mar./Sam. 11 h - 19 h
+                    </li>
+                    <li ng-show="show5">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            La galerie Gagosian a présenté une première sélection de cette série de dessins, l’automne dernier, à New York. Inspirée au sculpteur américain par la réalisation de son œuvre Ramble (2014), installation-sculpture qui explore ses thèmes favoris (la monumentalité, le temps, l’espace, la sensualité du métal), elle fouille elle aussi les matières, par des moyens plus intimes. Une tout autre échelle à découvrir pour un autre regard sur l’œuvre de Serra.
+                        </label>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>7</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/2_espacel-libre_lagaleriedarchitecture.jpg" class="parcoursImg2" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">La Galerie d'Architecture</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">11 rue des blancs manteaux - 75004 Paris </label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">02</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">13</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">a + samuel delmas. Sensible</label>
+                            </li>
+                        </ul>
+                    </li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li>
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">16</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">27</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">Espaces libres - 13 mots pour représenter l’architecture</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(2)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show6=!show6">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show6">
+                    +33(0)1 49 96 64 00. Ouverture : Mar./Sam. 11 h - 19 h
+                    </li>
+                    <li ng-show="show6">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            <strong>a + samuel delmas. Sensible :</strong> Samuel Delmas démontre qu’il est possible de modeler un espace par la matière et les vides. L’exposition « propose au visiteur de redécouvrir la manière dont les sens sont sollicités par l’architecture, par la mise en œuvre des matériaux, leur aspect, leur texture, leur lumière ».
+                        </label>
+                    </li>
+                    <li ng-show="show6">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            <strong>Espaces libres - 13 mots pour représenter l’architecture :</strong> Au centre du projet, la matière première de l’architecture: l’ESPACE. une liste de mots définissant l’espace ( « espace–mots ») con- stitue la trame originaire de l’ensemble des contributions. Le projet devient ainsi encyclopédique, pédagogique et néanmoins poétique. il pourra inclure des contributions littéraires, artistiques ou philosophiques.
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+       
+        
+        
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>8</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/5_maison-danemark-petit-expo.jpg" class="parcoursImg5" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">Maison du Danemark</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">142 Avenue des Champs-Élysées - 75008 Paris</label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">26</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">jan.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">03</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">avr.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">petits meubles - grand talents</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(5)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show7=!show7">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show7">
+                        01 56 59 17 40. Ouverture : Mar./Vend. 13 h - 19 h; Sam./Dim. 13h-18h
+                    </li>
+                    <li ng-show="show7">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            "L’Exposition d’Automne 2015 des Ebénistes est un tremplin-miroir pour 45 binômes de designers/producteurs, dont la réflexion profonde, la minutie d’exécution et la fierté professionnelle est mis à l’honneur à la Maison du Danemark. Petit est le thème choisi cette année pour l’exposition itinérante qui a démarré son voyage à l’Øregaard Museum à Copenhague en septembre 2015 et s’installe maintenant à Paris pour l’hiver.
+Petit comme élégant, raffiné et délicat. Petit comme lisible, élaboré et épuré. Cette exposition est le fruit d’une collaboration entre producteurs et designers membres de l’association.
+La direction de l’Exposition d’Automne des Ebénistes (SE) a demandé à ses membres de créer un petit meuble autonome, de 60 × 60 cm maximum. Petits meubles, mais les réflexions et les idées sont toujours aussi grandes sur notre relation à l’habitat et aux technologies notamment. Le thème général est démultiplié par la scénographie : des podiums-miroirs, qui permettent aux spectateurs de regarder sous les jupes des meubles — un détail que les designers danois sont justement connus pour maîtriser et qui exige l’excellence en matière de finitions.
+L’exposition est conçue par l’association Snedkernes Efterårsudstilling (SE) et organisée par le service culturel de l’Ambassade de Danemark en France"
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>9</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/6_frac-leplateau-idf.jpg" class="parcoursImg6" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">Le Plateau - FRAC Ile-de-France</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">22 rue des Alouettes - 75019 Paris</label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">21</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">jan.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">10</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">avr.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">De toi à la surface</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(6)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show8=!show8">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show8">
+                        Ouverture : Mer./Dim. 14 h - 19 h
+                    </li>
+                    <li ng-show="show8">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            L’accessoiriste place sur le plateau des objets essentiels à l’histoire qui va s’y dérouler, mais doit-on nécessairement la raconter ?
+Les éléments du décor sont là pour composer un environnement et créer les conditions d’une action, ceci même sans la présence des acteurs. Une scène et une narration se mettent en place à partir d’éléments placés les uns après les autres, les uns sur les autres, les uns derrière les autres. On les décrypte comme les éléments d'une histoire teintée de leur utilisation (Jean-Pascal Flavien), comme une syntaxe langagière (Karl Larsson), comme un tour de magie (Stuart Sherman). Quoi qu’il en soit, les frontières entre ces catégories sont poreuses, dès lors que les accessoires prennent la place des acteurs.
+La scène sur laquelle ils se produisent (Barbara Bloom), ou les effets qui entourent leur apparition (James Welling) peuvent aussi leur donner littéralement un rôle à jouer et une histoire  à raconter. La compréhension de cette histoire dépend de notre capacité à interpréter les accessoires comme on le ferait de pièces à conviction ou de collections. On pourrait nommer cela « l’esprit de l’étagère » : contrairement à celui de l’escalier, on ne retrouve pas une idée trop tard, on découvre un trait de caractère dans des objets qui en sont pourtant physiquement dépourvus. Qui sait les voir reconnaîtra le portrait de leur propriétaire (Christian Boltanski) ou les désirs contradictoires qui hantent ces choses banales (Simon Dybbroe Møller).
+En somme, ces suppléments d’âmes qu’on accorde aux objets sont les nôtres. Nous y investissons nos intuitions et nos affects. Parfois au point que sujets et objets semblent indissociables (Judith Hopf) ou incompréhensibles l’un sans l’autre (Shelly Nadashi). Il arrive même que l’on constate qu’ils ont pris une sorte d’autonomie, qu’ils ont une existence qui leur est propre (Camille Blatrix) ou sont mus par des sentiments (Anouchka Oler).
+Nous sommes donc habitués à ce que les objets remplissent d’autres fonctions que celles pour lesquelles ils ont été fabriqués. C'est ce constat qui réunit les artistes de cette exposition. Tous présentent des objets reconnaissables en tant que tels et évoquant aussi une narration ou des sentiments. Ce « et », ce chevauchement, est important. C’est là que s’invente une relation toute singulière, où nos affects fournissent aux objets leur puissance d’évocation. On peut voir ces œuvres comme autant de moments où, de façon aussi irrationnelle qu’inattendue, nos sentiments s’accordent avec notre environnement.
+Avec : Camille BLATRIX, Barbara BLOOM, Christian BOLTANSKI, Simon DYBBROE MØLLER, Jean-Pascal FLAVIEN, Judith HOPF, Karl LARSSON, Shelly NADASHI, Anouchka OLER, Stuart SHERMAN et James WELLING.
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>10</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/7_larissa-fassler_jerome-poggi.jpg" class="parcoursImg7" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">Galerie Jérôme Poggi</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">2 rue Beaubourg - 75004 Paris</label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">29</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">jan.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">27</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">World Inside - Larrissa Fassier</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(7)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show9=!show9">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show9">
+                        09 84 38 87 74. Ouverture : Mar./Sam. 11 h - 19 h    
+                    </li>
+                    <li ng-show="show9">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            Conjointement au Centre culturel canadien qui accueille la première exposition rétrospective de Larissa Fassler jusqu’au 1er avril, la galerie présente le projet le plus récent de l’artiste consacré à la Gare du Nord. Son travail se construit essentiellement sur un ensemble de relevés et d’impressions dont elle fait l’expérience, et qu’elle synthétise dans de grandes compositions graphiques, maquettes ou sculptures. Son travail est organisé en séries construites autour de sites urbains spécifiques : Taksim Square (Istanbul, 2015), Regent Street (London, 2009), Schlossplatz (Berlin, 2013), Place de la Concorde (Paris, 2010) …
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        
+      
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>11</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelarticles/laurent-grasso-solarwind.png" class="parcoursImg11" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">Ivry - Silos Calcia</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">Silos Calcia - 25, quai d’Ivry - 75013 Paris</label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">09</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">jan.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">27</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">Solar Wind - Laurent Grasso</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(11)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show10=!show10">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show10">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            <a href="http://www.carteldelart.com/cartel/laurent-grasso" target="_blank">http://www.carteldelart.com/cartel/laurent-grasso</a>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        
+         <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>12</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/8_yves_buraud_la-marechalerie.jpg" class="parcoursImg8" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">Centre d’art contemporain La Maréchalerie</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">5, avenue de Sceaux - 78000 Versailles</label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">22</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">jan.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">20</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">mar.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">Nous utilisons maintenant le pays lui même comme sa propre carte - Yves Buraud</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(8)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show11=!show11">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show11">
+                        T 01 39 07 40 27. Ouverture : Mar./Dim. 14 h - 18 h et sur rdv
+                    </li>
+                    <li ng-show="show11">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            Yves Buraud est artiste plasticien et écrivain. Se définissant en explorateur de la condition urbaine, il croise dans son travail aux formes multiples, l’actualité, l’urbanisme, la politique, la ville, et l’art. Très critique dans ses écrits comme dans ses œuvres graphiques et picturales, Yves Buraud donne à voir la plasticité et la diversité des architectures « périphériques » standardisées et délaissées. Interventionniste convaincue, il affiche à partir de la fin des années 90 ses « cartes » dans l’espace public, et les fait pénétrer petit à petit l’espace de la galerie.
+À La Maréchalerie, Yves Buraud présente l’exposition « NOUS UTILISONS MAINTENANT LE PAYS LUI-MÊME COMME SA PROPRE CARTE » qui réfère au roman Sylvie et Bruno de Lewis Carroll (1889) où deux protagonistes se disputent l’échelle la plus pertinente pour représenter un pays sur une carte, et qui se solde par la réalisation d’une carte « à l´échelle d´un mile pour un mile ». Yves Buraud concentre dans ce titre deux notions présentes dans son travail, la géographie et l’absurde, qu’il déploie à La Maréchalerie. L’artiste investit le centre d’art via un ensemble d’œuvres qui confrontent le registre de la peinture abstraite et monumentale, à celui de l’imagerie urbaine. Sur des immenses cimaises évidées et brutes, une série de « compilations graphiques » est présentée, cartes de géographie scolaires taguées « artificiellement » dialoguent avec des photographies de mobiliers urbains et d’architectures standardisées associées à des motifs colorés géométriques. Le visiteur fait face et est submergé par cette installation architecturale qui le renvoie au pied des tours qu’elle figure.
+Ses textes présentés en parallèle, particulièrement critiques et effleurant l’absurde, rendent compte de sa vision psycho-géographique du monde contemporain, et évoquent de manière caustique les banlieues, les conséquences de l’aménagement urbain sur ses habitants, les politiques sécuritaires… Yves Buraud livre ainsi une critique incisive de la ville contemporaine. Ses œuvres à première vue narratives délivrent une réflexion sur les enjeux des politiques d’urbanisme des périphéries et les questions liées à la Ville, ville linéaire, verticale ou radioconcentrique qui génèrent stratifications et inégalités sociales.
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1"  style="border-top:1px dashed #ee6779;">
+            <div class="col-xs-3 col-sm-1" style="margin-top:30px;">
+                <div style="background-color:#29374C;border-radius:100px;width:40px;height:40px;text-align:center;">
+                    <label style="color:white;font-weight:400;line-height:40px;"><strong>13</strong></label>
+                </div>
+            </div>
+            <div class="col-xs-9 col-sm-2" style="margin:10px 0;">
+                <img src="https://s3.eu-central-1.amazonaws.com/cartelparcours/fevrier-2016/9_maubuisson_abbaye_fleurie.jpg" class="parcoursImg9" style="width:100%;"></img>
+            </div>
+            <div class="col-xs-10 col-sm-8" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li><label style="font-size:20px;color:#29374C;font-weight:200;">Abbaye de Maubuisson (site d'art contemporain du Conseil départemental du Val d'Oise)</label></li>
+                    <li><label style="font-size:14px;color:#A7A9AB;font-weight:200;">5, avenue de Sceaux - 78000 Versailles</label></li>
+                    <li style="text-align:center;">
+                        <ul style="display:flex;list-style-type:none;padding-left:0px;">
+                            <li style="text-align:left;min-width:110px;">
+                                <div class="row" style="width:110px;margin-left:0px;">
+                                    <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">04</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">oct.</label></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:40px;padding:0;color:#A7A9AB">
+                                        <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">26</label></div>
+                                        <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">jui.</label></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="text-align:left;">
+                                <label style="margin-top:10px;font-weight:100;color:#29374C;">L'abbaye fleurie - Régis Perray</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-1" style="margin-top:20px;">
+                <button go-to-map class="btn" ng-click="setFocus(9)" style="background-color:#FEDCA9;color:#29374C;">
+                    <i class="fa fa-map-signs"></i>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3" >
+                <ul style="list-style-type:none;padding:0px;" id="custom-list">
+                    <li style="cursor:pointer;">
+                        <label style="cursor:pointer;margin-top:10px;font-weight:100;color:#29374C;" ng-click="show12=!show12">
+                            En savoir plus <i class="fa fa-chevron-down"></i>
+                        </label>
+                    </li>
+                    <li ng-show="show12">
+                        + 33 (0)1 34 64 36 10. Ouverture tous les jours sauf le mardi de 13h à 18h, les week-ends et jours fériés de 14 h à 18h
+                    </li>
+                    <li ng-show="show12">
+                        <label style="margin-top:10px;font-weight:100;color:#29374C;">
+                            Présent sur la scène artistique depuis plus de quinze ans, Régis Perray a toujours aimé travailler la question des lieux. Sa pratique de l'in situ fait désormais référence. Cet artiste refuse de se définir tant il utilise tous les moyens à sa disposition pour interroger les lieux d'exposition. Il aime à observer et sonder les espaces où il est invité à créer des actions, des installations et des sculptures.
+L'exposition "L'abbaye fleurie" est empreinte d'une générosité propore à son auteur. Elle soigne les blessures en déposant une fleur sur la tombe des cisterciennes. Elle réconcile avec le corps en nous engageant sur la piste à patiner. Elle fait entrer dans notre intérieur la couleur, la diversité et la beauté des fleurs. Elle rappelle la douceur des caresses sur la peau. Elle fait renaître la vie sur les ruines et offre une vision poétique pour le l'abbaye en proposant la construction d'une chapelle.
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <script>
+            $('document').ready(function(){
+                // clacul de la taille d'image pour etquelquesespacements.
+                //$('.parcoursImg1')[0].height = $('.parcoursImg1')[0].width;                
+                //$('.parcoursImg2')[0].height = $('.parcoursImg2')[0].width;
+                //$('.parcoursImg3')[0].height = $('.parcoursImg1')[0].width;
+                //$('.parcoursImg4')[0].height = $('.parcoursImg4')[0].width;
+                //$('.parcoursImg5')[0].height = $('.parcoursImg5')[0].width;
+                //$('.parcoursImg6')[0].height = $('.parcoursImg6')[0].width;
+                //$('.parcoursImg7')[0].height = $('.parcoursImg7')[0].width;
+                //$('.parcoursImg8')[0].height = $('.parcoursImg8')[0].width;
+                //$('.parcoursImg9')[0].height = $('.parcoursImg9')[0].width;
+                //$('.parcoursImg10')[0].height = $('.parcoursImg10')[0].width;
+                //$('.parcoursImg11')[0].height = $('.parcoursImg11')[0].width;
+                //$('.parcoursImg12')[0].height = $('.parcoursImg12')[0].width;
+            });
+        </script>
+        
+    </section>
+    
+    <div id="map" style="padding-top:60px;">
+        <leaflet id="map" lf-center="center" defaults="defaults" maxbounds="maxbounds" controls="controls" tiles="tiles" paths="paths" markers="markers" width="100%" height="650px"></leaflet>
+    </div>
+    
+    
+
+    <footer style="position:relative;">
+        <cartel-footer>
+        </cartel-footer>
+         <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    </footer>
+<script src="../js/modernizr.js"></script>
+</body>
+</html>

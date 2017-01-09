@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html ng-app="visitor-profile">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta name="keywords" content="Art, paris, Cartel,art+contemporain,promotion,culture,geoloc,carte" />
+    <meta name="author" content="Cartel">
+    <meta property="fb:admins" content="642530282" />
+
+    <title>Profil</title>
+
+    <link rel="shortcut icon" href="../img/icone.png" type="image/x-icon" />
+
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'/>
+    <link href="../css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/font-awesome.css"/>
+    <link href="../css/styles.css" rel="stylesheet"/>
+    <link href="../css/bootstrap-formhelpers.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/build.css"/>
+    <link rel="stylesheet" href="../css/privatespace.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    
+    
+    <link rel="stylesheet" href="../css/leaflet.css"/>
+    <link rel="stylesheet" href="../css/leaflet.label.css"/>
+    <link rel="stylesheet" href="../css/directions.css"/>
+    <link rel="stylesheet" href="../css/angular.rangeSlider.css"/>
+    
+    <link rel="stylesheet" href="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.css" />
+    
+    <!-- jQuery -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- BS JavaScript -->
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<script type="text/javascript" src="../js/angular-route.min.js"></script>
+<script type="text/javascript" src="../js/angular-cookies.min.js"></script>
+<script type="text/javascript" src="../js/angular.rangeSlider.js"></script>
+
+<script type="text/javascript" src="../js/visitor-profile.js"></script>
+<script type="text/javascript" src="../js/ui-bootstrap-tpls-0.13.0.js"></script>
+
+<script>
+  	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  	ga('create', 'UA-61941499-1', 'auto');
+  	ga('send', 'pageview');
+</script>
+</head>
+<style>
+    [ng-cloak] {
+        display:none !important;
+      }
+</style>
+<body class="bodyClass" ng-controller="visitorProfileController as profile" ng-cloak>
+<header id="home">
+<section id="divTop">
+    <div style="background-color:#29374C;width:100%;text-align:center;color:white;padding:10px;font-size:9px;font-weight:100;">
+        <div>Les parcours auto-générés de <label>CARTEL</label> sont en version beta.</div>
+        <div>Des changements majeurs pourraient affecter votre expérience. Merci pour votre patience et votre participation!</div>
+    </div>
+</section>
+<nav class="navbar" id="secondNav" style="position:static;width:100%;z-index:10;background-color:#FAF1E3;height:55px;margin-bottom:0px;" >
+  <cartel-public-nav></cartel-public-nav>
+</nav>
+</header>
+
+<section class="row">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border-bottom:1px solid #29374C;margin-top:30px;">
+        <h1 style="color:#29374C;">Paramètres de la découverte</h1>
+        
+    </div>
+    
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="margin-top:20px;">
+        <label style="font-size:18px;font-weight:100;color:#939597;">Distance d'exploration</label>
+        <div class="col-xs-10" style="border-top:1px solid #939597;padding-top:20px; ">
+            <div style="margin-bottom:10px;"range-slider min="0" max="10000" pin-handle="min" model-max="d_it_max" step="100" filter="distancefilter"></div>
+        </div>
+        <div class="col-xs-2" style="line-height:90px;font-weight:200;font-size:20px;color:#29374C;">
+            {{d_it_max | distancefilter}}
+        </div>
+        <div ng-show="isDistanceMaxChanged" style="padding-left:15px;margin-bottom:20px;">
+            <button class="btn" ng-click="changeDistancemax()" style="border-radius:4px;">Enregistrer</button>
+        </div>
+    </div>
+    
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="margin-bottom:80px;">
+        <label style="font-size:20px;font-weight:100;color:#939597;">Médium</label>
+        <div style="font-size:16px;border-top:1px solid #939597; ">
+            <label style="font-weight:100;font-size:18px;color:#29374C;padding-top:10px;">Sélectionner les médiums que vous souhaitez découvrir.</label>
+            <ul class="list-inline" style="list-style-type:none;margin-bottom:0px;color:#29374C;margin-top:0px;font-weight:100;">
+                <li>
+                    <ul style="list-style-type:none;">
+                        <li><input type="checkbox" ng-checked="true">Bijoux d'artistes</input></li>
+                        <li><input type="checkbox" ng-checked="true">Collage</input></li>
+                        <li><input type="checkbox" ng-checked="true">Dessin</input></li>
+                        <li><input type="checkbox" ng-checked="true">Estampe</input></li>
+                        <li><input type="checkbox" ng-checked="true">Graphisme</input></li>
+                        <li><input type="checkbox" ng-checked="true">Illustration</input></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul style="list-style-type:none;">
+                        <li><input type="checkbox" ng-checked="true">Installation</input></li>
+                        <li><input type="checkbox" ng-checked="true">Lithographie</input></li>
+                        <li><input type="checkbox" ng-checked="true">Peinture</input></li>
+                        <li><input type="checkbox" ng-checked="true">Performance</input></li>
+                        <li><input type="checkbox" ng-checked="true">Photographie</input></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul style="list-style-type:none;">
+                        <li><input type="checkbox" ng-checked="true">Sculpture</input></li>
+                        <li><input type="checkbox" ng-checked="true">Tapisserie</input></li>
+                        <li><input type="checkbox" ng-checked="true">Techniques mixtes</input></li>
+                        <li><input type="checkbox" ng-checked="true">Textile</input></li>
+                        <li><input type="checkbox" ng-checked="true">Video</input></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="margin-top:20px;" ng-show="false">
+        <label style="font-size:20px;font-weight:100;color:#939597;">Notifications</label>
+        <div style="font-size:16px;border-top:1px solid #939597; ">
+            <label style="font-weight:100;font-size:18px;color:#29374C;padding-top:10px;">Sélectionnez la politique de réception de notifications</label>
+            <div>
+                <label style="font-weight:100;font-size:16px;color:#29374C;padding-top:10px;"><i class="fa fa-envelope" style="padding-right:10px;"></i>Réception d'e-mail </label>
+                <div>
+                    <ul style="list-style-type:none;padding-left:10px;margin:0;font-size:14px;color:#29374C;">
+                        <li style="line-height:20px;"><input type="checkbox">Une oeuvre de votre collection est présentée lors d'une exposition</input></li>
+                        <li style="line-height:20px;"><input type="checkbox">Une oeuvre de ma collection a remporté un prix</input></li>
+                        <li style="line-height:20px;"><input type="checkbox">etc...</input></li>
+                    <ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div ng-show="false">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="border-bottom:1px solid #29374C;margin-top:30px;">
+            <h1 style="color:#29374C;">Support</h1>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2" >
+            <div style="margin-bottom:30px;margin-top:10px;">
+                Lien vers une page support.
+            </div>
+        </div>
+    </div>
+    
+    
+</section>
+
+
+<script>
+    var idCreator = <%- JSON.stringify(user.id) %>;
+</script>
+
+ <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<footer style="margin-top:-3px;z-index:10;" id="footer">
+    <cartel-footer>
+    </cartel-footer>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="galeries">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="Art, paris, Cartel,art+contemporain,promotion,culture,geoloc,carte" />
+<meta name="author" content="Cartel">
+<meta property="fb:admins" content="642530282" />
+
+<title>Partenaires</title>
+    
+     <link rel="shortcut icon" href="img/icone.png" type="image/x-icon" />
+
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'/>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/font-awesome.css"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/build.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    
+    
+    <link rel="stylesheet" href="css/leaflet.css"/>
+    <link rel="stylesheet" href="css/leaflet.label.css"/>
+    <link rel="stylesheet" href="css/galeries.css"/>
+    <link rel="stylesheet" href="../css/privatespace.css"/>
+    
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!-- BS JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/angular-cookies.min.js"></script>
+
+    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
+    <script type="text/javascript" src="js/leaflet.label.js"></script>
+    
+    <script type="text/javascript" src="js/angular-leaflet-directive.js"></script>
+
+    <script type="text/javascript" src="js/galeries.js"></script>
+    <script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.0.js"></script>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-61941499-1', 'auto');
+        ga('send', 'pageview');
+	</script>
+</head>
+<body class="container" id="top" ng-controller="GalerieMapController" style="padding:0;margin:0;">
+<header id="home">
+<section id="divTop">
+</section>
+<nav class="navbar" id="secondNav" style="position:static;width:100%;z-index:10;background-color:#FAF1E3;height:57px;margin-bottom:0px;" >
+  <cartel-nav></cartel-nav>
+</nav>  
+
+</header>
+    <section class="features text-center section-padding" style="background-color:white;padding-top:0px;padding-bottom:0px;" id="divFoire">
+        <div class="container" style="background-color:white;padding-bottom:20px;">
+            <h1 style="color:#5EC2D6;text-align:center;margin-top:40px;">
+                <span class="fa-stack fa-lg" style="font-size:20px;">
+                    <i class="fa fa-map-signs fa-stack-1x"></i>
+                    <i class="fa fa-square-o fa-stack-2x"></i>
+                 </span>
+                Partenaires
+            </h1>
+        </div>
+    </section>
+    
+    <leaflet id="map" defaults="defaults" maxbounds="maxbounds" layers="layers" controls="controls" tiles="tiles" paths="paths" markers="markers" width="100%" height="500px"></leaflet>
+
+    
+    <section class="row" style="margin-top:20px;position:relative;">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10" style="text-align:center;padding:20px 0;">
+            <label style="font-weight:200;font-size:20px;">Elles participent au lancement des itinéraires interactifs d’art contemporain en février</label>
+        </div>
+        
+        <div class="col-xs-12 col-sm-5 col-sm-offset-1" style="padding:0;">
+            
+            <div class="col-xs-12" id="gLeftGB"  style="border:1px solid #29374C;text-align:center;margin-top:5px;margin-bottom:5px;padding-top:20px;">
+                <a href="http://www.galeriegaillard.fr/" target="_blank"><img src="https://s3.eu-central-1.amazonaws.com/cartelgallery/logo_christophegaillard.png" style="width:100%;max-width:120px;"></img></a>
+                <ul style="padding:0;list-style-type:none;">
+                    <li style="font-family:'Avenir Next Condensed';font-size:24px;font-weight:500;padding-bottom:10px;">
+                        <a href="http://www.galeriegaillard.com/fr/expositions/liste/0/liste-des-expositions-en-cours" target="_blank">Voir les expositions <i class="fa fa-chevron-right" style="padding-left:5px;font-size:16px;font-weight:100;"></i></a>
+                    </li>
+                    
+                    </li>
+                    <li style="font-family:'Avenir Next Condensed';font-size:24px;font-weight:500;padding-bottom:10px;">
+                        <a id="fb-cartel" href="https://www.facebook.com/GalerieChristopheGaillard" target="_blank">
+                            <i class="fa fa-facebook-official"></i>
+                        </a>
+                        <a id="tw-cartel" href="https://twitter.com/galeriegaillard" target="_blank">
+                            <i class="fa fa-twitter-square"></i>
+                        </a>
+                    </li>
+                    
+                    <li style="font-family:'Helvetica';font-size:14px;font-weight:100;padding-bottom:10px;">Galerie Christophe Gaillard | 5 rue Chapon, 75003 Paris</li>
+                    
+                    <li style="text-align:center;">
+                        <div class="row" style="width:200px;margin:0 auto;">
+                            <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:60px;color:#A7A9AB">
+                                <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">1</label></div>
+                                <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                <div style="font-size:16px;margin-top:-6px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">2016</label></div>
+                            </div><div class="col-xs-2" style="color:#A7A9AB;font-size:24px;line-height:74px;">></div>
+                            <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:60px;color:#A7A9AB">
+                                <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">31</label></div>
+                                <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">avr.</label></div>
+                                <div style="font-size:16px;margin-top:-6px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">2016</label></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="col-xs-12" id="gRightCharlot" style="border:1px solid #29374C;text-align:center;margin-top:5px;margin-bottom:5px;padding-top:20px;padding-left:0;">
+                <a href="http://www.gbagency.fr/" target="_blank"><img src="https://s3.eu-central-1.amazonaws.com/cartelgallery/logo_gc.png" style="width:100%;max-width:120px;"></img></a>
+                <ul style="padding:0;list-style-type:none;">
+                    <li style="font-family:'Avenir Next Condensed';font-size:24px;font-weight:500;padding-bottom:10px;">
+                        <a href="http://www.galeriecharlot.com/fr/expo" target="_blank">Voir les expositions <i class="fa fa-chevron-right" style="padding-left:5px;font-size:16px;font-weight:100;"></i></a>
+                    </li>
+                    
+                    </li>
+                    <li style="font-family:'Avenir Next Condensed';font-size:24px;font-weight:500;padding-bottom:10px;">
+                        <a id="fb-cartel" href="https://www.facebook.com/galerie.charlot" target="_blank">
+                            <i class="fa fa-facebook-official"></i>
+                        </a>
+                        <a id="tw-cartel" href="https://twitter.com/GalerieCharlot" target="_blank">
+                            <i class="fa fa-twitter-square"></i>
+                        </a>
+                    </li>
+                    
+                    <li style="font-family:'Helvetica';font-size:14px;font-weight:100;padding-bottom:10px;">Galerie Charlot | 47 rue Charlot, 75003 Paris</li>
+                    
+                    <li style="text-align:center;">
+                        <div class="row" style="width:200px;margin:0 auto;">
+                            <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:60px;color:#A7A9AB">
+                                <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">1</label></div>
+                                <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                <div style="font-size:16px;margin-top:-6px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">2016</label></div>
+                            </div><div class="col-xs-2" style="color:#A7A9AB;font-size:24px;line-height:74px;">></div>
+                            <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:60px;color:#A7A9AB">
+                                <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">31</label></div>
+                                <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">mar.</label></div>
+                                <div style="font-size:16px;margin-top:-6px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">2016</label></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-sm-5">
+            <div class="col-xs-12" style="border:1px solid #29374C;text-align:center;margin-top:5px;margin-bottom:5px;padding-top:20px;">
+                <a href="http://www.rgalerie.com/et-quelques-espacements/" target="_blank"><img src="https://s3.eu-central-1.amazonaws.com/cartelgallery/logo-melanie-rio.jpeg" style="width:100%;height:100%;max-width:120px;"></img></a>
+                <ul style="padding:0;list-style-type:none;">
+                    <li style="font-family:'Avenir Next Condensed';font-size:24px;font-style:italic;font-weight:500;padding-bottom:10px;">
+                        <a href="http://www.rgalerie.com/et-quelques-espacements/" target="_blank">Et quelque(s) espacement(s)</a>
+                        <a id="fb-cartel" href="https://www.facebook.com/events/149147242123473/" target="_blank">
+                            <i class="fa fa-facebook-official"></i>
+                        </a>
+                        <a id="tw-cartel" href="https://twitter.com/search?q=etquelquesespacements" target="_blank">
+                            <i class="fa fa-twitter-square"></i>
+                        </a>
+                    </li>
+                    <li style="font-family:'Helvetica';font-size:14px;font-weight:100;padding-bottom:10px;">Galerie Melanie Rio | 56 Rue de la Fontaine au Roi, Paris</li>
+                    <li style="text-align:center;">
+                        <div class="row" style="width:200px;margin:0 auto;">
+                            <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:60px;color:#A7A9AB">
+                                <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">23</label></div>
+                                <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">jan.</label></div>
+                                <div style="font-size:16px;margin-top:-6px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">2016</label></div>
+                            </div><div class="col-xs-2" style="color:#A7A9AB;font-size:24px;line-height:74px;">></div>
+                            <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:60px;color:#A7A9AB">
+                                <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">27</label></div>
+                                <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                <div style="font-size:16px;margin-top:-6px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">2016</label></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="col-xs-12" style="border:1px solid #29374C;text-align:center;margin-top:5px;margin-bottom:5px;padding-top:20px;">
+                <a href="http://www.gbagency.fr/" target="_blank"><img src="https://s3.eu-central-1.amazonaws.com/cartelgallery/logo-gbagency.png" style="width:100%;height:100%;max-width:120px;"></img></a>
+                <ul style="padding:0;list-style-type:none;">
+                    <li style="font-family:'Avenir Next Condensed';font-size:24px;font-weight:500;padding-bottom:10px;">
+                        <a href="http://www.gbagency.fr/fr/592/Eva-Barto/" target="_blank"><i>The infinite Debt</i>, Eva Barto</a>
+                    </li>
+                    
+                    <li style="font-family:'Avenir Next Condensed';font-size:24px;font-weight:500;padding-bottom:10px;">
+                        <a href="http://www.gbagency.fr/fr/591/Dominique-Petitgand/" target="_blank"><i>L'élément déclencheur</i>, Dominique Petitgand</a>
+                    </li>
+                    
+                    </li>
+                    <li style="font-family:'Avenir Next Condensed';font-size:24px;font-weight:500;padding-bottom:10px;"><a id="fb-cartel" href="https://www.facebook.com/gbagency/" target="_blank">
+                            <i class="fa fa-facebook-official"></i>
+                        </a>
+                        <a id="tw-cartel" href="https://twitter.com/gbagency1" target="_blank">
+                            <i class="fa fa-twitter-square"></i>
+                        </a>
+                    </li>
+                    
+                    <li style="font-family:'Helvetica';font-size:14px;font-weight:100;padding-bottom:10px;">GB Agency | 18 rue des 4 Fils, 75003 Paris</li>
+                    
+                    <li style="text-align:center;">
+                        <div class="row" style="width:200px;margin:0 auto;">
+                            <div class="col-xs-4 col-xs-offset-1" style="margin-left:0px;border:1px solid #A7A9AB;width:60px;color:#A7A9AB">
+                                <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">4</label></div>
+                                <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">fév.</label></div>
+                                <div style="font-size:16px;margin-top:-6px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">2016</label></div>
+                            </div><div class="col-xs-2" style="color:#A7A9AB;font-size:24px;line-height:74px;">></div>
+                            <div class="col-xs-4" style="margin-left:5px;border:1px solid #A7A9AB;width:60px;color:#A7A9AB">
+                                <div style="font-size:22px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">12</label></div>
+                                <div style="font-size:14px;text-align:center;margin-top:-10px;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">mar.</label></div>
+                                <div style="font-size:16px;margin-top:-6px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">2016</label></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+         <div class="col-xs-12" style="height:30px;">
+         </div>
+        
+    <script>
+        $('document').ready(function(){
+            // clacul de la taille d'image pour etquelquesespacements.
+            if (window.innerWidth > 768) {
+                document.getElementById('gImage').style.maxHeight = $('#gDetails')[0].clientHeight+"px";
+                document.getElementById('gImage').style.maxWidth = document.getElementById('gImage').style.maxHeight *318/426 +"px";
+            } 
+        });
+    </script>
+    </section>
+
+    <footer style="position:relative;">
+        <cartel-footer>
+        </cartel-footer>
+         <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    </footer>
+<script src="js/modernizr.js"></script>
+</body>
+</html>

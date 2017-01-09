@@ -1,0 +1,72 @@
+html, body {
+   height: 70%;
+}
+
+.icongalerie {
+    border-radius: 120px;
+    background-color:#ee6779;
+}
+
+.iconchronique {
+    border-radius: 0px;
+    background-color:#29374C;
+}
+
+@media screen and (min-width: 768px){     
+    #map{
+    }
+    
+    #gRightCharlot{
+        margin-left:0px;
+    }
+}
+
+@media screen and (max-width: 768px){    
+    #map{
+    }
+    
+    #gRightCharlot{
+        margin-left:0px;
+    }
+}
+
+
+.title{
+    font-family:'Helvetica';
+    font-weight:400;
+    font-size:20px;
+    color:#29374C;
+}
+
+.author{
+    font-family:'Helvetica';
+    font-weight:100;
+    font-size:16px;
+    color:#29374C;
+}
+
+#fb-cartel{
+    padding-left:5px;
+    color:#29374C;
+}
+
+#tw-cartel{
+    padding-left:5px;
+    color:#5EC2D6;
+}
+
+#fb-cartel:hover{
+    color:#FEDCA9;
+}
+
+#tw-cartel:hover{
+    color:#FEDCA9;
+}
+
+th, td {
+    padding: 7px;
+}
+
+.list-inline>li {
+    display:inline-flex;
+}

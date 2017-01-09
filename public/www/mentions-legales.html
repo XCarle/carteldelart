@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="elem">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Art, paris, Cartel,art+contemporain,promotion,culture,geoloc,carte" />
+    <meta name="author" content="Cartel">
+    <link rel="shortcut icon" href="img/icone.png" type="image/x-icon" />
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    <link href="css/flexslider.css" rel="stylesheet" >
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/queries.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
+    <script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/elem.js"></script>
+
+</head>
+<header>
+    <cartel-nav></cartel-nav>
+</header>
+<body style="width:100%;">
+    <div class='container' style="margin:0 20px 0 20px;padding-left:20px;padding-right:20px;margin-bottom:30px;">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10">
+            <h1 style="font-size:24px;">Mentions légales </h1>
+            <p style="text-align:justify;text-justify:inter-word;color:black;font-size:18px;font-family:Helvetica;">
+            Le site www.carteldelart.com (ci-après le Site) est édité par la société Tiles Algorihtmes SAS, Société par actions simplifiée au capital de 5 000 euros, immatriculée au RCS de Paris sous le n° 813 289 717 et dont le siège social est situé au 42 rue de Poitou, 75003 Paris, France.
+            <ul style="list-style-type:none;font-family:Helvetica;font-size:17px;font-weight:200;">
+                <li>Responsable de la publication et Président: Alexandre Carle</li>
+                <li>Responsable de la rédaction : Nathalie Eggs</li>
+                <li>Contact : contact@carteldelart.com</li>
+                <li>Téléphone : +33682889043</li>
+                <li>www.carteldelart.com</li>
+            </ul>
+            </p><p style="color:black;font-size:18px;font-family:Helvetica;text-align:justify;text-justify:inter-word">
+            Le Site est hébergé par Heroku Inc.,  321 11th Street, San Francisco, CA , http://www.heroku.com/contact.
+            </p><p style="text-align:justify;text-justify:inter-word;color:black;font-size:18px;font-family:Helvetica;">Pour toute réclamation, vous pouvez écrire à contact@carteldelart.com ou à l’hébergeur.
+
+            </p><p style="color:black;font-size:18px;font-family:Helvetica;text-align:justify;text-justify:inter-word">
+            Le seul fait d’accéder et de naviguer sur le Site emporte l’acceptation sans réserve par tout internaute des présentes mentions et conditions.
+            </p>
+            <h1 style="font-size:24px;">Propriété intellectuelle</h1>
+            <p style="text-align:justify;text-justify:inter-word;color:black;font-size:18px;font-family:Helvetica;"">
+                L’ensemble du contenu du site est:</li>
+                <ul style="list-style-type:none;font-family:Helvetica;font-size:17px;font-weight:200;">
+                    <li>soit la propriété de Tiles Algorithmes</li>
+                    <li>soit cédé pour une utilisation sur le Site</li>
+                </ul>
+            </p><p style="color:black;font-size:18px;font-family:Helvetica;text-align:justify;text-justify:inter-word">
+                Tous les droits d’utilisation des textes, commentaires, oeuvres, illustrations et images reproduits ou représentés sur le Site sont strictement réservés au titre du droit d'auteur ainsi qu'au titre de la propriété intellectuelle, pour toute la durée de protection de ces droits et pour le monde entier. 
+
+                Toute reproduction, représentation, utilisation, modification, traduction, incorporation ou adaptation totale ou partielle du Site et/ou de tout élément du Site par quelque procédé et sur quelque support que ce soit est strictement interdite, sans l’autorisation écrite préalable de son auteur, hormis les exceptions visées à l’article L 122.5 du Code de Propriété Intellectuelle.
+
+                Toute violation de droit de propriété intellectuelle constatée par un internaute peut être signalée à Tiles Algorithmes à l’adresse mentionnée ci-dessus.
+            </p>
+            <h1 style="font-size:24px;">Données personnelles</h1>
+            <p style="color:black;font-size:18px;font-family:Helvetica;text-align:justify;text-justify:inter-word">
+Le Site a fait l’objet d’une déclaration à la Commission Nationale de l'Informatique et des Libertés sous le numéro 1861071.
+Conformément aux articles 39 et suivants de la loi n° 78-17 du 6 janvier 1978 modifiée en 2004 relative à l’informatique, aux fichiers et aux libertés, toute personne peut obtenir communication et, le cas échéant, rectification ou suppression des informations la concernant, en envoyant un courrier à l’adresse suivante:
+ <ul style="list-style-type:none;font-family:Helvetica;font-size:17px;font-weight:200;">
+<li>TILES ALGORITHMES
+<li>Cartel</li>
+<li>42 rue de Poitou, 75003 Paris</li>
+</ul>
+            </p>
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+</body>
+<footer>
+    <cartel-footer>
+    </cartel-footer>
+     <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+</footer>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="creation">
+	<head>
+		<title>Cartel - Creations</title>
+	    <link rel="shortcut icon" href="img/icone.png" type="image/x-icon" />
+	    <!-- Bootstrap core CSS -->
+	    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	    <!-- Bootstrap theme -->
+	    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/profile/global.css"/>
+		<link rel="stylesheet" href="css/profile/creations.css"/>		
+		<link rel="stylesheet" href="css/profile/profile.css"/>	
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		
+		
+		<link href="css/font-awesome.css" rel="stylesheet" />
+		<script type="text/javascript" src="/js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/jquery.elevatezoom.js"></script>		
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/angular-route.min.js"></script>
+		<script type="text/javascript" src='/js/lodash.js'></script>
+		<script type="text/javascript" src="js/angular-google-maps.js"></script>
+		<script type="text/javascript" src="js/creation.js"></script>
+		<script type="text/javascript" src="js/creation.directives.js"></script>
+		<script type="text/javascript" src="js/creation.services.js"></script>
+	</head>
+<header>
+		<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#FAF1E3;background-image:none;border:none;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="/img/icone.png" style="width:40px;height:40px;margin-top:-8px;"><label style="padding-left:10px;font-family:Helvetica;font-size:28px;color:#29374C;letter-spacing:2px;font-weight:100;"></label></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/profile" style="text-shadow:none;"><label style="padding-left:10px;">Profile</label><img src="/img/cartel_profil.png" style="height:27px;margin-top:-2px;float:left"></img></a></li>
+            <li  class="active"><a href="#" style="text-shadow:none;"><label style="padding-left:10px;">Catalogue</label><img src="/img/cartel_catalogue.png" style="height:27px;margin-top:-2px;float:left"></img></a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user.localemail %><span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+						<li><a href="/logout">Déconnexion</a></li>
+					  </ul>
+				</li>
+          	   </ul>
+        </div>
+      </div>
+    </nav>
+	</header>
+
+<body style="margin-left:10px;font-family:'Varela Round';background-color:white;">
+<section id="creationSection" ng-controller="CreationController as creationCtrl" ng-init="init()"> 
+<script>
+	var idCreator = <%- JSON.stringify(user.id) %>; 
+	var cType = <%- JSON.stringify(user.type) %>; 
+</script>
+    	<div class="container">
+        	<h1 style="margin-top:0px;margin-bottom:30px;" ng-model="creationCtrl.nbCreation">Vos oeuvres ({{nbCreation}}/5)</h1>      
+        	<div style="margin-left:80px;position:relative;" class="row" ng-show="showThumbnailList">
+				<div class="col-md-4" ng-repeat="creation in creationCtrl.creator[0].creator.creations track by $index" style="padding:0;">
+					<div id="listThumb_{{creation.id_creation}}" click-thumbnail set-up-preview ng-click="creationCtrl.clickThumb(creation);" 
+					style="background-image:{{creation.thumbnailUrl}};
+					position:relative;margin-bottom:20px;min-height:250px;max-width:250px;
+					background-size:250px 250px;
+					background-repeat:no-repeat;box-shadow: 0px 0px 0px #29374C;z-index:1;" id="thumbnail">
+						<div style="position:absolute;height:40px;padding-top:10px;padding-left:10px;padding-right:10px;bottom:0px;width:250px;background-color:rgba(255,255,255,0.93);">
+							<label style="word-wrap:break-word;width:240px;font-family:Helvetica;font-weight:100;">{{creation.properties[0].title}}</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4"  ng-show="showCreationAddButton"  style="min-height:250px;max-width:250px;margin-left:5px;">
+        			<span add-creation id="btnNewCreation" class="btn" ng-click="creationCtrl.addCreation()" style="margin-top:10px;margin-left:10px;width:230px;height:230px;">
+        				<img style="width:125px; height:125px;margin-top:50px;" src="/img/cartel_7_plus.png"></img>
+        			</span>
+        		</div>
+			</div>
+			
+			<div id="creationParam" style="position:relative;width:80%;margin-left:10%;padding-top:10px;border-bottom:4px solid #FEDCA9;" ng-show="showCreationConfig">
+				<h1 style="text-align:center;font-size:30px;">Paramétrage d'une oeuvre</h1>
+			</div>
+        	<div ng-show="showCreationConfig" style="position:relative;margin-top:40px;min-height:1000px;">				
+				<div class="row">
+					<div class="col-lg-4" style="box-shadow: 0px 0px 0px #29374C;width:308px;margin-right:50px;margin-left:80px;">
+						<div ng-show="showPreview">
+							<div style="border-bottom:3px solid #FEDCA9;margin-left:-15px;margin-bottom:10px;">
+								<p id="status" style="font-size:20px;padding-left:15px;text-align:left;margin-right:15px;max-width:348px;">Aper&ccedil;u</p>
+							</div>
+							<div ng-hide="showAddImageButton">
+								<img id="preview" class="preview" style="width:250px;height:250px;" />
+							</div>
+						</div>		
+						
+						<form id="formImage" name="creationForm" novalidate>
+							<div class="form-group">
+								<div click-div-photo ng-click="creationCtrl.clickOnDivConfigPhoto()" style="border-bottom:3px solid #FEDCA9;margin-left:-15px;margin-right:13px;">
+									<p id="status" style="font-size:20px;text-align:left;padding-left:15px;padding-top:10px;">1 - Photo</p>
+								</div>
+								<div ng-show="showAddImageButton" style="margin-top:20px;">
+									<span id="btn-file" class="btn btn-file" style="box-shadow: 0px 0px 0px #29374C;margin-left:15px;width:250px;height:250px;padding-top:75px;">
+										<img src="/img/cartel 7_select-image-medium.png" style="width:90px; height:90px;"></img>
+										<input type="file" id="file_input" required></input>
+									</span>
+								</div>
+								<div ng-hide="showAddImageButton">
+									<p style="padding-top:20px;" ng-show="showChangeImageButton">Positionner l'image</p>
+								</div>
+								<div class="btn-group" style="margin-top:20px;width:400px;" ng-show="showChangeImageButton">
+									<button left-button id="left" class="btn" style="margin-left:0px;width:40px; background-color:white;border:1px solid #FEDCA9;">
+										<span class="fa fa-arrow-left">
+										</span>
+									</button>
+									<button right-button id="right" class="btn" style="margin-left:7px;background-color:white;border:1px solid #FEDCA9;">
+										<span class="fa fa-arrow-right">
+										</span>
+									</button>
+									<button up-button id="up" class="btn" style="margin-left:7px;background-color:white;border:1px solid #FEDCA9;">
+										<i class="fa fa-arrow-up">
+										</i>
+									</button>
+									<button down-button id="down" class="btn" style="margin-left:7px;background-color:white;border:1px solid #FEDCA9;">
+										<span class="fa fa-arrow-down">
+										</span>
+									</button>
+									<button zoom-in-button id="zoomIn" class="btn" style="margin-left:7px;background-color:white;border:1px solid #FEDCA9;">
+										<span class="fa fa-search-plus">
+										</span>
+									</button>
+									<button zoom-out-button id="zoomOut" class="btn" style="margin-left:7px;background-color:white;border:1px solid #FEDCA9;">
+										<span class="fa fa-search-minus">
+										</span>
+									</button>
+								</div>
+							</div>
+							<div class="row" ng-show="showChangeImageButton">
+								<div class="form-group col-lg-12" style="text-align:center">
+									<button class="btn" ng-click="creationCtrl.addImageToCreation()">Valider</button>
+								</div>
+							</div>
+						</form>
+						
+						<div style="margin-top:-10px;margin-left:-15px;">
+							<div ng-click="creationCtrl.clickOnDivConfigDescription()" style="border-bottom:3px solid #FEDCA9;margin-right:13px;">
+								<p id="status" style="font-size:20px;text-align:left;padding-left:15px;padding-top:10px;">2 - Description</p>
+							</div>
+							<form name="creationDetails" ng-show="showDescriptionModule">
+								<div class="form-group" style="text-align:left;margin-top:20px;">
+									<label for="creationTitle" style="padding-left:15px;">Titre</label>
+									<input type="text" class="form-control" id="creationTitle" placeHolder="{{title}}" ng-model="title" ng-model-options="{ getterSetter: true }"
+										style="max-width:285px;" required/>
+								</div>
+								<div class="form-group" style="text-align:left;margin-top:10px;">
+									<label for="cartel" style="padding-left:15px;">Commentaires ({{cartel.length}} / {{nbCharCartel}})</label>
+									<textarea id="cartel" class="form-control" rows="16" placeholder="{{cartel}}"  ng-model="cartel" max="800" style="font-family:Helvetica;font-size:12px;max-width:285px;"   ng-model-options="{ getterSetter: true }"
+									required> 
+									</textarea>
+								</div>
+								<div class="form-group" style="text-align:left;padding-top:10px;">
+									<label for="creationDate" style="padding-left:15px;">Date de création</label>
+									<input id="creationDate" class="form-control" type="month" ng-model="dateCreation" min="1950-01" max="2015-10" style="max-width:285px;" required/>
+								</div>
+								<div class="form-group" style="text-align:left;">
+									<label for="medium" style="padding-left:15px;">medium</label>
+									<select id="medium" class="form-control" ng-model="medium" style="width:290px;" required>
+										<option value="Céramique">Céramique</option>
+										<option value="Bijouterie">Bijouterie</option>
+										<option value="Collage">Collage</option>
+										<option value="Dessin">Dessin</option>
+										<option value="Estampe">Estampe</option>
+										<option value="Graphisme">Graphisme</option>
+										<option value="Illustration">Illustration</option>
+										<option value="installation">Installation</option>
+										<option value="Lithographie">Lithographie</option>
+										<option value="Peinture">Peinture</option>
+										<option value="Performance">Performance</option>
+										<option value="Photographie">Photographie</option>
+										<option value="Sculpture">Sculpture</option>
+										<option value="Tapisserie">Tapisserie</option>
+										<option value="Techniques mixtes">Techniques mixtes</option>
+										<option value="Textile">Textile</option>
+										<option value="Video">Video</option>
+									</select>
+								</div>
+								<div>
+									<label>Dimensions (cm)</label>
+								</div>
+								<div class="row">
+									<div class="form-group col-lg-4" style="margin-left:-5px;">
+										<input id="hauteur" style="width:85px;font-size:10px;" class="form-control" type="number" placeholder="{{s_h}}" ng-model="s_h" required/>
+										</div>
+									<div class="form-group col-lg-4">
+									<input id="longueur" class="form-control" style="margin-left:-10px;width:97px;font-size:10px;" type="number" placeholder="{{s_w}}" ng-model="s_w" required/>
+									</div>
+									<div class="form-group col-lg-4">
+										<input id="largeur" class="form-control" style="margin-left:-10px;width:88px;font-size:10px;" type="number" placeholder="{{s_l}}" ng-model="s_l" required/>
+									</div>
+								</div>
+								<div class="form-group col-lg-12" style="text-align:center">
+									<button class="btn" ng-click="creationCtrl.addCreationDetailToImage()">Valider</button>
+								</div>
+							</form>
+						</div>
+						
+						<div ng-click="creationCtrl.clickOnDivConfigGeolocalisation()" style="border-bottom:3px solid #FEDCA9;margin-right:13px;margin-left:-15px;">
+							<p id="status" style="font-size:20px;text-align:left;padding-left:15px;padding-top:10px;">3 - Géolocalisation</p>
+						</div>
+						<div ng-show="showGeolocationModule">
+							<div style="margin-top:15px;">
+								<label for="adresse">Adresse : </label>
+								<input type="text" class="form-control" id="adresse" placeHolder="{{adresse}}" ng-model="adresse" ng-model-options="{ getterSetter: true }"
+									style="max-width:285px;" required/>
+							</div>
+							<div style="margin-top:15px;text-align:left;">
+								<button class="btn" ng-click="creationCtrl.clickGeolocation()">Enregistrer</button>
+							</div>
+							<div ng-show="showGetPosition">
+								<div class="row" style="margin-top:10px;">
+									<div class="col-md-4" >
+										<div  style="margin-top:10px;margin-right:-30px;border-bottom:3px solid #FEDCA9;width:20px;float:right">
+										</div>
+									</div>
+									<div class="col-md-4" style="text-align:center;">
+										<label>OU</label>
+									</div>
+									<div class="col-md-4">
+										<div style="margin-top:10px;margin-left:-30px;border-bottom:3px solid #FEDCA9;width:20px;float:left">
+										</div>
+									</div>
+								</div>
+								<div id="clickGeoloc" style="margin-top:10px;text-align:center;margin-bottom:20px;">
+									<button click-geolocation id="buttonClickGeoloc" class="btn">Position actuelle</button>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="row" ng-show="showGeolocationSavingButton" style="margin-top:20px;">
+								<label style="margin-bottom:15px;">{{adresse}}</label>
+								<div class="col-md-6">
+									<button class="btn" ng-click="creationCtrl.validateGeolocation()" ng-hide="hideGeolocationSavingButton">Valider</button>
+								</div>
+								<div class="col-md-6">
+									<button class="btn" ng-click="creationCtrl.changeGeolocation()" ng-hide="hideGeolocationSavingButton">Modifier</button>
+								</div>
+							</div>
+						</div>
+						
+						<div ng-click="creationCtrl.clickOnDivConfigGestion()" style="border-bottom:3px solid #FEDCA9;margin-right:13px;margin-left:-15px;">
+							<p id="status" style="font-size:20px;text-align:left;padding-left:15px;padding-top:10px;">4 - Gestion de l'image</p>
+						</div>
+						<div ng-show="showAdminModule" style="margin-top:10px;">
+							<ul class="dl-horizontal" style="margin-left:-40px;">
+								<dt style="width:20px;margin-left:-10px;"><input type="checkbox" checked="true"></input></dt>
+								<dd style="margin-left:20px;">En publiant cette oeuvre sur Cartel, vous acceptez de céder ses droits de représentation. Pour plus d'information consulter les <a href="">Conditions Particulières d'Utilisation</a>
+								</dd>
+							</ul>
+							<button class="btn" ng-click="creationCtrl.deleteCreation()">Supprimer l'image</button>
+						</div>
+																
+					</div>
+					
+					
+				
+				
+					<div class="col-lg-4" ng-show="showPreview">
+						<div style="border-bottom:3px solid #FEDCA9;margin-left:-15px;margin-bottom:10px;max-width:318px;margin-left:20px;">
+							<p id="status" style="font-size:20px;padding-left:15px;text-align:left;padding-right:50px;">Aper&ccedil;u catalogue</p>
+						</div>
+						<div class ="row">
+							<div style="width:308px;margin-left:40px;">
+								<div id="catalogImageDiv" style="margin-bottom:15px;min-height:548px;width:308px;margin-right:5px;
+									background-size:308px 548px;background-repeat:no-repeat;
+									box-shadow: 0px 0px 0px #29374C;margin-right:50px;z-index:-10;">
+								</div>
+								<div style="margin-left:15px;z-index:1;">
+									<div style="position:absolute;margin-top:-117px;padding-left:15px;height:102px;padding-top:20px;padding-right:5px;margin-left:-15px;width:308px;background-color:rgba(255,255,255,0.93);">
+										<div class="row">
+											<div class="col-lg-8">
+												<a style="margin-top:10px;font-family:Helvetica;font-weight:100;font-size:20px;color:#29374C;">Nom de l'auteur</a>
+												<a style="word-wrap:break-word;width:240px;font-family:Helvetica;font-weight:10px;color:#29374C;" ><br>{{title}}</br></a>
+												<a style="word-wrap:break-word;line-height:1;width:240px;font-family:Helvetica;font-weight:10px;color:#29374C;">{{dateCreation | date:"MMMM yyyy"}}</a>
+											</div>
+											<div class="col-lg-4">
+												<div class="row" style="text-align:right;padding-right:19px;margin-top:4px;">
+													1  	  <span><img src="/img/cartel_etoile.png" style="width:16px;height:15px;margin-top:-4px;"></img></span>
+												</div>
+												<div class="row" style="text-align:right;padding-right:18px;margin-top:4px;">
+													0	   <span><img src="/img/cartel_oeil.png" style="width:17px;height:11px;margin-top:-4px;"></img></span>
+												</div>
+												<div class="row" style="text-align:right;padding-right:22px;margin-top:4px;;">
+													0 km 	 <span><img src="/img/cartel_lieu.png" style="width:9px;height:15px;margin-top:-4px;"></img></span>
+												</div>
+											</div>
+										</div>
+										<div style="margin-top:-40px;margin-left:110px;position:absolute;top:0px;">
+											<canvas id="circleCanvas" width="100" height="100" style="position:static;" />
+										</div>
+									</div>																
+								</div>
+							</div>
+						</div>
+					</div>
+				
+				
+					<div class="col-lg-4" style="margin-left:30px;width:308px;margin-right:5px;
+						font-family:Helvetica;" ng-show="showPreview">
+						<div>
+							<div style="border-bottom:3px solid #FEDCA9;margin-left:-20px;margin-bottom:10px;width:318px;">
+								<p id="status" style="font-size:20px;padding-left:15px;text-align:left;font-family:'Varela Round';padding-right:50px;">Aper&ccedil;u détail</p>
+							</div>
+							<div style="position:absolute;top:50px;text-align:center;margin-left:-16px;z-index:1;background-color:white;width:308px;height:34px;">
+								<div class="row">
+									<div class="col-sm-8" style="z-index:-10;">
+										<p  style="font-family:'Varela Round';font-size:20px;padding-top:5px;text-align:right;padding-right:14px;">
+										Cartel</p>
+									</div>
+									<div class="col-sm-4">
+										<img src="/img/icone.png" style="width:22px;height:22px;margin-left:52px;margin-top:6px;"></img>
+									</div>
+								</div>
+							</div>
+							<div id="detailImageDiv" style="position:absolute;top:84px;margin-left:-16px;width:308px;height:1px;" data-zoom-image="{{url}}">
+							</div>
+							<div class="row" id="divIndicator" style="position:absolute;top:342px;height:44px;padding-top:4px;margin-left:-16px;background-color:white;width:308px;padding-top:8px;">
+								<div class="col-sm-4" style="font-size:11px;">
+									217  <img src="/img/cartel_etoile.png" style="width:16px;height:15px;margin-top:-4px"></img>
+								</div>
+								<div class="col-sm-4" style="text-align:center;font-size:11px;">
+									8 000  <img src="/img/cartel_oeil.png" style="width:17px;height:11px;margin-top:-4px"></img>
+								</div>
+								<div class="col-sm-4" style="text-align:right;font-size:11px;">
+									0.3 km  <img src="/img/cartel_lieu.png" style="width:10px;height:15px;margin-top:-4px"></img>
+								</div>
+								<div class="col-sm-4">
+									<img></img>
+								</div>
+								<div class="col-sm-4">
+									<img></img>
+								</div>
+							</div>
+							<div id="divDescription"style="position:absolute;top:372px;width:308px;margin-left:-16px;padding-left:15px;padding-right:15px;padding-bottom:210px;background-color:white;padding-top:10px;
+											border-top-color:#FEDCA9; border-top-style:solid; border-top-width:2.5px;">
+								<div style="min-height:100px;">
+									<p style="font-size:27px;font-color:#29374C;">Cindy Sherman</p>
+									<p style="font-size:20px;font-color:#939597;">{{title}}</p>
+									<p style="font-size:14px;font-color:#29374C; word-wrap:break-word;">{{cartel}}</p>
+								</div>
+								<div style="border-top-color:#FEDCA9; border-top-style:solid; border-top-width:2.5px;width:30px;">
+								</div>
+								<div style="margin-top:5px;">
+									<p>Biographie de 400 caractères</p>
+								</div>
+								<div style="border-top-color:#FEDCA9; border-top-style:solid; border-top-width:2.5px;width:30px;">
+								</div>
+								<div style="position:absolute;bottom:110px;width:308px;margin-left:-14px;padding-left:15px;padding-top:10px;background-color:white;">
+									<p>{{dateCreation | date:"MMMM yyyy"}}</p>
+									<p>Médium : {{medium}}</p>
+									<p>{{s_h}} cm x {{s_w}} cm x {{s_l}} cm</p>
+								</div>
+						
+						
+								<div class="row" style="position:absolute;bottom:0px;width:309px;height:100px;margin-left:-15px;background-color:#FEDCA9;">
+									<div class="col-lg-6" style="background-color:#FEDCA9;height:70px;width:149px;margin-top:15px;
+															border-right-color:white;border-right-style:solid; border-right-width:2.5px;">
+										<span style="padding-left:35px;">
+											<img src="/img/button-chat.png" style="width:50px;height:50px;margin-top:12px;"><img/>
+										</span>
+									</div>
+									<div class="col-lg-6" style="background-color:#FEDCA9;height:100px;margin-left:5px;">
+										<span style="padding-left:30px;padding-top:25px;">
+											<img src="/img/button-exposition.png" style="width:60px;height:50px;margin-top:25px;"><img/>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					<div>
+				</div>
+
+				
+				</div>
+					<div style="height:500px;">
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
+
+<script type="text/javascript">
+/*
+    Function to carry out the actual PUT request to S3 using the signed request from the app.
+*/
+function upload_file(file, signed_request, url){
+    var xhr = new XMLHttpRequest();
+    xhr.open("PUT", signed_request);
+    xhr.setRequestHeader('x-amz-acl', 'public-read');
+    xhr.setRequestHeader('cache-control', '60480000');
+    xhr.setRequestHeader('expires', new Date(Date.now() + 60480000000).toUTCString());
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            //document.getElementById("preview").src = url;            
+        }
+    };
+    xhr.onerror = function() {
+        alert("Could not upload file."); 
+    };
+    xhr.send(file);
+}
+
+/*
+    Function to get the temporary signed request from the app.
+    If request successful, continue to upload the file using this signed
+    request.
+*/
+function get_signed_request(file){
+    var xhr = new XMLHttpRequest();
+    
+    // TO DO - Calculate file name
+    // file name = c_creatorName_idImage 
+    var file_name =  set_sign_request();
+
+    xhr.open("GET", "/sign_s3?file_name="+file_name+"&file_type="+file.type);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            if(xhr.status === 200){
+                var response = JSON.parse(xhr.responseText);
+                upload_file(file, response.signed_request, response.url);
+            }
+            else{
+                alert("Could not get signed URL.");
+            }
+        }
+    };
+    xhr.send();
+}
+
+function set_sign_request(){
+	var $element = document.getElementById("creationSection");
+	var $scope = angular.element($element).scope();
+	var tmpUrl;
+	$scope.$apply(function(){
+		tmpUrl = $scope.url;
+	});
+	return tmpUrl;
+}
+
+/*
+   Function called when file input updated. If there is a file selected, then
+   start upload procedure by asking for a signed request from the app.
+*/
+function init_upload(){
+	// mise en forme de l'image
+    format_image();
+    
+    //var files = document.getElementById("file_input").files;
+    //var file = files[0];
+    
+    // PEUT POSER PROBLEME
+}
+
+var image = new Image();
+
+function format_image(){
+	// on récupère le fichier
+	var files = document.getElementById("file_input").files;
+    var file = files[0];
+	
+	var reader = new FileReader();
+	
+	// on créé le canvas de réception
+	var resize_canvas = document.createElement('canvas');
+	var catalog_canvas = document.createElement('canvas');
+	var thumbnail_canvas = document.createElement('canvas');
+	
+	// on lit le fichier source
+	if (file){		
+		reader.readAsDataURL(file);
+	}
+	
+	reader.onloadend = function(_file){
+		// on écrit dans l'image tampon.
+		image.src = reader.result;
+		
+		// calculate new image size
+		var size = image.width + image.height;
+		var newW = image.width * 1600 / size;
+		var newH = image.height * 1600 / size;
+		
+		// on initialise les canvas 
+		resize_canvas.width = newW;
+		resize_canvas.height = newH;
+		catalog_canvas.width = 309;
+		catalog_canvas.height = 550;
+		thumbnail_canvas.width = 275;
+		thumbnail_canvas.height = 275;
+		
+		// FULL IMAGE CANVAS RESIZED
+		resize_canvas.getContext('2d').drawImage(image, 0, 0, newW, newH);
+		fullImageUrl = resize_canvas.toDataURL();
+		
+		var newFullHeight = image.height*308/image.width;
+
+		document.getElementById('detailImageDiv').style.background ='url('+fullImageUrl+')';		
+		document.getElementById('detailImageDiv').style.backgroundSize = "308px "+newFullHeight+"px";
+		document.getElementById('detailImageDiv').style.backgroundRepeat = "no-repeat";
+		document.getElementById('detailImageDiv').style.height = newFullHeight+"px";
+		
+		// on adapte les tailles d'images
+		var divIndicatorHeight = newFullHeight + 85;
+		var divDescriptionHeight = divIndicatorHeight + 30;
+		document.getElementById('divIndicator').style.top = divIndicatorHeight+"px";
+		document.getElementById('divDescription').style.top = divDescriptionHeight+"px";
+		
+		/** 
+			SECOND PART
+		*/
+		var image2 = new Image();
+		image2.src = document.getElementById('detailImageDiv').style.backgroundImage.slice(4,-1);
+	
+		// THUMBNAIL				
+		thumbnail_canvas.width = 275;
+		thumbnail_canvas.height = 275;		
+
+		catalog_canvas.width = 309;
+		catalog_canvas.height = 550;
+		
+		// CALCUL DES PARAMETRES DE POSITIONNEMENT
+		// on calcule les nouvelles valeurs de px, py, dx, dy, tdx et tdy
+		var p_x = 0;
+		var p_y = 0;
+		var d_x = image2.width;
+		var d_y = image2.height;
+		
+		var center_x, center_y;
+		
+		if (d_x * 548 / d_y > 309){
+			// alors on croppe sur la largeur
+			d_x = 309 * image2.height / 548;
+			d_y = image2.height;
+			p_x = (image2.width * 548 / image2.height - 309) * image2.height / 548 / 2;
+			t_d_x = image2.height;
+		}
+		else if (image2.width * 548 / image2.height < 309){
+			// alors, on ajuste sur la largeur.
+			if (image2.height * 308 / image2.width > 548){
+				d_x = image2.width;
+				d_y = 548 * image2.width / 309;
+				p_y = ((image2.height * 309 / image2.width - 548)*image2.width / 309) / 2;
+				t_d_x = image2.width;
+			}
+		}
+		center_x = p_x + d_x / 2;
+		center_y = p_y + d_y / 2;
+		
+		t_p_x = center_x - t_d_x / 2;
+		t_p_y = center_y - t_d_x / 2;
+		
+		// draw canvas
+		thumbnail_canvas.getContext('2d').drawImage(image2, t_p_x, t_p_y, t_d_x, t_d_x, 0, 0, 275, 275);
+		catalog_canvas.getContext('2d').drawImage(image2, p_x, p_y, d_x, d_y, 0, 0, 308, 548);
+		
+		// on mémorise les valeurs de p_x, p_y, d_x, d_y, t_p_x, t_p_y, d_d_x, t_d_y
+		var $element = document.getElementById("creationSection");
+		var $scope = angular.element($element).scope();
+		$scope.$apply(function(){
+			$scope.width= newW;
+			$scope.height= newH;
+			$scope.p_x= p_x;
+			$scope.p_y= p_y;
+			$scope.d_x= d_x;
+			$scope.d_y= d_y;
+			$scope.t_p_x= t_p_x;
+			$scope.t_p_y= t_p_y;
+			$scope.t_d_x= t_d_x;
+			$scope.canvas=catalog_canvas;
+			$scope.image = image2;
+			$scope.changeShowParam(2);
+			//angular.element($element).controller().showAddImageButton = false;
+		});
+		document.getElementById('preview').src = thumbnail_canvas.toDataURL();
+		document.getElementById('preview').style.height = 275;	
+	
+		catalogImageUrl = catalog_canvas.toDataURL();		
+	
+		document.getElementById('catalogImageDiv').style.background = 'url('+catalogImageUrl+')';
+		
+		// CODE FOR SENDING
+		var file = dataURItoBlob(resize_canvas.toDataURL());
+		if(file == null){
+        	alert("No file selected.");
+        	return;
+    	}
+    	get_signed_request(file);
+		
+		// manage error
+		image.onerror = function(){
+			alert('Invalid File Type : ', file.type);
+		};
+	}
+}
+
+function dataURItoBlob(dataURI) {
+    // convert base64 to raw binary data held in a string
+    var byteString = atob(dataURI.split(',')[1]);
+ 
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+ 
+    // write the bytes of the string to an ArrayBuffer
+    var arrayBuffer = new ArrayBuffer(byteString.length);
+    var _ia = new Uint8Array(arrayBuffer);
+    for (var i = 0; i < byteString.length; i++) {
+        _ia[i] = byteString.charCodeAt(i);
+    }
+ 
+    var dataView = new DataView(arrayBuffer);
+    var blob = new Blob([dataView], { type: 'image/png' });
+    console.log("blob ok");
+    return blob;
+}
+
+/*
+   Bind listeners when the page loads.
+*/
+(function() {
+    document.getElementById("file_input").onchange = init_upload;
+})();
+</script>
+
+<script>
+	var elem = document.getElementById('circleCanvas');
+	var context = elem.getContext('2d');
+	
+	// Add shadow to canvas
+	context.shadowOffsetX = 1;
+	context.shadowOffsetY = 1;
+	context.shadowBlur = 2;
+	context.shadowColor = 'rgba(30,30,30, 0.5)';
+	
+	// Draw circle (yellow)
+	context.beginPath();
+	context.arc(30, 30, 30, 0, 2 * Math.PI, false);
+	context.fillStyle = "#FEDCA9";
+	context.fill();
+</script>
+<script>
+$("#detailImageDiv").elevateZoom({
+  zoomType				: "lens",
+  lensShape : "round",
+  lensSize    : 200
+});
+</script>
+    	<div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+		
+
+</html>

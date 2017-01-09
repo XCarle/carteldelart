@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html ng-app="welcome">
+	<head>
+		<title>Sélection du lieux</title>
+	    <!-- Bootstrap core CSS -->
+	    <link rel="shortcut icon" href="img/icone.png" type="image/x-icon" />
+
+	    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	    <!-- Bootstrap theme -->
+	    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="/css/welcome.css" rel="stylesheet">
+
+		<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        
+		<script type="text/javascript" src="/js/angular.min.js"></script>
+		<script type="text/javascript" src="/js/angular-route.min.js"></script>
+		<script type="text/javascript" src="/js/ui-bootstrap-tpls-0.13.0.js"></script>
+		
+		<script type="text/javascript" src="/js/welcome.js"></script>
+		
+		<link rel="stylesheet" href="css/build.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		
+		<link href="css/styles.css" rel="stylesheet">
+		<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-61941499-1', 'auto');
+        ga('send', 'pageview');
+        </script>
+
+	</head>
+	<body ng-app="place">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#FAF1E3;background-image:none;border:none;">
+		  <div class="container">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="/"><img src="/img/icone.png" style="width:40px;height:40px;margin-top:-8px;"><label style="padding-left:10px;font-family:Helvetica;font-size:28px;color:#29374C;letter-spacing:2px;font-weight:100;"></label></a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+			  <ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="../navbar/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user.localemail %><span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+						<li><a href="#">Action</a></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li role="separator" class="divider"></li>
+						<li class="dropdown-header">Nav header</li>
+						<li><a href="#">Separated link</a></li>
+						<li><a href="#">One more separated link</a></li>
+					  </ul>
+				</li>
+          	   </ul>
+			</div>
+		  </div>
+		</nav>
+    
+	<section class="container container-fluid" style="margin-top:70px;font-family:'Varela Round'" ng-controller="welcomeController as welcome">
+	 <script>
+		var idCreator = <%- JSON.stringify(user.id) %>; 
+    </script>
+	<div class="row" id="setUpProfile" style="margin-bottom:100px;">
+		<div class="col-md-12" style="margin-bottom:30px;">
+		        <div style="border-bottom:3px solid #FEDCA9;font-size:25px;text-align:center;width:30%;margin:0 auto;">
+		            <p style="opacity:1;">Sélectionner votre profil</p>
+		        </div>
+		</div>
+		
+		<div class="col-md-7" ng-click="clickGalerie()">
+			<div redirection-galerie type="type" class="selectionDiv" style="border-bottom:2px solid #FEDCA9;text-align:center;height:200px;display:table;width:98%;margin-right:4%;">
+				<div class="col-xs-12">
+				   <img class="shadowImg" src="/img/cartel_exposition.png" style="height:90px;margin-bottom:10px;margin-top:20px;"></img>
+				</div>
+				<div class="col-xs-12" style="text-align:center;margin-top:10px;">
+				    <label style="font-size:20px;">GALERIE & LIEU D'ART</label>
+				    <div style="border-bottom:2px solid #FEDCA9;width:50px;margin:0 auto;"></div>
+				</div>
+				<div class="col-md-10 col-md-offset-1" style="margin-top:5px;margin-bottom:40px;">
+				    <div style="text-align:left;">
+				        <ul style="list-style-type:none;margin:0px;padding-left:15px;">
+					        <li><i class="fa fa-map-signs"></i><label class="descLabel" style="padding-left:5px;">Géolocalisez vos expositions dans les parcours Cartel</label></li>
+					        <li><i class="fa fa-share"></i><label class="descLabel" style="padding-left:5px;">Communiquez auprès des amateurs d'arts</label></li>
+					        <li><div style="border-bottom:2px solid #FEDCA9;width:50px;margin:0 auto;margin-top:10px;margin-bottom:10px;"></div></li>
+					        <li><label style="color:#A7A9AB;font-weight:100;">A venir : </label><ul style="list-style-type:none;color:#A7A9AB;margin-top:0px;">
+					            <li style="font-weight:100;"><i class="fa fa-street-view" style="padding-right:5px"></i>Statistiques cartographiées de la découverte des oeuvres de vos expositions</li>
+					        </ul></li>
+				        </ul>
+				    </div>
+			    </div>
+			</div>
+		</div>
+		
+		<div class="col-md-5" ng-click="clickArtiste()" ng-show="false">
+			<div redirection-artiste type="type" class="selectionDiv" style="border-bottom:2px solid #FEDCA9;text-align:center;height:200px;display:table;width:98%;margin-right:4%;">
+				<div class="col-xs-12">
+				    <img class="shadowImg" src="/img/cartel_profil.png" style="height:90px;margin-bottom:10px;margin-top:20px;"></img>
+				</div>
+				<div class="col-xs-12" style="text-align:center;margin-top:10px;">
+				    <label style="font-size:20px;">ARTISTE</label>
+				    <div style="border-bottom:2px solid #FEDCA9;width:50px;margin:0px auto;">
+				        
+				    </div>
+				</div>
+				<div class="col-md-12" style="margin-top:0px;margin-bottom:5px;padding-bottom:40px;">
+					<div style="text-align:left;">
+				        <ul style="list-style-type:none;margin:0px;padding-left:15px;">
+					        <li><i class="fa fa-flash"></i><label class="descLabel" style="padding-left:5px;">Participez aux concours de sélection des experts Cartel</label></li>
+					        <li><i class="fa fa-fire"></i><label class="descLabel" style="padding-left:5px;">Participez aux concours de sélection du grand public</label></li>
+					        <li><div style="border-bottom:2px solid #FEDCA9;width:50px;margin:0 auto;margin-top:10px;margin-bottom:10px;"></div></li>
+					        <li><label style="color:#A7A9AB;font-weight:100;">A venir : </label><ul style="list-style-type:none;color:#A7A9AB;margin-top:0px;">
+					            <li style="font-weight:100;"><i class="fa fa-street-view" style="padding-right:5px"></i>Statistiques cartographiées de la découverte de vos oeuvres</li>
+					        </ul></li>
+				        </ul>
+				    </div>
+				</div>
+			</div>
+		</div>
+		
+		
+    </div>
+	</section>
+	<footer class="footer" id="footer">
+    <cartel-footer>
+    </cartel-footer>
+    </footer>	
+    	<div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+	</body>
+
+</html>

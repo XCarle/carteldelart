@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html ng-app="events" style="height:100%;box-sizing:border-box;">
+	<head>
+		<title>Expositions à promouvoir</title>
+		<link rel="shortcut icon" href="img/icone.png" type="image/x-icon" />
+
+	    <!-- Bootstrap core CSS -->
+	    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	    <!-- Bootstrap theme -->
+	    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="/css/place.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/font-awesome.css"/>		
+		<link rel="stylesheet" href="css/profile/global.css"/>
+		<link rel="stylesheet" href="css/profile/profile.css"/>	
+		<link rel="stylesheet" href="css/datetimepicker.css"/>	
+		<link rel="stylesheet" href="css/style.css"/>	
+		<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		
+		<link rel="stylesheet" href="css/build.css">
+		<link href="css/admin-style.css" rel="stylesheet">
+
+		
+		<script type="text/javascript" src="/js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.js"></script>	
+		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+		<script type="text/javascript" src="/js/angular.min.js"></script>
+		<script type="text/javascript" src="/js/angular-route.min.js"></script>
+		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+		<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="/js/events.js"></script>
+		
+	</head>
+	<body style="margin-top:30px;font-family:'Varela Round';min-height: 100%;postion:relative;" >
+		<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#FAF1E3;background-image:none;border:none;">
+		  <div class="container">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="/"><img src="/img/icone.png" style="width:40px;height:40px;margin-top:-8px;"><label style="padding-left:10px;font-family:Helvetica;font-size:28px;color:#29374C;letter-spacing:2px;font-weight:100;"></label></a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+			  <ul class="nav navbar-nav">
+				<li><a href="/profile" style="text-shadow:none;"><label style="padding-left:10px;">Profile</label><img src="/img/cartel_profil.png" style="height:27px;margin-top:-2px;float:left"></img></a></li>
+				<li><a href="/creations" style="text-shadow:none;"><label style="padding-left:10px;">Oeuvres</label><img src="/img/cartel_catalogue.png" style="height:27px;margin-top:-2px;float:left"></img></a></li>
+				<li class="active"><a href="#" style="text-shadow:none;"><label style="padding-left:10px;">Expositions</label><img src="/img/cartel_exposition.png" style="height:27px;margin-top:-2px;float:left"></img></a></li>
+			  </ul>
+			  <ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="../navbar/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user.localemail %><span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+						<li><a href="/logout">Déconnexion</a></li>
+					  </ul>
+				</li>
+          	   </ul>
+			</div>
+		  </div>
+		</nav>
+	    <section style="margin-top:30px;" ng-controller="eventsController as eventsCtrl" id="eventSection">
+	    <script>
+			var idCreator = <%- JSON.stringify(user.id) %>; 
+		</script>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12" style="margin:50px auto;" ng-show="showExhibitionList" id="exhibitionList">
+
+						<div class="col-xs-12" style="border:3px solid #FEDCA9;position:relative;background-size:250px 250px;background-repeat:no-repeat;" 
+							ng-repeat="exhibition in events_details[0].gallery.gallery_exhibitions track by $index"
+							ng-show="exhibition.issvg"
+							ng-click="eventsCtrl.selectEvent(exhibition, $index)"	
+							setup-exhibition-preview click-exhibition 
+							withsrc="{{exhibition.url}}"
+							withtpx="{{exhibition.t_p_x}}"
+							withtpy="{{exhibition.t_p_y}}"
+							withtdx="{{exhibition.t_d_x}}"
+							id="listExhibitionThumb_{{exhibition.id_exposition}}"
+							ng-cloak
+						>
+							<div class="col-xs-5" style="width:125px;height:125px;margin-top:12px;margin-bottom:7px;">
+								<img id="exhibitionImage_{{exhibition.id_exposition}}" style="margin-left:-18px;margin-top:-3px;width:125px;height:125px;"></img>
+							</div>
+							<div class="col-xs-7" style="padding-top:10px;margin-left:0px;padding-left:10px;">
+								<div>
+								<label style="font-size:18px;">{{exhibition.e_name}}</label>
+								</div>
+								<div>
+								<label style="font-size:14px;">{{exhibition.adresse}}</label>
+								</div>
+								<div class="row" style="width:200px;margin-left:0px;">
+									<div class="col-xs-3"style="border:1px solid #A7A9AB;width:60px;color:#A7A9AB;">
+										<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">{{exhibition.date_debut | date : 'd'}}</label></div>
+										<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>{{exhibition.date_debut | date : 'MMM'}}</label></div>
+									</div>
+									<div class="col-xs-1" style="color:#A7A9AB;font-size:24px;font-weight:100;margin-left:-5px;padding-top:10px;"><label>></label></div>
+									<div class="col-xs-3" style="margin-left:5px;border:1px solid #A7A9AB;width:60px;color:#A7A9AB">
+										<div style="font-size:24px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">{{exhibition.date_fin | date : 'd'}}</label></div>
+										<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>{{exhibition.date_fin | date : 'MMM'}}</label></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12" click-new-exhibition style="padding-top:15px;padding-bottom:15px;text-align:center;background-color:#FAF1E3;" ng-click="eventsCtrl.addExhibition()">
+								<img src="/img/cartel_diffuser.png" style="height:30px;width:30px;"><label style="padding-left:10px;">Publier une nouvelle exposition</label></img>
+						</div>
+					</div>
+					
+					<div class="col-md-12" style="padding-top:70px;margin-bottom:100px;" ng-show="showExpositionConfigPanel" id="exhibitionConfigPanel">
+						<div style="width:80%;margin-left:10%;padding-top:10px;border-bottom:4px solid #FEDCA9;margin-bottom:20px;">
+							<h1 style="text-align:center;font-size:30px;">Paramétrer une exposition<h1>
+						</div>
+						<div class="col-md-4" ng-show="showExhibitionConfig">
+							<div class="col-xs-12" style="margin-bottom:6px;">
+								<label>Saisir les paramètres de l'exposition</label>
+							</div>
+							<div class="col-xs-12" style="border:1px solid #FEDCA9; background-color:#FAF1E3;">
+								<div class="form-group col-xs-12" style="text-align:left;margin-top:10px;">
+									<input type="text" class="form-control" id="eName" placeHolder="Nom de l'exposition" ng-model="eName" ng-model-options="{ getterSetter: true }"
+									style="font-family:Helvetica;border-bottom:2px solid #FEDCA9;border-right:2px solid #FEDCA9;border-left:2px solid #FEDCA9;border-top:none;border-radius:0;"
+									required/>
+								</div>
+								
+								
+								<div class="form-group col-xs-12" style="position:relative;text-align:center;">
+									<label for="file_input_exhibition" style="font-size:13px;font-weight:400;">Ajouter une vue d'ensemble de l'exposition : </label>
+									<span id="btn-file" class="btn btn-file" style="box-shadow: 0px 0px 0px #29374C;width:156px;height:156px;padding-top:30px;" ng-click="profileCtrl.addCreationImage()">
+										<img src="/img/cartel 7_select-image-medium.png" id="buttonAddExhibitionImage"
+											style="width:90px; height:90px;"></img>
+										<input type="file" id="file_input_exhibition" required></input>
+									</span>
+									<div style="border-bottom:3px solid #FEDCA9;margin:20px auto 0px auto;width:50px;"></div>
+								</div> 
+								
+								<div class="form-group col-xs-12" style="text-align:left;position:relative;">
+									<div ng-show="false" class="col-xs-12" style="text-align:center">
+										<img src="/img/cartel_select-date.png" style="height:100px;background-color:#29374C;border-radius:100%;border:2px solid #FEDCA9;"></img>
+									</div>
+									<div ng-show="true" class="col-xs-12 row" style="padding-left:0; padding-right:0;">
+										<div class="row" style="min-width:300px;">
+											<div class="form-group">
+												<div class="col-xs-2">
+													<img src="/img/cartel_select-date.png" style="height:50px;border-radius:100%;border:1px solid #FEDCA9;background-color:#29374C;"></img>
+												</div>
+												<div class="col-xs-3">
+													<div class='input-group dateCR' id='datetimepickerdebut' style="margin-left:-15px;">
+														<input type='text' class="form-control" ng-model="eDebut" style="visibility:hidden;width:0px;"/>
+														<span class="input-group-addon" 
+															style="padding: 0 0;border:0;border-radius:0;">
+															<div 
+																style="line-height:1.414;margin-left:0px;border:1px solid #FEDCA9;width:60px;color:#FEDCA9;background-color:#ffffff; opacity:0.95;">
+																<div style="font-size:20px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">{{ eDebut.length > 0 && (eDebut | date : 'd') || ("date")}}</label></div>
+																<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>{{ eDebut.length > 0 && (eDebut | date : 'MMM') || ("début")}}</label></div>
+															</div>
+														</span>
+													</div>
+												</div>
+
+												<div class="col-xs-3 col-xs-offset-2">
+													<div class='input-group dateCR' id='datetimepickerfin'>
+														<input type='text' class="form-control" ng-model="eFin" style="visibility:hidden;width:0px;"/>
+														<span class="input-group-addon" 
+															style="padding: 0 0;border:0;border-radius:0;">
+															<div 
+																style="line-height:1.414;margin-left:0px;border:1px solid #FEDCA9;width:60px;color:#FEDCA9;background-color:#ffffff; opacity:0.95;">
+																<div style="font-size:20px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">{{ eFin.length > 0 && (eFin | date : 'd') || ("date")}}</label></div>
+																<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>{{ eFin.length > 0 && (eFin | date : 'MMM') || ("fin")}}</label></div>
+															</div>
+														</span>
+													</div>
+												</div>
+												
+												<script type="text/javascript">
+													$(function () {
+														$('#datetimepickerdebut').datetimepicker({
+															icons: {
+																time: "fa fa-clock-o",
+																date: "fa fa-calendar",
+																up: "fa fa-arrow-up",
+																down: "fa fa-arrow-down",
+																previous: "fa fa-arrow-left",
+																next : "fa fa-arrow-right"
+															}, 
+															format: 'd/MMM/YYYY',
+															locale:'fr',
+															showTodayButton:false
+														});
+														
+														$('#datetimepickerfin').datetimepicker({
+															icons: {
+																time: "fa fa-clock-o",
+																date: "fa fa-calendar",
+																up: "fa fa-arrow-up",
+																down: "fa fa-arrow-down",
+																previous: "fa fa-arrow-left",
+																next: "fa fa-arrow-right"
+															}, 
+															format: 'd/MMM/YYYY',
+															locale:'fr'
+														});
+														
+														$("#datetimepickerdebut").on("dp.change", function (e) {
+															$('#datetimepickerfin').data("DateTimePicker").minDate(e.date);
+															
+															var $scope = angular.element(document.getElementById("eventSection")).scope();
+															$scope.$apply(function(){
+																$scope.eDebut = e.date.format();
+															});
+														});
+														
+														$("#datetimepickerfin").on("dp.change", function (e) {
+															var $scope = angular.element(document.getElementById("eventSection")).scope();
+															$scope.$apply(function(){
+																$scope.eFin = e.date.format();
+															});
+														});
+													});
+												</script>
+											</div>
+										</div>
+									</div>
+									<div style="border-bottom:3px solid #FEDCA9;margin:60px auto 0px auto;width:50px;"></div>
+								</div>
+								
+								<div class="form-group col-xs-12" style="text-align:left;padding:0;">
+										<textarea id="eDescription" class="form-control" rows="10" placeholder="Expliquer l'exposition"  
+											ng-model="eDescription" max="400" 
+											style="font-family:Helvetica;font-size:12px;
+													border-bottom:2px solid #FEDCA9;border-right:2px solid #FEDCA9; border-left:2px solid #FEDCA9;border-top:none;border-radius:0;"   
+											ng-model-options="{ getterSetter: true }"
+										required></textarea>
+										<div class="col-xs-12" style="text-align:right;">
+											<label for="eDescription" style="font-size:14px;">({{eDescription.length}}/400)</label>
+										</div>
+								</div>
+								<div gallery-position class="form-group col-xs-12" style="text-align:left;margin-top:10px;padding:0;">
+									<div ng-show="showGalleryPositionParam" class="col-xs-12" style="text-align:center">
+										<img src="/img/cartel_select-lieu.png" style="height:100px;background-color:#29374C;border-radius:100%;border:2px solid #FEDCA9;"></img>
+									</div>
+									<div ng-hide="showGalleryPositionParam" style="position:relative;border-bottom:2px solid #FEDCA9;border-right:2px solid #FEDCA9; border-left:2px solid #FEDCA9;border-top:none;border-radius:0;">
+										<div class="row">
+											<div class="col-xs-2" style="margin-bottom:5px;">
+												<img src="/img/cartel_select-lieu-small.png" style="height:50px;padding-left:9px;"></img>
+											</div>
+											<div class="col-xs-9" style="padding-top:5px;margin-left:-5px;">
+												<div>
+													<input type="text" class="form-control" id="eAddress" placeHolder="Adresse de la galerie" ng-model="eAdresse" ng-model-options="{ getterSetter: true }"
+													required/>
+												</div>
+											</div>
+											<div class="col-xs-1" style="padding:0;margin:0 -18px;">
+												<button class="btn" ng-click="eventsCtrl.clickGeolocation()" 
+													style="margin:6px 0 -5px;height:32px;background-color:transparent;">
+													<label style="cursor:pointer;"><i class="fa fa-location-arrow"></i></label>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group col-xs-12" style="text-align:left;position:relative;margin:0;padding:0;margin-top:10px;">
+									<div ng-show="true" class="col-xs-12" style="text-align:center;position:relative;margin:0;padding:0;">
+										<div style="position:relative;margin-bottom:10px;" ng-show="showCreationSelect">
+											<div style="text-align:left;">
+												<img src="/img/cartel_select-image-big.png" 
+												style="height:30px;background-color:#29374C;border-radius:100%;border:2px solid #FEDCA9;"
+												ng-click="eventsCtrl.selectImageForExhibition()"></img> 
+												<label style="">Ajouter / retirer une oeuvre</label>
+											</div>
+											<div id="creationSection" ng-controller="CreationController as creationCtrl">
+												<div class="row" ng-show="true" style="margin:0;position:relative;">
+													<div class="col-xs-6" ng-repeat="creation in creationCtrl.creator[0].creator.creations track by $index" style="padding-right:0px;padding-left:0px;">
+														<div id="listThumb_{{creation.id_creation}}" set-up-preview ng-click="eventsCtrl.selectCreation(creation);"
+														style="background-image:{{creation.thumbnailUrl}};
+														position:relative;min-height:140px;width:140px;
+														margin:10px 0 0 2%;
+														background-size:140px 140px;background-repeat:no-repeat;box-shadow: 0px 0px 0px #29374C;z-index:1;" id="thumbnail">
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12" style="padding:0;margin-bottom:20px;">
+									<button class="btn" style="width:100%;border-radius:0;background-color:#ee6779;" ng-click="eventsCtrl.addEvent()">Publier</button>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6" ng-show="showExhibitionPreview" style="text-align:center;margin:0 auto;">
+							<div style="position:relative;text-align:center;margin-bottom:10px;width:308px;font-weight:100;">Preview Exposition</div>
+							<div class="col-md-12" style="position:static;width:308px;border:1px solid #A7A9AB;margin:0 auto;">
+								<div style="background-color:#ffffff; opacity:0.95;width:100%;height:60px;text-align:center;font-family:'Helvetica';">
+									<div style="padding-top:5px;font-size:18px;">
+										<label style="font-weight:400;">{{eName}}</label>
+									</div>
+									<div style="font-size:14px;color:#6D6E70;">
+										<label style="font-weight:200;">{{ePlace}}</label>
+									</div>
+								</div>
+								<div style="margin:0 -15px;background-color:#FEDCA9;min-height:200px;position:relative;" id="exhibitionImage">
+									<div>
+										<div class="row" style="width:200px;margin-left:10px;position:absolute;bottom:10px;">
+											<div class="col-xs-3"style="border:1px solid #A7A9AB;width:60px;color:#A7A9AB;background-color:#ffffff; opacity:0.95;">
+												<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">{{eDebut | date : 'd'}}</label></div>
+												<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>{{eDebut | date : 'MMM'}}</label></div>
+											</div>
+											<div class="col-xs-1" style="color:#A7A9AB;font-size:24px;font-weight:100;margin-left:-5px;padding-top:10px;"><label>></label></div>
+											<div class="col-xs-3" style="margin-left:5px;border:1px solid #A7A9AB;width:60px;color:#A7A9AB;background-color:#ffffff; opacity:0.95;">
+												<div style="font-size:24px;text-align:center;font-weight:lighter;"><label style="font-weight:100;font-family:sans-serif;">{{eFin | date : 'd'}}</label></div>
+												<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>{{eFin | date : 'MMM'}}</label></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div style="position:relative;margin:0;text-align:left;">
+									<label style="color:#939597;margin-top:10px;font-weight:200px;font-size:11px;">Exposition - Installation</label>
+									<div style="width:124px; border-bottom:2px solid #FEDCA9;"></div>
+									<label style="font-weight:300px;font-size:13px;margin-top:10px;font-family:'Helvetica';font-weight:normal;">{{eDescription}}</label>
+									<div style="width:40px; border-bottom:2px solid #FEDCA9;"></div>
+									<label style="color:#939597;font-weight:200px;font-size:11px;margin-top:10px;">{{eAdresse}}</label>
+									<div style="border-bottom:2px solid #FEDCA9;"></div>
+									<div class="row" style="margin-bottom:10px;">
+										<div class="col-xs-6"
+											ng-repeat="exhibitionCreation in events_details[0].gallery.gallery_exhibitions[selectedExhibition].exposition_creations track by $index"
+											style="width:47%;margin:10px 0 0 2%;"
+											>
+											<div id="listCreationThumb_{{exhibitionCreation.id_creation}}" exposition-creations
+												style="background-image:{{exhibitionCreation.thumbnailUrl}};
+														position:relative;min-height:140px;width:140px;margin-left:-15px;
+														background-size:140px 140px;background-repeat:no-repeat;box-shadow: 0px 0px 0px #29374C;z-index:1;" id="thumbnail">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row" style="background-color:#FEDCA9;margin:0 -15px;height:40px;">
+									<div class="col-xs-2">
+										<img src="/img/cartel_maps.png" style="width:30px;padding-top:5px;"></img>
+									</div>
+									<div class="col-xs-10">
+										<label style="padding-top:10px;">Emmenez moi à cette exposition</label>
+									</div>
+								</div>						
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>    
+	</section>
+	
+	<script type="text/javascript">
+/*
+    Function to carry out the actual PUT request to S3 using the signed request from the app.
+*/
+    
+    function upload_file(file, signed_request, url){
+        var xhr = new XMLHttpRequest();
+        
+        console.log("upload file");
+        
+        xhr.open("PUT", signed_request);
+        xhr.setRequestHeader('x-amz-acl', 'public-read');
+        xhr.onload = function() {
+            
+            if (xhr.status === 200) {
+                console.log("url : ", url);
+                
+                // on dessine l'image dans un canvas de 150 * 150 px
+                var profile_canvas = document.createElement('canvas');
+                profile_canvas.width = 308;
+                profile_canvas.height = 308;
+                
+                var pImage = new Image();
+                pImage.crossOrigin = "Anonymous";
+                pImage.onload = function(){
+                    // on cacule les metriques de dessin
+                    var x, y, d_x;
+                    if (pImage.width > pImage.height){
+                        d_x = pImage.height;
+                        x = (pImage.width - pImage.height) / 2;
+                        y = 0;
+                    }else{
+                        d_x = pImage.width;
+                        y = (pImage.height - pImage.width) / 2;
+                        x = 0;                        
+                    }
+                    
+                    // memorize the elements
+                    var $element = document.getElementById("eventSection");
+                    var $scope = angular.element($element).scope();
+                
+                    $scope.$apply(function(){
+                        $scope.e_x = x;
+                        $scope.e_y = y;
+                        $scope.e_d_x = d_x;
+                        $scope.eHeight = pImage.height;
+                        $scope.eWidth = pImage.width;
+                    });
+                    console.log(x);
+                    console.log(y);
+                    console.log(d_x);
+                    profile_canvas.getContext('2d').drawImage(pImage, x, y, d_x, d_x, 0, 0, 308, 308);
+                    var dataUrl = profile_canvas.toDataURL();
+                    document.getElementById("exhibitionImage").style.height = profile_canvas.height+"px";
+                    document.getElementById("exhibitionImage").style.backgroundImage = "url("+dataUrl+")";  
+                    
+                    document.getElementById("buttonAddExhibitionImage").src = dataUrl;
+                    document.getElementById("buttonAddExhibitionImage").style.width = "156px";
+                    document.getElementById("buttonAddExhibitionImage").style.height = "156px";
+                    document.getElementById("buttonAddExhibitionImage").style.marginLeft="-13px";
+                    document.getElementById("buttonAddExhibitionImage").style.marginTop="-30px";
+                }
+                
+                pImage.src = url;
+            } else {
+            	console.log("other status on xhr send");
+            }
+        };
+        xhr.onerror = function() {
+            alert("Could not upload file."); 
+        };
+        xhr.send(file);
+    }
+
+    /*
+        Function to get the temporary signed request from the app.
+        If request successful, continue to upload the file using this signed
+        request.
+    */
+    function get_signed_request(file){
+    	console.log("get signed request");
+        var xhr = new XMLHttpRequest();
+        // TO DO - Calculate file name
+        // file name = c_creatorName_idImage 
+        var file_name =  set_sign_request();
+
+        xhr.open("GET", "/sign_s3_exhibition?file_name="+file_name+"&file_type="+file.type);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4){
+                if(xhr.status === 200){
+                    var response = JSON.parse(xhr.responseText);
+                    upload_file(file, response.signed_request, response.url);
+                }
+                else{
+                    alert("Could not get signed URL.");
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function set_sign_request(){
+        var tmpUrl;
+        
+        var $element = document.getElementById("eventSection");
+        var $scope = angular.element($element).scope();
+                
+        $scope.$apply(function(){
+            tmpUrl = $scope.eUrl;
+        });
+        console.log(tmpUrl);
+        return tmpUrl;
+    }
+
+    /*
+       Function called when file input updated. If there is a file selected, then
+       start upload procedure by asking for a signed request from the app.
+    */
+    function init_upload_exhibition(){
+        // mise en forme de l'image
+        format_image_exhibition();
+    
+        //var files = document.getElementById("file_input").files;
+        //var file = files[0];
+    }
+
+    function init_upload_gallery(){
+    	console.log("init_upload_exhibition");
+        // mise en forme de l'image
+        format_image_exhibition();
+    
+        //var files = document.getElementById("file_input").files;
+        //var file = files[0];
+    }
+
+    var image = new Image();
+
+    function format_image_exhibition(){
+    	console.log("format_image_exhibition");
+        // on récupère le fichier
+        var files = document.getElementById("file_input_exhibition").files;
+        var file = files[0];
+    
+        var reader = new FileReader();
+    
+        // on créé le canvas de réception
+        var resize_canvas = document.createElement('canvas');
+
+        
+        // on lit le fichier source
+        if (file){		
+            reader.readAsDataURL(file);
+        }
+        
+        reader.onloadend = function(_file){
+            // on écrit dans l'image tampon.
+            image.src = reader.result;
+        	
+        	image.onload = function(){
+				// calculate new image size
+				var size = image.width + image.height;
+				var newW = image.width * 800 / size;
+				var newH = image.height * 800 / size;
+		
+				// on initialise les canvas 
+				resize_canvas.width = newW;
+				resize_canvas.height = newH;
+			
+			
+				// FULL IMAGE CANVAS RESIZED
+				resize_canvas.getContext('2d').drawImage(image, 0, 0, newW, newH);
+				fullImageUrl = resize_canvas.toDataURL();
+		
+				var newFullHeight = image.height*308/image.width;
+	 
+				// CODE FOR SENDING
+				var file = dataURItoBlob(resize_canvas.toDataURL());
+				if(file == null){
+					alert("No file selected.");
+					return;
+				}
+			
+				get_signed_request(file);
+			}
+			
+            // manage error
+            image.onerror = function(){
+                alert('Invalid File Type : ', file.type);
+            };
+        }
+    }
+
+    function dataURItoBlob(dataURI) {
+        // convert base64 to raw binary data held in a string
+        var byteString = atob(dataURI.split(',')[1]);
+ 
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+ 
+        // write the bytes of the string to an ArrayBuffer
+        var arrayBuffer = new ArrayBuffer(byteString.length);
+        var _ia = new Uint8Array(arrayBuffer);
+        for (var i = 0; i < byteString.length; i++) {
+            _ia[i] = byteString.charCodeAt(i);
+        }
+ 
+        var dataView = new DataView(arrayBuffer);
+        var blob = new Blob([dataView], { type: 'image/png' });
+        return blob;
+    }
+
+    /*
+       Bind listeners when the page loads.
+    */
+    (function() {
+        document.getElementById("file_input_exhibition").onchange = init_upload_exhibition;
+    })();
+</script> 
+	<div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+<footer class="footer" >
+    <cartel-footer>
+    </cartel-footer>
+</footer>
+</body>
+</html>

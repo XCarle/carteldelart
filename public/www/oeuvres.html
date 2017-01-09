@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="oeuvres">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="Art, paris, Cartel,art+contemporain,promotion,culture,geoloc,carte" />
+<meta name="author" content="Cartel">
+<meta property="fb:admins" content="642530282" />
+
+<title>Focus</title>
+
+    <meta property="fb:app_id" content="1485534465076102" /> 
+    <meta property="fb:admins" content="642530282" />
+    <meta property="og:type"   content="article" /> 
+    <meta property="og:url"    content="http://www.carteldelart.com/oeuvres" /> 
+    <meta property="og:title"  content="Cartel - Le cartel de l'art - Oeuvres" /> 
+    <meta property="og:image"  content="https://s3.eu-central-1.amazonaws.com/cartelarticles/capture.png" /> 
+    
+    <meta property="og:image:width" content="1083" />
+    <meta property="og:image:height" content="625" />
+    <meta property="og:description" content="Des oeuvres d'art contemporain selectionnées par le cartel de l'art
+    " />
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@carteldelart">
+    <meta name="twitter:creator" content="@carteldelart">
+    <meta name="twitter:title" content="Cartel - Le cartel de l'art - Oeuvres">
+    <meta name="twitter:description" content="Des oeuvres d'art contemporain selectionnées par le cartel de l'art">
+    <meta name="twitter:image" content="https://s3.eu-central-1.amazonaws.com/cartelarticles/capture.png">
+    
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    <link href="css/flexslider.css" rel="stylesheet" >
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/queries.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/bootstrap-formhelpers.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/icone.png" type="image/x-icon" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/build.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/article.css"/>
+    <link rel="stylesheet" href="../css/privatespace.css"/>
+    
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="js/oeuvres.js"></script>
+	<script type="text/javascript" src="js/elem.js"></script>
+	<script type="text/javascript" src="js/uuid.js"></script>
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.0.js"></script>
+	<script type="text/javascript" src="js/magapix-image.js"></script>
+    
+	<script>
+  	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  	ga('create', 'UA-61941499-1', 'auto');
+  	ga('send', 'pageview');
+	</script>
+
+</head>
+<body id="top" ng-controller="UserController as user">
+<header id="home">
+<section id="divTop">
+</section>
+<nav class="navbar" id="secondNav" style="position:static;width:100%;z-index:10;background-color:#FAF1E3;height:55px;margin-bottom:0px;" >
+  <cartel-nav></cartel-nav>
+</nav>  
+<script>    
+    $('#arrow').hide();
+    $(document).ready(function() {
+        var w = $(window).innerWidth();
+        if (w > 768){
+            console.log("innerwidth");
+            $('.arrow').show();
+        } else {
+            $('.arrow').hide();
+        }
+    });
+</script>
+</header>
+
+    <section class="features text-center section-padding" style="background-color:white;padding-top:0px;padding-bottom:0px;" id="divArticle">
+      <div class="container" style="background-color:white;" ng-controller="ArticleController as article">
+            <h1 style="font-weight:100;font-size:34px;color:#FEDCA9;text-align:center;margin-top:60px;">
+            <img src="/img/Items_comprendre.png" style="width:70px;"></img>
+            Oeuvres</h1>
+            <h3 style="margin:30px 0;font-weight:100;font-size:16px;text-transform:uppercase;color:#29374C;">
+                Cartels détaillés expliquant des oeuvres reconnues sur la scène plastique contemporaine et la démarche de l'artiste.
+            </h3>
+            
+          <div class="row" id="formContainer" style="margin-bottom:60px;">
+              <div class="col-md-10 col-md-offset-1 row" id="cartelContainer" style="border-top:2px solid #FEDCA9;margin-top:25px;padding-right:0;padding-left:0;background-color:white;">
+                
+                <div class="col-md-12 row" onclick="location.href = '/cartel/jean-michel-alberola'" style="margin-left:0;" id="article"
+                    ng-mouseenter="showRedirect31=true" ng-mouseleave="showRedirect31=false" ng-show="article.showArticle('alberola')">
+                    <div class="col-xs-12 col-sm-3 cartelImgPreview" alberola id="alberola" style="width:150px;height:150px;">
+                        <div class="col-sm-3 cartelDate">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">29</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> fév</label></div>
+                            <div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2016</label></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                        <ul style="list-style-type:none;padding-left:5px;">
+                            <li><label style="font-size:24px;color:#29374C;">Jean-Michel Alberola</label></li>
+                            <li><label style="font-size:20px;font-weight:lighter;color:#939597">L'aventure des détails, 2016</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; ADAGP, Paris 2016</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Crédit Photo : André Morin</label></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 arrow" ng-show="showRedirect31" style="position:absolute;right:10px;">
+                        <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 row" onclick="location.href = '/cartel/laurent-grasso'" style="margin-left:0;" id="article"
+                    ng-mouseenter="showRedirect30=true" ng-mouseleave="showRedirect30=false" ng-show="article.showArticle('laurentgrasso')">
+                    <div class="col-xs-12 col-sm-3 cartelImgPreview" laurentgrasso id="laurentgrasso" style="width:150px;height:150px;">
+                        <div class="col-sm-3 cartelDate">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">25</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> jan</label></div>
+                            <div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                        <ul style="list-style-type:none;padding-left:5px;">
+                            <li><label style="font-size:24px;color:#29374C;">Laurent Grasso</label></li>
+                            <li><label style="font-size:20px;font-weight:lighter;color:#939597">SolarWind, 2016</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; ADAGP, Paris 2016</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Crédit Photo : Romain Darnaud</label></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 arrow" ng-show="showRedirect30" style="position:absolute;right:10px;">
+                        <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 row" onclick="location.href = '/cartel/felix-gonzalez-torres'" style="margin-left:0;" id="article"
+                    ng-mouseenter="showRedirect29=true" ng-mouseleave="showRedirect29=false" ng-show="article.showArticle('gonzaleztorres')">
+                    <div class="col-xs-12 col-sm-3 cartelImgPreview" gonzaleztorres id="gonzaleztorres" style="width:150px;height:150px;">
+                        <div class="col-sm-3 cartelDate">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">9</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> jan</label></div>
+                            <div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2016</label></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                        <ul style="list-style-type:none;padding-left:5px;">
+                            <li><label style="font-size:24px;color:#29374C;">Felix Gonzalez Torres</label></li>
+                            <li><label style="font-size:20px;font-weight:lighter;color:#939597">"Untitled" (Revenge), détail</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; Felix Gonzalez Torres</label></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 arrow" ng-show="showRedirect29" style="position:absolute;right:10px;">
+                        <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 row" onclick="location.href = '/cartel/cheri-samba'" style="margin-left:0;" id="article"
+                    ng-mouseenter="showRedirect28=true" ng-mouseleave="showRedirect28=false" ng-show="article.showArticle('samba')">
+                    <div class="col-xs-12 col-sm-3 cartelImgPreview" samba id="samba" style="width:150px;height:150px;">
+                        <div class="col-sm-3 cartelDate">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">7</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> jan</label></div>
+                            <div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2016</label></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                        <ul style="list-style-type:none;padding-left:5px;">
+                            <li><label style="font-size:24px;color:#29374C;">Chéri Samba</label></li>
+                            <li><label style="font-size:20px;font-weight:lighter;color:#939597">La vraie carte du monde, 2011</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; Chéri Samba</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">photo &copy; Florian Kleinefenn</label></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 arrow" ng-show="showRedirect28" style="position:absolute;right:10px;">
+                        <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 row" onclick="location.href = '/cartel/francois-morellet'" style="margin-left:0;" id="article"
+                    ng-mouseenter="showRedirect27=true" ng-mouseleave="showRedirect27=false" ng-show="article.showArticle('morellet')">
+                    <div class="col-xs-12 col-sm-3 cartelImgPreview" morellet id="morellet" style="width:150px;height:150px;">
+                        <div class="col-sm-3 cartelDate">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">9</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> déc</label></div>
+                            <div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                        <ul style="list-style-type:none;padding-left:5px;">
+                            <li><label style="font-size:24px;color:#29374C;">François Morellet</label></li>
+                            <li><label style="font-size:20px;font-weight:lighter;color:#939597">Seven Corridors, 2015</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy Richard Long</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; ADAGP, Paris 2015</label></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 arrow" ng-show="showRedirect27" style="position:absolute;right:10px;">
+                        <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 row" onclick="location.href = '/cartel/richard-long'" style="margin-left:0;" id="article"
+                    ng-mouseenter="showRedirect26=true" ng-mouseleave="showRedirect26=false" ng-show="article.showArticle('long')">
+                    <div class="col-xs-12 col-sm-3 cartelImgPreview" long id="long" style="width:150px;height:150px;">
+                        <div class="col-sm-3 cartelDate">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">2</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> déc</label></div>
+                            <div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                        <ul style="list-style-type:none;padding-left:5px;">
+                            <li><label style="font-size:24px;color:#29374C;">Richard Long</label></li>
+                            <li><label style="font-size:20px;font-weight:lighter;color:#939597">A Circle in Antarctica, 2012</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy  Richard Long</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; ADAGP, Paris 2015</label></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 arrow" ng-show="showRedirect26" style="position:absolute;right:10px;">
+                        <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 row" onclick="location.href = '/cartel/pistoletto'" style="margin-left:0;" id="article"
+                    ng-mouseenter="showRedirect25=true" ng-mouseleave="showRedirect25=false" ng-show="article.showArticle('pistoletto')">
+                    <div class="col-xs-12 col-sm-3 cartelImgPreview" pistoletto id="pistoletto" style="width:150px;height:150px;">
+                        <div class="col-sm-3 cartelDate">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">27</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> nov</label></div>
+                            <div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                        <ul style="list-style-type:none;padding-left:5px;">
+                            <li><label style="font-size:24px;color:#29374C;">Michelangelo Pistoletto</label></li>
+                            <li><label style="font-size:20px;font-weight:lighter;color:#939597">Le troisième paradis, 2003-2015</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy Michelangelo Pistoletto</label></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 arrow" ng-show="showRedirect25" style="position:absolute;right:10px;">
+                        <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 row" onclick="location.href = '/cartel/shiota'" style="margin-left:0;" id="article"
+                    ng-mouseenter="showRedirect24=true" ng-mouseleave="showRedirect24=false" ng-show="article.showArticle('shiota')">
+                    <div class="col-xs-12 col-sm-3 cartelImgPreview" shiota id="shiota" style="width:150px;height:150px;">
+                        <div class="col-sm-3 cartelDate">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">19</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> nov</label></div>
+                            <div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                        <ul style="list-style-type:none;padding-left:5px;">
+                            <li><label style="font-size:24px;color:#29374C;">Chiharu Shiota</label></li>
+                            <li><label style="font-size:20px;font-weight:lighter;color:#939597">The Key in the Hand, 2015</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy Chiaharu Shiota</label></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 arrow" ng-show="showRedirect24" style="position:absolute;right:10px;">
+                        <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 row" onclick="location.href = '/cartel/boltanski'" style="margin-left:0;" id="article"
+                    ng-mouseenter="showRedirect23=true" ng-mouseleave="showRedirect23=false" ng-show="article.showArticle('boltanski')">
+                    <div class="col-xs-12 col-sm-3 cartelImgPreview" boltanski id="boltanski" style="width:150px;height:150px;">
+                        <div class="col-sm-3 cartelDate">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">3</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> nov</label></div>
+                            <div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                        <ul style="list-style-type:none;padding-left:5px;">
+                            <li><label style="font-size:24px;color:#29374C;">Christian Boltanski</label></li>
+                            <li><label style="font-size:20px;font-weight:lighter;color:#939597">Animitas (petites âmes), 2015</label></li>
+                            <li><label style="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy Galerie Marian Goodman</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; ADAGP, Paris 2015</label></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 arrow" ng-show="showRedirect23" style="position:absolute;right:10px;">
+                        <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 row" onclick="location.href = '/cartel/rondinone'" style="margin-left:0;" id="article"
+                    ng-mouseenter="showRedirect22=true" ng-mouseleave="showRedirect22=false" ng-show="article.showArticle('rondinone')">
+                    <div class="col-xs-12 col-sm-3 cartelImgPreview" rondinone id="rondinone" style="width:150px;height:150px;">
+                        <div class="col-sm-3 cartelDate">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">19</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> oct</label></div>
+                            <div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                        <ul style="list-style-type:none;padding-left:5px;">
+                            <li><label style="font-size:24px;color:#29374C;">Ugo Rondinone</label></li>
+                            <li><label style="font-size:20px;font-weight:lighter;color:#939597">I ♥ John Giorno, 2015</label></li>
+                            <li><label style="FONT-WEIGHT:LIGHTER;color:#A7A9AB;"></label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;"></label></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 arrow" ng-show="showRedirect22" style="position:absolute;right:10px;">
+                        <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                    </div>
+                </div>
+                
+                
+                
+                <div class="col-md-12 row" onclick="location.href = '/cartel/prouvost'" style="margin-left:0;" id="article"
+                    ng-mouseenter="showRedirect21=true" ng-mouseleave="showRedirect21=false" ng-show="article.showArticle('prouvost')">
+                    <div class="col-xs-12 col-sm-3 cartelImgPreview" prouvost id="prouvost" style="width:150px;height:150px;">
+                        <div class="col-sm-3 cartelDate">
+                            <div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">19</label></div>
+                            <div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> oct</label></div>
+                            <div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                        <ul style="list-style-type:none;padding-left:5px;">
+                            <li><label style="font-size:24px;color:#29374C;">Laure Prouvost</label></li>
+                            <li><label style="font-size:20px;font-weight:lighter;color:#939597">The Smocking Image, 2015</label></li>
+                            <li><label style="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; Courtesy Laure Prouvost et Galerie Nathalie Obadia Paris / Bruxelles</label></li>
+                            <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Photo : &copy; Bertrand Huet / Tutti.</label></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-2 arrow" ng-show="showRedirect21" style="position:absolute;right:10px;">
+                        <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                    </div>
+                </div>
+            
+            <div class="col-md-12 row" onclick="location.href = '/cartel/becher'" style="margin-left:0;" id="article"
+                ng-mouseenter="showRedirect20=true" ng-mouseleave="showRedirect20=false" ng-show="article.showArticle('becher')">
+                <div class="col-xs-12 col-sm-3 cartelImgPreview" becher id="becher">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">14</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> oct</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Bernd & Hilla Becher</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Ch&acirc;teaux d'eau (Wassert&uuml;rme), 1980</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; Bernd and Hilla Becher</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect20" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+            </div>
+            
+            <div class="col-md-12 row" onclick="location.href = '/cartel/sherman'" style="margin-left:0;" id="article"
+                ng-mouseenter="showRedirect19=true" ng-mouseleave="showRedirect19=false" ng-show="article.showArticle('sherman')">
+                <div class="col-xs-12 col-sm-3 cartelImgPreview" sherman id="sherman">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">13</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> oct</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Cindy Sherman</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Untitled, 2008</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy de Cindy Sherman et de Metro Pictures</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect19" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+            </div>
+            
+            <div class="col-md-12 row" onclick="location.href = '/cartel/balincourt'" style="margin-left:0;" id="article"
+                ng-mouseenter="showRedirect18=true" ng-mouseleave="showRedirect18=false" ng-show="article.showArticle('balincourt')">
+                <div class="col-xs-12 col-sm-3 cartelImgPreview" balincourt id="balincourt">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">12</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> oct</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Jules De Balincourt</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">As Far West As We Could Go, 2014</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy Galerie Thaddaeus Ropac, Paris/Salzburg</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect18" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+            </div>
+            
+            <div class="col-md-12 row" onclick="location.href = '/cartel/calle-prenez-soin-de-vous'" style="margin-left:0;" id="article"
+                ng-mouseenter="showRedirect17=true" ng-mouseleave="showRedirect17=false" ng-show="article.showArticle('calle')">
+                <div class="col-xs-12 col-sm-3 cartelImgPreview" calle-prenez-soin-de-vous id="calle-prenez-soin-de-vous">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">8</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> oct</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Sophie Calle</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Prenez soin de vous, 2007</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; ADAGP, 2015| Photo : &copy; Jean-Baptiste Mondino</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect17" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+            </div>
+            
+            <div class="col-md-12 row" onclick="location.href = '/cartel/weiwei-forever-bicycles'" style="margin-left:0;" id="article"
+                ng-mouseenter="showRedirect16=true" ng-mouseleave="showRedirect16=false" ng-show="article.showArticle('weiwei')">
+                <div class="col-xs-12 col-sm-3 cartelImgPreview" weiwei-forever-bicycles id="weiwei-forever-bicycles">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">1</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label> oct</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Ai Weiwei</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Forever Bicycles, 2011</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; Ai Weiwei</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect16" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+            </div>
+            
+            <div class="col-md-12 row" onclick="location.href = '/cartel/rama'" style="margin-left:0;" id="article"
+                ng-mouseenter="showRedirect15=true" ng-mouseleave="showRedirect15=false" ng-show="article.showArticle('rama')">
+                <div class="col-xs-12 col-sm-3 cartelImgPreview" rama id="rama">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">28</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>sept</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Carol Rama</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Isola degli Occhi, 1967</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy;Archivio Carol Rama, Torino &copy; Photo Gabriele Gaidano</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect15" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+            </div>
+            
+            <div class="col-md-12 row" onclick="location.href = '/cartel/dormino-glass'" style="margin-left:0;" id="article"
+                ng-mouseenter="showRedirect14=true" ng-mouseleave="showRedirect14=false" ng-show="article.showArticle('dormino-glass')">
+                <div class="col-xs-12 col-sm-3 cartelImgPreview" dormino-glass id="dormino-glass">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">24</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>sept</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Davide Dormino & Charles Glass</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Anything To Say ? 2015</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy Davide Dormino</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect14" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+            </div>
+
+            
+            <div class="col-md-12 row" onclick="location.href = '/cartel/pignon-ernest'" style="margin-left:0;" id="article"
+                ng-mouseenter="showRedirect13=true" ng-mouseleave="showRedirect13=false" ng-show="article.showArticle('pignon-ernest')">
+                <div pignon-ernest id="pignon-ernest" class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">21</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>sept</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Ernest Pignon-Ernest</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Pasolini - 40 ans après son assassinat, 2015</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy & Photo &copy; Ernest Pignon-Ernest &copy; ADAGP, Paris 2015</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect13" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+            </div>
+            
+            <div class="col-md-12 row" onclick="location.href = '/cartel/messager'" style="margin-left:0;" id="article"
+                ng-mouseenter="showRedirect12=true" ng-mouseleave="showRedirect12=false" ng-show="article.showArticle('messager')">
+                <div messager id="messager" class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">16</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>sept</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Annette Messager</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">La Lune Crayons, 2015</label></li>
+                        <li><label style="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy Galerie Christian Berst & Annette Messager</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect12" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+            </div>
+            
+            
+            <div class="col-md-12 row" onclick="location.href = '/cartel/hyman'" style="margin-left:0;" id="article"
+                ng-mouseenter="showRedirect11=true" ng-mouseleave="showRedirect11=false" ng-show="article.showArticle('hyman')">
+                <div hyman id="hyman" class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">11</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>sept</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Jonathan C. Hyman</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">All Gave Some, Some Gave All, 2003</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy;Jonathan C. Hyman</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect11" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+            </div>
+           
+           
+            <div class="col-md-12 row" onclick="location.href = '/cartel/tatah'" id="article" style="margin-left:0;"
+                ng-mouseenter="showRedirect10=true" ng-mouseleave="showRedirect10=false" ng-show="article.showArticle('tatah')">
+                <div tatah id="tatah" class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">9</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>sept</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Djamel Tatah</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Sans titre, 2008</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy Djamel Tatah &copy;ADAGP, Paris</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect10" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+           </div>
+           
+           
+           <div class="col-md-12 row" onclick="location.href = '/cartel/goldin'" id="article" style="margin-left:0;"
+                ng-mouseenter="showRedirect9=true" ng-mouseleave="showRedirect9=false" ng-show="article.showArticle('goldin')">
+                <div goldin id="goldin" class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">5</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>sept</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Nan Goldin</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Nan and Brian in Bed, NYC, 1983</label></li>
+                        <li><label style="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy; Nan Goldin</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect9" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+           </div>
+           
+           
+           
+           <div class="col-md-12 row" onclick="location.href = '/cartel/jaar'" id="article" style="margin-left:0;"
+                ng-mouseenter="showRedirect8=true" ng-mouseleave="showRedirect8=false" ng-show="article.showArticle('jaar')">
+                <div jaar id="jaar" class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">3</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>sept</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Alfredo Jaar</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Culture = Capital, 2010</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">Courtesy Alfredo Jaar & Kamel Mennour</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect8" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+           </div>
+        
+           
+           <div class="col-md-12 row" onclick="location.href = '/cartel/veilhan'" id="article" style="margin-left:0;"
+                ng-mouseenter="showRedirect7=true" ng-mouseleave="showRedirect7=false" ng-show="article.showArticle('veilhan')">
+                <div veilhan id="veilhan" class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">20</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>août</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Xavier Veilhan</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Le Carosse, 2009</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy;Georges Meguerditchian - Centre Pompidou, MNAM-CCI  &copy;Xavier Veilhan</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect7" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+           </div>
+           
+           <div class="col-md-12 row" onclick="location.href = '/cartel/graham'" id="article" style="margin-left:0;"
+                ng-mouseenter="showRedirect6=true" ng-mouseleave="showRedirect6=false" ng-show="article.showArticle('graham')">
+                <div graham id="graham"  class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">18</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>août</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Dan Graham</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Tight Squeeze, 2015</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy;Stéphane Aboudaram – WE ARE CONTENT(S) ; &copy;MAMO Audi talents awards</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect6" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+           </div>
+           
+           <div class="col-md-12 row" onclick="location.href = '/cartel/hatoum'" id="article" style="margin-left:0;"
+                ng-mouseenter="showRedirect5=true" ng-mouseleave="showRedirect5=false" ng-show="article.showArticle('hatoum')">
+                <div hatoum id="hatoum" class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">14</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>août</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Mona Hatoum</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Cellules, 2012 - 2013</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy;Mona Hatoum, &copy;Sébastien Normand</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect5" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+           </div>
+           
+           <div class="col-md-12 row" onclick="location.href = '/cartel/parreno'" id="article" style="margin-left:0;"
+                ng-mouseenter="showRedirect4=true" ng-mouseleave="showRedirect4=false" ng-show="article.showArticle('parreno')">
+                <div parreno id="parreno" class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">11</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>août</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Philippe Parreno</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Sans titre, 2012</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy;ADAGP</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect4" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+           </div>
+          
+           <div class="col-md-12 row" onclick="location.href = '/cartel/parr'" id="article" style="margin-left:0;"
+                ng-mouseenter="showRedirect3=true" ng-mouseleave="showRedirect3=false" ng-show="article.showArticle('parr')">
+                <div parr id="parr" class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">6</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>août</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+               </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Martin Parr</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Floride, 1998</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy;MAGNUM PHOTOS</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect3" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+           </div>
+           
+           <div class="col-md-12 row" onclick="location.href = '/cartel/fleury'" id="article" style="margin-left:0;"
+                ng-mouseenter="showRedirect2=true" ng-mouseleave="showRedirect2=false" ng-show="article.showArticle('fleury')">
+                <div fleury id="fleury" class="col-xs-12 col-sm-3 cartelImgPreview">
+                    <div class="col-sm-3 cartelDate">
+						<div style="font-size:24px;text-align:center;"><label style="font-weight:100;font-family:sans-serif;">3</label></div>
+						<div style="font-size:14px;margin-top:-10px;font-weight:lighter;"><label>août</label></div>
+						<div style="font-size:12px;margin-top:-10px;font-weight:lighter;"><label>2015</label></div>
+				    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7" style="text-align:left;margin-top:10px;margin-left:10px;">
+                    <ul style="list-style-type:none;padding-left:5px;">
+                        <li><label style="font-size:24px;color:#29374C;">Sylvie Fleury</label></li>
+                        <li><label style="font-size:20px;font-weight:lighter;color:#939597">Tableau n°1, 1992</label></li>
+                        <li><label STYLE="FONT-WEIGHT:LIGHTER;color:#A7A9AB;">&copy;Georges Meguerditchian - Centre Pompidou, MNAM-CCI  &copy;Sylvie Fleury</label></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2 arrow" ng-show="showRedirect2" style="position:absolute;right:10px;">
+                    <img src="/img/cartel_fleche-right.png" style="height:80px;width:35px;margin-top:45px;"></img>
+                </div>
+           </div>
+        </div>
+        <div class="col-md-10 col-md-offset-1" ng-show="showPlus" style="background-color:#FEDCA9;height:40px;line-height:40px;" ng-click="article.showMore()">
+            <label style="font-weight:lighter;"><i class="fa fa-chevron-down" style="padding-right:5px;font-weight:lighter;"></i>Afficher plus</label>
+        </div>
+    </div>
+</section>
+
+
+
+ 
+<footer>
+    <cartel-footer>
+    </cartel-footer>
+     <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+</footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/waypoints.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/scripts.js"></script> 
+<script src="js/jquery.flexslider.js"></script> 
+<script src="js/modernizr.js"></script>
+</body>
+</html>

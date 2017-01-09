@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html ng-app="place">
+	<head>
+		<title>Cartel</title>
+		<link rel="shortcut icon" href="img/icone.png" type="image/x-icon" />
+
+	    <!-- Bootstrap core CSS -->
+	    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	    <!-- Bootstrap theme -->
+	    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="/css/place.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">	
+		<link rel="stylesheet" href="css/profile/global.css"/>
+		<link rel="stylesheet" href="css/profile/profile.css"/>	
+		<link rel="stylesheet" href="css/datetimepicker.css"/>	
+		<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="../css/conditions.css"/>
+		
+		<link rel="stylesheet" href="css/build.css">
+		<link href="css/admin-style.css" rel="stylesheet">
+		
+		<link rel="stylesheet" href="../css/galeries.css"/>
+		
+		<script type="text/javascript" src="/js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.js"></script>	
+		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+		<script type="text/javascript" src="/js/angular.min.js"></script>
+		<script type="text/javascript" src="/js/angular-route.min.js"></script>
+		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+		<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="/js/place.js"></script>
+		
+	</head>
+	<header style="font-family:'Varela Round';">
+		<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#FAF1E3;background-image:none;border:none;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="/img/icone.png" style="width:40px;height:40px;margin-top:-8px;"><label style="padding-left:10px;font-family:Helvetica;font-size:28px;color:#29374C;letter-spacing:2px;font-weight:100;"></label></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#" style="text-shadow:none;"><label style="padding-left:10px;">Profile</label><img src="/img/cartel_profil.png" style="height:27px;margin-top:-2px;float:left"></img></a></li>
+            <li><a href="/creations" style="text-shadow:none;"><label style="padding-left:10px;">Catalogue</label><img src="/img/cartel_catalogue.png" style="height:27px;margin-top:-2px;float:left"></img></a></li>
+            <li><a href="/expositions" style="text-shadow:none;"><label style="padding-left:10px;">Expositions</label><img src="/img/cartel_exposition.png" style="height:27px;margin-top:-2px;float:left"></img></a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            
+            <li class="dropdown">
+                <a href="../navbar/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user.localemail %><span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/logout">Déconnexion</a></li>
+                  </ul>
+            </li>
+           </ul>
+        </div>
+      </div>
+    </nav>
+	</header>
+	<body>
+    
+	<section style="font-family:'Varela Round';margin-top:70px;" ng-controller="placeController as placeCtrl" id="placeSection">
+	 <script>
+		var idCreator = <%- JSON.stringify(user.id) %>; 
+    </script>
+	<div class="container" style="margin-bottom:100px;">
+		<div class="row">
+			<div class="col-xs-12 col-md-8" ng-show="showProfilConfig" id="profileConfig">
+				 <div ng-click="placeCtrl.clickGalleryAvatarDiv()" class="col-md-12" style="clear:both;margin-bottom:15px;font-size:20px;text-align:left;padding-left:15px;padding-top:10px;border-bottom:3px solid #FEDCA9;margin-right:13px;margin-top:10px;">
+					<ul class="list-inline" style="list-style-type:none;margin-bottom:0px;">
+						<li><label  style="float:left;font-size:16px;text-align:left;padding-left:15px;padding-top:10px;">Logo de la galerie</label><li>
+						<li ng-show="showValidAvatar" style="float:right;padding-top:5px;"><img src="/img/cartel-green.png" style="width:20px;height:20px;"></img></li>
+						<li ng-hide="showValidAvatar" style="float:right;padding-top:5px;"><img src="/img/cartel-red.png" style="width:20px;height:20px;"></img></li>
+					</ul>
+				</div>
+				<div class="form-group col-md-12" ng-show="showGalleryAvatarParam" >
+					<div style="margin-top:20px;text-align:center;">
+						<span id="btn-file" class="btn btn-file" style="box-shadow: 0px 0px 0px #29374C;width:156px;height:156px;padding-top:30px;" ng-click="profileCtrl.addCreationImage()">
+							<img src="/img/cartel 7_select-image-medium.png" id="buttonAddGalleryImage"
+								style="width:90px; height:90px;"></img>
+							<input type="file" id="file_input_gallery" required></input>
+						</span>
+					</div> 
+				</div>
+			
+				<div ng-click="placeCtrl.clickGalleryIdentiteDiv()" class="col-md-12" ng-show="showGalleryIdentiteDiv"
+					style="clear:both;margin-bottom:15px;font-size:20px;text-align:left;padding-left:15px;border-bottom:3px solid #FEDCA9;margin-right:13px;">
+					<ul class="list-inline" style="list-style-type:none;margin-bottom:0px;">
+						<li><label  style="float:left;font-size:16px;text-align:left;padding-left:15px;">Identité</label><li>
+						<li ng-show="showValidIdentite" style="float:right;padding-top:5px;"><img src="/img/cartel-green.png" style="width:20px;height:20px;"></img></li>
+						<li ng-hide="showValidIdentite" style="float:right;padding-top:5px;"><img src="/img/cartel-red.png" style="width:20px;height:20px;"></img></li>
+					</ul>
+				</div>
+				<div ng-show="showGalleryIdentiteParam">
+					<div class="form-group col-md-12" style="text-align:left;">
+						<ul class="list-inline">
+							<li><label for="gName" style="padding-left:15px;width:100px;">Nom</label></li>
+							<li style="width:80%;"><input type="text" class="form-control" id="gName" placeHolder="Nom de la galerie de 100 caractères maximum (obligatoire)" ng-model="gName" ng-model-options="{ getterSetter: true }"
+							required/></li>
+						</ul>
+					</div>
+					<div class="form-group col-md-12" style="text-align:left;">
+						<ul class="list-inline">
+							<li><label for="gRcs" style="padding-left:15px;width:100px;">RCS</label></li>
+							<li style="width:80%;"><input type="text" class="form-control" id="gRcs" placeHolder="format : FRXX999999999 (champ non obligatoire)" ng-model="gRcs" ng-model-options="{ getterSetter: true }"
+							/></li>
+						</ul>
+					</div>
+					<div class="form-group col-md-12" style="text-align:left;">
+						<ul class="list-inline">
+							<li><label for="gSite" style="padding-left:15px;width:100px;">Site</label></li>
+							<li style="width:80%;"><input type="text" class="form-control" id="gSite" placeHolder="format : http://www.votregalerie.com (champ non obligatoire)" ng-model="gSite" ng-model-options="{ getterSetter: true }"
+							/></li>
+						</ul>
+					</div>
+					<div class="col-md-12 alert alert-info" role="alert" ng-show="identiteMessage.length > 0" style="margin-bottom:20px;">
+						{{identiteMessage}}
+					</div>
+				</div>
+				
+				
+				 <div class="col-md-12" ng-click="placeCtrl.clickGalleryContactDiv()" ng-show="showGalleryContactDiv"
+					style="clear:both;margin-bottom:15px;font-size:20px;text-align:left;padding-left:15px;border-bottom:3px solid #FEDCA9;margin-right:13px;">
+					<ul class="list-inline" style="list-style-type:none;margin-bottom:0px;">
+						<li><label  style="float:left;font-size:16px;text-align:left;padding-left:15px;">Informations pratiques</label><li>
+						<li ng-show="showValidContact" style="float:right;padding-top:5px;"><img src="/img/cartel-green.png" style="width:20px;height:20px;"></img></li>
+						<li ng-hide="showValidContact" style="float:right;padding-top:5px;"><img src="/img/cartel-red.png" style="width:20px;height:20px;"></img></li>
+					</ul>
+				</div>
+				<div ng-show="showGalleryContactParam">
+					<div class="form-group col-md-12" style="text-align:left;">
+						<ul class="list-inline">
+							<li><label for="gAdresse" style="padding-left:15px;width:100px;">Adresse</label></li>
+							<li style="width:80%;"><input type="text" class="form-control" id="gAdresse" placeHolder="Adresse de 120 caractères maximum (obligatoire)" ng-model="gAdresse" ng-model-options="{ getterSetter: true }"
+							required/></li>
+						</ul>
+					</div>
+					<div class="form-group col-md-12" style="text-align:left;">
+						<ul class="list-inline">
+							<li><label for="gVisites" style="padding-left:15px;width:100px;">Visites </label></li>
+							<li style="width:80%;">
+							<textarea id="gVisites" class="form-control" rows="3" placeholder="ex : Du mardi au mercredi de 14h à 20h, jeudi et vendredi de 10h à 17h, dimanche de 10h à 13h"  ng-model="gVisites" max="255" style="width:100%;"   ng-model-options="{ getterSetter: true }"
+									required> </textarea>
+							</li>
+					</div>
+					<div class="form-group col-md-12" style="text-align:left;">
+						<ul class="list-inline">
+							<li><label for="gPhone" style="padding-left:15px;width:100px;font-size:22px;"><span class="fa fa-phone fa-6"></span></label></li>
+							<li style="width:80%;"><input type="text" class="form-control" id="gPhone" placeHolder="ex : 0612345678 ou +3312345678 (obligatoire)" ng-model="gPhone" ng-model-options="{ getterSetter: true }"
+							/></li>
+						</ul>
+					</div>
+					<div class="form-group col-md-12" style="text-align:left;">
+						<ul class="list-inline">
+							<li><label for="gMail" style="padding-left:15px;width:100px;">Mail</label></li>
+							<li style="width:80%;"><input type="text" class="form-control" id="gMail" placeHolder="ex : contact@votregalerie.com" ng-model="gMail" ng-model-options="{ getterSetter: true }" col="1" rows="3"
+							/></li>
+						</ul>
+					</div>
+					<div class="col-md-12 alert alert-info" role="alert" ng-show="contactMessage.length > 0" style="margin-bottom:20px;">
+						{{contactMessage}}
+					</div>
+				</div>
+				
+				
+				 <div class="col-md-12" ng-click="placeCtrl.clickGalleryDroitDiv()" ng-show="showGalleryDroitDiv"
+					style="clear:both;margin-bottom:15px;font-size:20px;text-align:left;padding-left:15px;border-bottom:3px solid #FEDCA9;margin-right:13px;">
+					<ul class="list-inline" style="list-style-type:none;margin-bottom:0px;">
+						<li><label  style="float:left;font-size:16px;text-align:left;padding-left:15px;">Conditions particulières d'utilisation</label><li>
+						<li ng-show="showValidRight" style="float:right;padding-top:5px;"><img src="/img/cartel-green.png" style="width:20px;height:20px;"></img></li>
+						<li ng-hide="showValidRight" style="float:right;padding-top:5px;"><img src="/img/cartel-red.png" style="width:20px;height:20px;"></img></li>
+					</ul>
+				</div>
+				<div class="col-md-12" ng-show="showGalleryDroitParam">
+					<div style="overflow:scroll; border:#29374C 1px solid; height:200px;">
+						<conditions-galeries></conditions-galeries>
+					</div>
+					<ul class="dl-horizontal" style="margin-left:-30px;margin-top:10px;">
+						<dt style="width:20px;margin-left:-10px;"><input type="checkbox" ng-model="droitAccepted" required></input></dt>
+						<dd style="margin-left:20px;">Vous acceptez les <a href="">Conditions Particulières d'Utilisation</a>.
+						</dd>
+					</ul>  
+				</div>
+				<div class="col-md-12 alert alert-info" role="alert" ng-show="droitMessage.length > 0" style="margin-bottom:20px;">
+					{{droitMessage}}
+				</div>
+				
+				<div class="col-md-12" style="margin-bottom:20px;text-align:center;" ng-hide="showFormValidationButton">
+					<button class="btn" style="background-color:#FEDCA9;" ng-show="showGalleryValidationButon" ng-click="placeCtrl.updateGalleryProfile()">Valider</button>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-4" ng-click="placeCtrl.clickProfil()">
+				<div class ="row">
+					<div id="pageProfile" style="width:308px;border:1px solid #FEDCA9;height:548px;margin-left:20%;padding:0 0 0 0;">
+						<div style="" set-up-gallery-avatar>
+							<img id="profileImage" style="width:100%;height:308px;"></img>
+						</div>
+						<div style="text-align:center;margin-left:-35px;">
+							<ul style="list-style-type:none;">
+								<li><label style="font-size:18px;"><br>{{gName+" "}}{{nom}}</br></label></li>
+								<li><label style="font-size:17px;color:#FEDCA9;">1 <img src="/img/cartel-etoile-jaune.png" style="width:20px;height:20px;margin-top:-5px;"></img></label></li>
+								<li><label style="font-size:11px;color:#29374C;font-weight:lighter;">Galerie</label></li>
+							</ul>
+						</div>
+						<div style="margin:5px auto;width:20px;border:1px solid #FEDCA9;">
+						</div>
+						<div style="font-size:12px;margin-left:15px; margin-right:15px;margin-top:10px;">
+							<label style="word-break: normal;">
+								{{gAdresse}}
+							</label>
+						</div>
+						<div style="font-size:12px;margin-left:15px; margin-right:15px;" ng-show="gVisites.length > 0">
+							<label style="word-break: normal;">
+								{{ gVisites.length > 0 && ("Ouvert : "+gVisites) || ("")}}
+							</label>
+						</div>
+						<div style="font-size:12px;margin-left:15px; margin-right:15px;margin-top:10px;" ng-show="gSite.length > 0">
+							<label style="word-break: normal;">
+								<a href="{{gSite}}">{{gSite}}</a>
+							</label>
+						</div>
+						<div show-validation-button style="margin-bottom:50px;">
+							<button ng-click="placeCtrl.addDetailsToGallery()" id="validationButton" class="btn" style="border-radius:0px;margin-left:-1px;width:308px;position:absolute;bottom:-42px;padding-top:10px;">
+								<label>{{validationButtonLabel}}</label>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-8" style="margin-top:100px;" ng-hide="showProfilConfig">
+				<div class="row col-sm-10 col-sm-offset-1" onclick="location.href = '/creations'" 
+					style="position:relative;margin-top:10px;background-color:#FAF1E3;padding:10px;padding-right:10px;border-radius:0px;cursor:pointer;">
+					<div class="col-xs-12 col-sm-2 promoImg" style="position:relative;color:#ee6779;text-align:left;padding-left:0;">
+						<img src="/img/cartel_catalogue.png" style="width:100%;"></img>
+					</div>
+					<div class="col-xs-12 col-sm-10" id="promoElem" style="text-align:left;margin-top:10px;margin-left:0px;position:relative;">
+						<ul style="list-style-type:none;padding-left:5px;">
+							<li><label style="font-size:18px;font-weight:200;color:#29374C;text-transform:uppercase;cursor:pointer;">Administrez votre catalogue</label></li>
+							<li><label style="font-size:16px;color:#29374C;font-weight:100;"></label></li>
+						</ul>
+					</div>
+				</div>
+		
+				<div class="row col-sm-10 col-sm-offset-1" onclick="location.href = '/expositions'" 
+					style="position:relative;margin-top:10px;background-color:#FEDCA9;padding:10px; padding-right:10px;border-radius:10px;cursor:pointer;">
+			
+					<div class="col-xs-12 col-sm-10" id="promoElem" style="text-align:left;margin-top:10px;margin-left:0px;position:relative;">
+						<ul style="list-style-type:none;padding-left:5px;color:##FEDCA9;">
+							<li><label style="font-size:18px;font-weight:200;color:#29374C;text-transform:uppercase;cursor:pointer;">Publiez une exposition</label></li>
+							<li><label style="font-size:16px;color:#29374C;font-weight:100;"></label></li>
+						</ul>
+					</div>
+			
+					<div class="col-xs-12 col-sm-2 promoImg" style="position:relative;color:#FEDCA9;text-align:right;padding-left:0;">
+						<img src="/img/cartel_exposition.png" style="width:100%;">
+					</div>
+				</div>
+				
+				<div class="row col-sm-10 col-sm-offset-1"
+					style="position:relative;margin-top:50px;background-color:#29374C;padding:10px;padding-right:10px;border-radius:0px;opacity:0.9;">
+					<div class="col-xs-12 col-sm-2 promoImg" style="position:relative;color:white;text-align:left;padding-left:0;">
+						<span class="fa-stack fa-3x">
+						  <i class="fa fa-square-o fa-stack-2x"></i>
+						  <i class="fa fa-bar-chart-o fa-stack-1x"></i>
+						</span>
+					</div>
+					<div class="col-xs-12 col-sm-10" id="promoElem" style="text-align:left;margin-top:10px;margin-left:0px;position:relative;color:#A7A9AB;">
+						<ul style="list-style-type:none;padding-left:5px;">
+							<li><label style="font-size:16px;text-transform:uppercase;">Suivez les statistiques de publication</label></li>
+							<li><label style="font-size:16px;font-weight:100;">[En cours de construction]</label></li>
+						</ul>
+					</div>
+				</div>
+		
+			</div>
+		</div>
+	</div>
+	
+	</section>
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+	console.log(navigator);
+	console.log(navigator.doNotTrack )
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+<script type="text/javascript">
+/*
+    Function to carry out the actual PUT request to S3 using the signed request from the app.
+*/
+    
+    function upload_file(file, signed_request, url){
+        var xhr = new XMLHttpRequest();
+        
+       
+        console.log("upload file");
+        
+        xhr.open("PUT", signed_request);
+        xhr.setRequestHeader('x-amz-acl', 'public-read');
+        xhr.onload = function() {
+            
+            if (xhr.status === 200) {
+                console.log("url : ", url);
+                
+                // on dessine l'image dans un canvas de 150 * 150 px
+                var profile_canvas = document.createElement('canvas');
+                profile_canvas.width = 308;
+                profile_canvas.height = 308;
+                
+                var pImage = new Image();
+                pImage.crossOrigin = "Anonymous";
+                
+                pImage.onload = function(){
+                    // on cacule les metriques de dessin
+                    var x, y, d_x;
+                    if (pImage.width > pImage.height){
+                        d_x = pImage.height;
+                        x = (pImage.width - pImage.height) / 2;
+                        y = 0;
+                    }else{
+                        d_x = pImage.width;
+                        y = (pImage.height - pImage.width) / 2;
+                        x = 0;                        
+                    }
+                    
+                    // memorize the elements
+                    var $element = document.getElementById("placeSection");
+                    var $scope = angular.element($element).scope();
+                
+                    $scope.$apply(function(){
+                        $scope.g_x = x;
+                        $scope.g_y = y;
+                        $scope.g_d_x = d_x;
+                    });
+                    console.log(x);
+                    console.log(y);
+                    console.log(d_x);
+                    profile_canvas.getContext('2d').drawImage(pImage, x, y, d_x, d_x, 0, 0, 308, 308);
+                    var dataUrl = profile_canvas.toDataURL();
+                    document.getElementById("profileImage").src = dataUrl;  
+                    
+                    document.getElementById("buttonAddGalleryImage").src = dataUrl;
+                    document.getElementById("buttonAddGalleryImage").style.width = "156px";
+                    document.getElementById("buttonAddGalleryImage").style.height = "156px";
+                    document.getElementById("buttonAddGalleryImage").style.marginLeft="-13px";
+                    document.getElementById("buttonAddGalleryImage").style.marginTop="-30px";
+                }
+                
+                pImage.src = url;
+            }
+        };
+        xhr.onerror = function() {
+            alert("Could not upload file."); 
+        };
+        xhr.send(file);
+    }
+
+    /*
+        Function to get the temporary signed request from the app.
+        If request successful, continue to upload the file using this signed
+        request.
+    */
+    function get_signed_request(file){
+    	console.log("get signed request");
+        var xhr = new XMLHttpRequest();
+        // TO DO - Calculate file name
+        // file name = c_creatorName_idImage 
+        var file_name =  set_sign_request();
+
+        xhr.open("GET", "/sign_s3_gallery?file_name="+file_name+"&file_type="+file.type);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4){
+                if(xhr.status === 200){
+                    var response = JSON.parse(xhr.responseText);
+                    console.log("ici");
+                    upload_file(file, response.signed_request, response.url);
+                }
+                else{
+                    alert("Could not get signed URL.");
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    function set_sign_request(){
+        var tmpUrl;
+        
+        var $element = document.getElementById("placeSection");
+        var $scope = angular.element($element).scope();
+                
+        $scope.$apply(function(){
+            tmpUrl = $scope.url;
+        });
+        console.log(tmpUrl);
+        return tmpUrl;
+    }
+
+    /*
+       Function called when file input updated. If there is a file selected, then
+       start upload procedure by asking for a signed request from the app.
+    */
+    function init_upload_gallery(){
+        // mise en forme de l'image
+        format_image_gallery();
+    
+        //var files = document.getElementById("file_input").files;
+        //var file = files[0];
+    }
+
+    function init_upload_gallery(){
+    	console.log("init_upload_gallery");
+        // mise en forme de l'image
+        format_image_gallery();
+    
+        //var files = document.getElementById("file_input").files;
+        //var file = files[0];
+    }
+
+    var image = new Image();
+
+    function format_image_gallery(){
+    	console.log("format_image_gallery");
+        // on récupère le fichier
+        var files = document.getElementById("file_input_gallery").files;
+        var file = files[0];
+    
+        var reader = new FileReader();
+    
+        // on créé le canvas de réception
+        var resize_canvas = document.createElement('canvas');
+
+        
+        // on lit le fichier source
+        if (file){		
+            reader.readAsDataURL(file);
+        }
+        
+        reader.onloadend = function(_file){
+            // on écrit dans l'image tampon.
+            image.src = reader.result;
+        
+            // calculate new image size
+            var size = image.width + image.height;
+            var newW = image.width * 800 / size;
+            var newH = image.height * 800 / size;
+        
+            // on initialise les canvas 
+            resize_canvas.width = newW;
+            resize_canvas.height = newH;
+            
+        	
+            // FULL IMAGE CANVAS RESIZED
+            resize_canvas.getContext('2d').drawImage(image, 0, 0, newW, newH);
+            fullImageUrl = resize_canvas.toDataURL();
+        
+            var newFullHeight = image.height*308/image.width;
+     
+            // CODE FOR SENDING
+            var file = dataURItoBlob(resize_canvas.toDataURL());
+            if(file == null){
+                alert("No file selected.");
+                return;
+            }
+            
+            get_signed_request(file);
+        
+            // manage error
+            image.onerror = function(){
+                alert('Invalid File Type : ', file.type);
+            };
+        }
+    }
+
+    function dataURItoBlob(dataURI) {
+        // convert base64 to raw binary data held in a string
+        var byteString = atob(dataURI.split(',')[1]);
+ 
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+ 
+        // write the bytes of the string to an ArrayBuffer
+        var arrayBuffer = new ArrayBuffer(byteString.length);
+        var _ia = new Uint8Array(arrayBuffer);
+        for (var i = 0; i < byteString.length; i++) {
+            _ia[i] = byteString.charCodeAt(i);
+        }
+ 
+        var dataView = new DataView(arrayBuffer);
+        var blob = new Blob([dataView], { type: 'image/png' });
+        return blob;
+    }
+
+    /*
+       Bind listeners when the page loads.
+    */
+    (function() {
+        document.getElementById("file_input_gallery").onchange = init_upload_gallery;
+        //document.getElementById("file_input_creation").onchange = init_upload_creation;
+    })();
+</script> 
+<footer class="footer" id="footer" style="width:100%;">
+    <cartel-footer>
+    </cartel-footer>
+    </footer>	
+    	<div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+		</body>	
+</html>

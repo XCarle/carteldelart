@@ -1,0 +1,662 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: answers; Type: TABLE; Schema: public; Owner: alexandrecarle; Tablespace: 
+--
+
+CREATE TABLE answers (
+    id_answer integer,
+    description character varying(300),
+    id_question integer,
+    id_question_next integer
+);
+
+
+ALTER TABLE answers OWNER TO alexandrecarle;
+
+--
+-- Name: country; Type: TABLE; Schema: public; Owner: alexandrecarle; Tablespace: 
+--
+
+CREATE TABLE country (
+    id integer NOT NULL,
+    nickname character varying(2) NOT NULL,
+    name character varying(64) NOT NULL
+);
+
+
+ALTER TABLE country OWNER TO alexandrecarle;
+
+--
+-- Name: country_id_seq; Type: SEQUENCE; Schema: public; Owner: alexandrecarle
+--
+
+CREATE SEQUENCE country_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE country_id_seq OWNER TO alexandrecarle;
+
+--
+-- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alexandrecarle
+--
+
+ALTER SEQUENCE country_id_seq OWNED BY country.id;
+
+
+--
+-- Name: form_reset; Type: TABLE; Schema: public; Owner: alexandrecarle; Tablespace: 
+--
+
+CREATE TABLE form_reset (
+    id integer NOT NULL,
+    session_id character varying(36),
+    idquestion integer,
+    operation_time timestamp with time zone
+);
+
+
+ALTER TABLE form_reset OWNER TO alexandrecarle;
+
+--
+-- Name: form_reset_id_seq; Type: SEQUENCE; Schema: public; Owner: alexandrecarle
+--
+
+CREATE SEQUENCE form_reset_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE form_reset_id_seq OWNER TO alexandrecarle;
+
+--
+-- Name: form_reset_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alexandrecarle
+--
+
+ALTER SEQUENCE form_reset_id_seq OWNED BY form_reset.id;
+
+
+--
+-- Name: french_region; Type: TABLE; Schema: public; Owner: alexandrecarle; Tablespace: 
+--
+
+CREATE TABLE french_region (
+    id integer NOT NULL,
+    code integer,
+    name character varying(40)
+);
+
+
+ALTER TABLE french_region OWNER TO alexandrecarle;
+
+--
+-- Name: french_region_id_seq; Type: SEQUENCE; Schema: public; Owner: alexandrecarle
+--
+
+CREATE SEQUENCE french_region_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE french_region_id_seq OWNER TO alexandrecarle;
+
+--
+-- Name: french_region_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alexandrecarle
+--
+
+ALTER SEQUENCE french_region_id_seq OWNED BY french_region.id;
+
+
+--
+-- Name: langue; Type: TABLE; Schema: public; Owner: alexandrecarle; Tablespace: 
+--
+
+CREATE TABLE langue (
+    id_lang integer NOT NULL,
+    langue character varying(30)
+);
+
+
+ALTER TABLE langue OWNER TO alexandrecarle;
+
+--
+-- Name: langue_id_lang_seq; Type: SEQUENCE; Schema: public; Owner: alexandrecarle
+--
+
+CREATE SEQUENCE langue_id_lang_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE langue_id_lang_seq OWNER TO alexandrecarle;
+
+--
+-- Name: langue_id_lang_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alexandrecarle
+--
+
+ALTER SEQUENCE langue_id_lang_seq OWNED BY langue.id_lang;
+
+
+--
+-- Name: questions; Type: TABLE; Schema: public; Owner: alexandrecarle; Tablespace: 
+--
+
+CREATE TABLE questions (
+    id integer,
+    description character varying(400),
+    multiple boolean
+);
+
+
+ALTER TABLE questions OWNER TO alexandrecarle;
+
+--
+-- Name: user_answers; Type: TABLE; Schema: public; Owner: alexandrecarle; Tablespace: 
+--
+
+CREATE TABLE user_answers (
+    sessionid character varying(36),
+    id_answer integer,
+    id_question integer,
+    answer_time timestamp with time zone
+);
+
+
+ALTER TABLE user_answers OWNER TO alexandrecarle;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: alexandrecarle; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    mail character varying(320),
+    session character varying(36),
+    lang integer,
+    useragent character varying(700),
+    creation_date timestamp with time zone,
+    modification_date timestamp with time zone
+);
+
+
+ALTER TABLE users OWNER TO alexandrecarle;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: alexandrecarle
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO alexandrecarle;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alexandrecarle
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: alexandrecarle
+--
+
+ALTER TABLE ONLY country ALTER COLUMN id SET DEFAULT nextval('country_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: alexandrecarle
+--
+
+ALTER TABLE ONLY form_reset ALTER COLUMN id SET DEFAULT nextval('form_reset_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: alexandrecarle
+--
+
+ALTER TABLE ONLY french_region ALTER COLUMN id SET DEFAULT nextval('french_region_id_seq'::regclass);
+
+
+--
+-- Name: id_lang; Type: DEFAULT; Schema: public; Owner: alexandrecarle
+--
+
+ALTER TABLE ONLY langue ALTER COLUMN id_lang SET DEFAULT nextval('langue_id_lang_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: alexandrecarle
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: answers; Type: TABLE DATA; Schema: public; Owner: alexandrecarle
+--
+
+COPY answers (id_answer, description, id_question, id_question_next) FROM stdin;
+1	Un homme	1	2
+2	Une femme	1	2
+3	En Europe	2	3
+4	En Afrique	2	3
+5	En Europe	2	3
+6	En Asie	2	3
+7	En Amérique du Sud	2	3
+8	En Amérique du Nord	2	3
+9	Une métropole	3	4
+10	Une petite ville	3	4
+10	A la campagne	3	4
+11	Oui	4	5
+12	Non	4	6
+13	Oui	5	6
+14	Non	5	6
+15	une idée	6	0
+16	une oeuvre	6	0
+17	une personne	6	0
+\.
+
+
+--
+-- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: alexandrecarle
+--
+
+COPY country (id, nickname, name) FROM stdin;
+1	AF	Afghanistan
+2	AL	Albania
+3	DZ	Algeria
+4	AD	Andorra
+5	AO	Angola
+6	AR	Argentina
+7	AM	Armenia
+8	AU	Australia
+9	AT	Austria
+10	AZ	Azerbaijan
+11	BH	Bahrain
+12	BD	Bangladesh
+13	BY	Belarus
+14	BE	Belgium
+15	BJ	Benin
+16	BT	Bhutan
+17	BO	Bolivia
+18	BA	Bosnia and Herzegovina
+19	BW	Botswana
+20	BR	Brazil
+21	BN	Brunei
+22	BG	Bulgaria
+23	BF	Burkina Faso
+24	BI	Burundi
+25	KH	Cambodia
+26	CM	Cameroon
+27	CA	Canada
+28	CT	Canton and Enderbury Islands
+29	CV	Cape Verde
+30	KY	Cayman Islands
+31	CF	Central African Republic
+32	TD	Chad
+33	CL	Chile
+34	CN	China
+35	CO	Colombia
+36	KM	Comoros
+37	CG	Congo - Brazzaville
+38	CD	Congo - Kinshasa
+39	CR	Costa Rica
+40	HR	Croatia
+41	CU	Cuba
+42	CY	Cyprus
+43	CZ	Czech Republic
+44	CI	Côte d’Ivoire
+45	DK	Denmark
+46	DJ	Djibouti
+47	DM	Dominica
+48	DO	Dominican Republic
+49	EC	Ecuador
+50	EG	Egypt
+51	SV	El Salvador
+52	GQ	Equatorial Guinea
+53	ER	Eritrea
+54	EE	Estonia
+55	ET	Ethiopia
+56	FJ	Fiji
+57	FI	Finland
+58	FR	France
+59	GF	French Guiana
+60	PF	French Polynesia
+61	GA	Gabon
+62	GM	Gambia
+63	GE	Georgia
+64	DE	Germany
+65	GH	Ghana
+66	GR	Greece
+67	GD	Grenada
+68	GP	Guadeloupe
+69	GT	Guatemala
+70	GN	Guinea
+71	GW	Guinea-Bissau
+72	GY	Guyana
+73	HT	Haiti
+74	HN	Honduras
+75	HK	Hong Kong SAR China
+76	HU	Hungary
+77	IS	Iceland
+78	IN	India
+79	IR	Iran
+80	IQ	Iraq
+81	IE	Ireland
+82	IL	Israel
+83	IT	Italy
+84	JM	Jamaica
+85	JP	Japan
+86	JT	Johnston Island
+87	JO	Jordan
+88	KZ	Kazakhstan
+89	KE	Kenya
+90	KW	Kuwait
+91	KG	Kyrgyzstan
+92	LA	Laos
+93	LV	Latvia
+94	LB	Lebanon
+95	LS	Lesotho
+96	LR	Liberia
+97	LY	Libya
+98	LI	Liechtenstein
+99	LT	Lithuania
+100	LU	Luxembourg
+101	MO	Macau SAR China
+102	MK	Macedonia
+103	MG	Madagascar
+104	MW	Malawi
+105	MY	Malaysia
+106	MV	Maldives
+107	ML	Mali
+108	MT	Malta
+109	MH	Marshall Islands
+110	MQ	Martinique
+111	MR	Mauritania
+112	MU	Mauritius
+113	YT	Mayotte
+114	FR	France
+115	MX	Mexico
+116	FM	Micronesia
+117	MD	Moldova
+118	MC	Monaco
+119	MN	Mongolia
+120	ME	Montenegro
+121	MS	Montserrat
+122	MA	Morocco
+123	MZ	Mozambique
+124	MM	Myanmar [Burma]
+125	NA	Namibia
+126	NR	Nauru
+127	NP	Nepal
+128	NL	Netherlands
+129	NC	New Caledonia
+130	NZ	New Zealand
+131	NI	Nicaragua
+132	NE	Niger
+133	NG	Nigeria
+134	NF	Norfolk Island
+135	KP	North Korea
+136	VD	North Vietnam
+137	MP	Northern Mariana Islands
+138	NO	Norway
+139	OM	Oman
+140	PC	Pacific Islands Trust Territory
+141	PK	Pakistan
+142	PW	Palau
+143	PS	Palestinian Territories
+144	PA	Panama
+145	PG	Papua New Guinea
+146	PY	Paraguay
+147	YD	People's Democratic Republic of Yemen
+148	PE	Peru
+149	PH	Philippines
+150	PL	Poland
+151	PT	Portugal
+152	PR	Puerto Rico
+153	QA	Qatar
+154	RO	Romania
+155	RU	Russia
+156	RW	Rwanda
+157	BL	Saint Barthélemy
+158	WS	Samoa
+159	SM	San Marino
+160	SA	Saudi Arabia
+161	SN	Senegal
+162	RS	Serbia
+163	CS	Serbia and Montenegro
+164	SC	Seychelles
+165	SL	Sierra Leone
+166	SG	Singapore
+167	SK	Slovakia
+168	SI	Slovenia
+169	SB	Solomon Islands
+170	SO	Somalia
+171	ZA	South Africa
+172	KR	South Korea
+173	ES	Spain
+174	LK	Sri Lanka
+175	SD	Sudan
+176	SR	Suriname
+177	SE	Sweden
+178	CH	Switzerland
+179	SY	Syria
+180	TW	Taiwan
+181	TJ	Tajikistan
+182	TZ	Tanzania
+183	TH	Thailand
+184	TG	Togo
+185	TO	Tonga
+186	TT	Trinnicknamead and Tobago
+187	TN	Tunisia
+188	TR	Turkey
+189	TM	Turkmenistan
+190	UG	Uganda
+191	UA	Ukraine
+192	AE	United Arab Emirates
+193	GB	United Kingdom
+194	US	United States
+195	UY	Uruguay
+196	UZ	Uzbekistan
+197	VA	Vatican City
+198	VE	Venezuela
+199	VN	Vietnam
+200	YE	Yemen
+201	ZM	Zambia
+202	ZW	Zimbabwe
+\.
+
+
+--
+-- Name: country_id_seq; Type: SEQUENCE SET; Schema: public; Owner: alexandrecarle
+--
+
+SELECT pg_catalog.setval('country_id_seq', 202, true);
+
+
+--
+-- Data for Name: form_reset; Type: TABLE DATA; Schema: public; Owner: alexandrecarle
+--
+
+COPY form_reset (id, session_id, idquestion, operation_time) FROM stdin;
+25	5c85c352-22c0-7ad1-87f4-5de72c67b907	2	2015-05-11 11:01:58+02
+26	5c85c352-22c0-7ad1-87f4-5de72c67b907	1	2015-05-11 11:02:44+02
+27	5c85c352-22c0-7ad1-87f4-5de72c67b907	3	2015-05-11 11:02:56+02
+28	5c85c352-22c0-7ad1-87f4-5de72c67b907	3	2015-05-11 11:08:45+02
+\.
+
+
+--
+-- Name: form_reset_id_seq; Type: SEQUENCE SET; Schema: public; Owner: alexandrecarle
+--
+
+SELECT pg_catalog.setval('form_reset_id_seq', 28, true);
+
+
+--
+-- Data for Name: french_region; Type: TABLE DATA; Schema: public; Owner: alexandrecarle
+--
+
+COPY french_region (id, code, name) FROM stdin;
+1	1	Alsace
+2	2	Aquitaine
+3	3	Auvergne
+4	4	Basse-Normandie
+5	5	Bourgogne
+6	6	Bretagne
+7	7	Centre
+8	8	Champagne-Ardenne
+9	9	Corse
+10	10	Franche-Comté
+11	11	Haute-Normandie
+12	12	Île de France
+13	13	Languedoc-Roussillon
+14	14	Limousin
+15	15	Lorraine
+16	16	Midi-Pyrénnées
+17	17	Nord-Pas-de-Calais
+18	18	Pays de la Loire
+19	19	Picardie
+20	20	Poitou-Charentes
+21	21	Provence-Alpes-Côte-d'Azur
+22	22	Rhône-Alpes
+\.
+
+
+--
+-- Name: french_region_id_seq; Type: SEQUENCE SET; Schema: public; Owner: alexandrecarle
+--
+
+SELECT pg_catalog.setval('french_region_id_seq', 22, true);
+
+
+--
+-- Data for Name: langue; Type: TABLE DATA; Schema: public; Owner: alexandrecarle
+--
+
+COPY langue (id_lang, langue) FROM stdin;
+1	fr
+2	en
+\.
+
+
+--
+-- Name: langue_id_lang_seq; Type: SEQUENCE SET; Schema: public; Owner: alexandrecarle
+--
+
+SELECT pg_catalog.setval('langue_id_lang_seq', 2, true);
+
+
+--
+-- Data for Name: questions; Type: TABLE DATA; Schema: public; Owner: alexandrecarle
+--
+
+COPY questions (id, description, multiple) FROM stdin;
+1	Vous êtes :	t
+2	Vous habitez :	t
+3	Dans :	t
+4	Avez-vous des enfants ?	f
+5	Les éduquez-vous à l'art ?	f
+6	Pour vous l'art c'est ?	f
+\.
+
+
+--
+-- Data for Name: user_answers; Type: TABLE DATA; Schema: public; Owner: alexandrecarle
+--
+
+COPY user_answers (sessionid, id_answer, id_question, answer_time) FROM stdin;
+5c85c352-22c0-7ad1-87f4-5de72c67b907	1	1	2015-05-11 11:02:46+02
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: alexandrecarle
+--
+
+COPY users (id, mail, session, lang, useragent, creation_date, modification_date) FROM stdin;
+44	coucou@gmail.com	a4a71e0e-7238-5a79-915c-3c95bcf4dc26	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-02 18:21:37+02	2015-05-02 18:21:37+02
+45	all@gmail.com	a4a71e0e-7238-5a79-915c-3c95bcf4dc26	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-02 18:26:15+02	2015-05-02 18:26:15+02
+46	emaus@gmail.com	a4a71e0e-7238-5a79-915c-3c95bcf4dc26	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-02 18:26:58+02	2015-05-02 18:26:58+02
+47	coucou@coucou.com	627b0914-2070-52cf-ab38-6c06eafcdd2c	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-02 18:47:31+02	2015-05-02 18:47:31+02
+48	frt@frt.com	627b0914-2070-52cf-ab38-6c06eafcdd2c	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-02 18:48:01+02	2015-05-02 18:48:01+02
+49	coucoucvaca@gmail.com	55582e18-ddd4-d6f9-6092-5621a7c35ccd	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-04 09:48:57+02	2015-05-04 09:48:57+02
+50	undefined	55582e18-ddd4-d6f9-6092-5621a7c35ccd	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-04 09:49:59+02	2015-05-04 09:49:59+02
+51	undefined	dd7c7551-2844-216e-2227-d84c61d68a07	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-04 19:41:38+02	2015-05-04 19:41:38+02
+52	undefined	9cbe8706-728f-07f6-7e91-f01127d20b76	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-05 19:41:45+02	2015-05-05 19:41:45+02
+53	undefined	1e39f591-b6e1-98a7-22fe-1705af74972a	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-05 19:46:28+02	2015-05-05 19:46:28+02
+54	undefined	cf98cd50-c924-b3b0-7e94-270112eef4c6	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-05 19:49:41+02	2015-05-05 19:49:41+02
+55	undefined	ed7bdb74-cc07-5319-d657-a10c1b83fccc	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-05 19:50:12+02	2015-05-05 19:50:12+02
+56	undefined	5c85c352-22c0-7ad1-87f4-5de72c67b907	1	Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36	2015-05-05 19:59:27+02	2015-05-05 19:59:27+02
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: alexandrecarle
+--
+
+SELECT pg_catalog.setval('users_id_seq', 56, true);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: alexandrecarle
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM alexandrecarle;
+GRANT ALL ON SCHEMA public TO alexandrecarle;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

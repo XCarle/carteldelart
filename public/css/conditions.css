@@ -1,0 +1,38 @@
+.title{
+    font-size:20px;
+    font-family:'Varela Round';
+    font-weight:100;
+    color:#29374C;
+    padding-bottom:15px;
+    padding-top:15px;
+    padding-left:20px;
+}
+
+.paraph{
+    font-size:16px;
+    font-family:'Helvetica';
+    font-weight:100;
+    color:#29374C;
+    padding-left:15px;
+    padding-bottom:5px;
+}
+
+
+.title2{
+    font-size:16px;
+    font-family:'Varela Round';
+    font-weight:100;
+    color:#29374C;
+    padding-bottom:15px;
+    padding-top:15px;
+    padding-left:20px;
+}
+
+.paraph2{
+    font-size:13px;
+    font-family:'Helvetica';
+    font-weight:100;
+    color:#29374C;
+    padding-left:15px;
+    padding-bottom:5px;
+}

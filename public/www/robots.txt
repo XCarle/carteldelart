@@ -1,0 +1,15 @@
+User-Agent: *
+Disallow:
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: dotbot 
+Disallow: / 
+
+User-agent: Twitterbot
+Disallow:
+
+Sitemap:http://www.carteldelart.com/sitemap
+
+#r2

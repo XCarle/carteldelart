@@ -1,0 +1,26 @@
+#navbackgroundcolor {
+ 	background-color:#FEDCA9;
+ }
+ 
+ .watchandgo{
+    background-size:cover;
+    margin-left:-100px;
+    text-align:center;
+    background-image:url('/img/image_4.png');
+}
+
+@media screen and (max-width: 768px) {
+    .watchandgo{
+        height:700px;
+        background-image:url('/img/image_3.png');
+    }
+}
+
+@media screen and (min-width: 768px){ 
+    .watchandgo{
+        background-image:url('/img/image_4.png');
+        height:550px;
+    }   
+}
+
+

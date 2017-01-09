@@ -1,0 +1,21 @@
+.selectionDiv:hover{
+    background-color:rgba(41,55,77,0.9);
+    color:white;
+}
+
+.shadowImg{
+/*    -webkit-filter: drop-shadow(1px 1px 4px white);
+    filter: drop-shadow(1px 1px 4px white);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=0, Color='white')";
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=0, Color='white');
+*/
+}
+
+.descLabel{
+    font-weight:200;
+    padding-top:6px;
+}
+
+.container{
+    min-height:100%;
+}

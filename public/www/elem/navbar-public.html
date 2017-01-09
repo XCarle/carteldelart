@@ -1,0 +1,33 @@
+<nav class="navbar navbar-static-top" id="secondNav" style="width:100%;background-color:#FAF1E3;height:57px;margin-bottom:0px;" >
+  <div class="container" style="min-height:57px;background-color:#FAF1E3;">
+    <div class="navbar-header" style="margin-bottom:4px;">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"
+            style="border:2px solid white;"
+        >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar" style="background-color:#FEDCA9;"></span>
+            <span class="icon-bar" style="background-color:#FEDCA9;"></span>
+            <span class="icon-bar" style="background-color:#FEDCA9;"></span>
+        </button>
+      <div class="navbar-brand">
+        <a  href="/"><img src="/img/icone.png" style="width:40px;margin-top:-7px;"></img>
+        <label style="font-family:Helvetica;letter-spacing:2px;font-weight:200;color:#29374C;font-size:24px;padding-top:6px;padding-left:5px;cursor:pointer;">CARTEL</label>
+        </a>
+      </div>
+    </div>
+    
+    <div id="navbar" class="navbar-collapse collapse" style="background-color:#FAF1E3;max-height:405px;">
+      <ul class="nav navbar-nav navbar-right" style="margin-top:0px;font-family:Helvetica;letter-spacing:2px;font-weight:200;padding-top:6px;font-size:18px;">
+        <li ng-class="{'active':parcoursTab}"  id="privateSpaceNavItem"><a href="/parcours" onMouseOver="this.style.backgroundColor='#FEDCA9';" onMouseOut="this.style.backgroundColor='#FAF1E3';"><img src="/img/cartel_maps.png" style="width:40px;padding-right:10px;" ng-show="sizeFit()"></img>Catalogue</a></li>
+        <li ng-class="{'active':collectionTab}" id="privateSpaceNavItem"><a href="/parcours/collection" onMouseOver="this.style.backgroundColor='#FEDCA9';" onMouseOut="this.style.backgroundColor='#FAF1E3';"><img src="/img/cartel_collection.png" style="width:40px;padding-right:10px;" ng-show="sizeFit()"></img>Collection</a></li>
+        <li ng-class="{'active':visitorProfileTab}" id="privateSpaceNavItem"><a href="/parcours/profile" onMouseOver="this.style.backgroundColor='#FEDCA9';" onMouseOut="this.style.backgroundColor='#FAF1E3';"><i class="fa fa-user"><span ng-show="sizeFit();" style="padding-left:10px;font-weight:100;font-family:Helvetica;">Profil</span></i></a></li>
+      </ul>
+    </div>
+    <style>
+        .active{
+            background-color: #FEDCA9;
+        }
+    </style>
+  </div>
+  
+</nav>

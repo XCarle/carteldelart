@@ -1,0 +1,51 @@
+#publicSpaceNavItem > a{
+    text-align:center;
+}
+ 
+    
+@media screen and (max-width: 768px){
+    #myAuthModal{
+        margin-top:0px;
+    }
+    
+    #publicSpaceNavItem{
+        height:100px;
+    }
+    
+    #publicSpaceNavItem > a{
+        line-height:100px;
+        padding:0;
+        text-align:left;
+    }
+    
+    #privateSpaceNavItem{
+        height:100px;
+        text-align:left;
+    }
+    
+    #privateSpaceNavItem > a{
+        line-height:100px;
+        padding:0;
+        padding-left:60px;
+    }
+}
+
+@media screen and (min-width: 768px){   
+    #myAuthModal{
+        margin-top:100px;
+    }
+    
+    #privateSpaceNavItem{
+        height:50px;
+    }
+
+    #privateSpaceNavItem > a{
+        line-height:50px;
+        padding:0 15px;
+        text-align:center;
+    }
+}
+
+.tooltip{
+    font-size:20px;
+}

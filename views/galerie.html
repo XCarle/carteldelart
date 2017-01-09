@@ -1,0 +1,149 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html ng-app="oeuvre">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title><%= title %></title>
+    <link rel="shortcut icon" href="./../../img/icone.png" type="image/x-icon" />
+    
+    <meta property="fb:app_id" content="1485534465076102" /> 
+    <meta property="fb:admins" content="642530282" />
+    <meta property="og:type"   content="article" /> 
+    <meta property="og:url"    content="<%= uri %>" /> 
+    <meta property="og:title"  content="<%= title%>" /> 
+    <meta property="og:image"  content="<%= url %>" /> 
+    <meta property="og:image:width" content="<%= creation.width %>" />
+    <meta property="og:image:height" content="<%= creation.height %>" />
+    <meta property="og:description" content="<%= description %>" />
+    
+    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'/>
+    <link href="./../../css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../css/font-awesome.css"/>
+    <link href="./../../css/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./../../css/build.css"/>
+    <link rel="stylesheet" href="./../../css/article.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+
+
+    <script type="text/javascript" src="./../../js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="./../../js/angular.min.js"></script>
+	<script type="text/javascript" src="./../../js/angular-route.min.js"></script>
+	<script type="text/javascript" src="./../../js/angular-cookies.min.js"></script>
+	<script type="text/javascript" src="./../../js/oeuvre.js"></script>
+
+</head>
+<style>
+  [ng-cloak] {
+    display:none !important;
+  }
+</style>
+<body>
+<nav class="navbar" id="secondNav" style="position:static;width:100%;z-index:10;background-color:#FAF1E3;height:55px;margin-bottom:0px;" >
+  <cartel-nav></cartel-nav>
+</nav>  
+
+<script>
+	var creation = <%- JSON.stringify(creation) %>; 
+</script>
+
+<section class="container" style="font-family:Helvetica;margin:0 0;padding:0;" ng-controller="oeuvreController as oeuvre">
+    <div class="row" style="position:static;margin-left:0px;margin-right:0px;">
+        <div class="col-lg-12 col-md-12 col-xs-12" style="position:relative;margin-bottom:5px;padding:0;text-align:center;">
+            <button id="myCartel" type="button" data-toggle="modal" data-target="#myModal" style="padding:0;border:none;background-color:white;"> 
+                <img src="<%= url %>"
+                    style="display:block;width:100%;max-width:654px;min-width:200px;margin-left:auto;margin-right:auto;margin-top:0px;"
+                    id="fullScreenImage">
+                </img>
+                <div id="stats" style="width:100%;margin:0;padding:10px 0;border:1px solid #FAF1E3;" class="row">
+                    <div class="col-xs-9" style="text-align:left;">
+                        <div class="authorSimple">
+                            <%= creation.author_details[0].fname %> <%= creation.author_details[0].lname %>
+                        </div>
+                        <div class="titleSimple">
+                            <%= creation.properties[0].title %>
+                        </div>
+                    </div>
+                    <div class="col-xs-3" style="text-align:right;">
+                        <div style="padding-bottom:5px;margin-right:-3px;">
+                           <label style="font-weight:100;"> {{nbView}}</label> <img src="/img/cartel_oeil.png" style="width:17px;height:11px;margin-top:-4px;"></img>
+                        </div>
+                        <div>
+                            <label style="font-weight:100;margin-left:-3px;">{{distance | number : 1}} km</label> <img src="/img/cartel_lieu.png" style="width:10px;height:15px;margin-top:-4px"></img>
+                        </div>
+                    </div>
+                </div>
+            </button>
+        </div>
+        
+        <div class="col-xs-12">
+            <div set-size id="divDetail2" style="width:100%;margin:0 auto;position:relative;padding:10px 10px;margin-bottom:100px;text-align:left;border-left:1px dotted #FEDCA9;border-right:1px dotted #FEDCA9;border-bottom:1px solid #FEDCA9;">
+                <div>
+                <label class="cartel" style="padding-top:10px;">
+                    <%= creation.properties[0].cartel %>
+                </label>
+                </div>
+                <div style="position:relative;width:50px;border-bottom:1px dotted #A7A9AB;margin-top:10px;"></div>
+                <div style="padding-top:10px;">
+                    <label class="cartel">
+                   <%= creation.author_details[0].bio %>
+                    </label>
+                </div>
+            
+                <div style="padding:0;margin:0;">
+                    <div style="position:relative;width:50px;border-bottom:2px solid #FEDCA9;margin-top:10px;margin-bottom:10px;">
+                    </div>
+                    <div style="font-size:15px;color:#939597;">
+                        <div> 
+                            Année : <%= creation.properties[0].creation_date %>
+                        </div>
+                        <div>
+                            Medium : <%= creation.properties[0].medium %>
+                        </div>
+                        <div>
+                            Dimensions : <%= creation.properties[0].s_h %> cm x <%= creation.properties[0].s_w %> cm x <%= creation.properties[0].s_l %> cm.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row" style="padding:0;margin:0;">
+                    <div class="col-xs-12" style="margin:0;padding:0;">
+                        <div style="position:relative;width:50px;border-bottom:2px solid #FEDCA9;margin-top:10px;margin-bottom:10px;">
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-2" style="margin:0;padding:0;">
+                        <img id="logoGallery" style="width:110px; height:110px;"></img>
+                    </div>
+                    <div class="col-xs-9 col-sm-10">
+                        <div class="col-xs-12 authorSimple" style="font-weight:200;font-size:18px;">
+                            <%= creation.gallery_details[0].gname %>
+                        </div>
+                        <div class="col-xs-12 titleSimple" style="font-weight:100;font-size:14px;">
+                            <%= creation.gallery_details[0].g_adresse %>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+   
+ </section>   
+<footer id="footer">
+    <cartel-footer>
+    </cartel-footer>
+     <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4&appId=1485534465076102";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+</footer> 
+</body>
+</html>

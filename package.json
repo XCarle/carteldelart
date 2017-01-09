@@ -1,0 +1,63 @@
+{
+  "name": "carteldelart",
+  "version": "0.1.2",
+  "description": "The cartel website",
+  "main": [
+    "less/bootstrap.less",
+    "dist/css/bootstrap.css",
+    "dist/js/bootstrap.js",
+    "dist/fonts/glyphicons-halflings-regular.eot",
+    "dist/fonts/glyphicons-halflings-regular.svg",
+    "dist/fonts/glyphicons-halflings-regular.ttf",
+    "dist/fonts/glyphicons-halflings-regular.woff",
+    "dist/fonts/glyphicons-halflings-regular.woff2"
+  ],
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "angular": "~1.3.15",
+    "angular-cookies": "~1.3.x",
+    "angular-translate": "~2.5.x",
+    "aws-sdk": "~2.1.x",
+    "bootstrap": "~3.3.4",
+    "express": "~4.12.3",
+    "connect-flash":"~0.1.x",
+    "express-session": "^1.11.3",
+    "jquery": "~2.1.3",
+    "jsonwebtoken": "~5.0.2",
+    "compression":"~1.5.x",
+    "async":"~1.5.x",
+    "nodemailer": "~1.3.x",
+    "passport": "~0.2.x",
+    "connect-flash":"~0.1.x",
+    "passport-local": "~1.0.x",
+    "bcrypt-nodejs":"~0.0.3",
+    "body-parser":"~1.0.2",
+    "cookie-parser":"~1.0.x",
+    "express-session":"~1.11.x",
+    "passport-local":"~1.0.x",
+    "passport-facebook":"~2.0.x",
+    "passport-google-oauth":"~0.2.x",
+    "ejs":"~2.3.1",
+    "sequelize":"~3.3.0",
+    "pg-hstore":"~2.3.2",
+    "pg": "4.x",
+    "pg-native":"~1.8.x",
+    "morgan":"~1.6.x"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/node-js-getting-started"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "homepage": "http://www.carteldelart.com",
+  "license": "MIT"
+}
